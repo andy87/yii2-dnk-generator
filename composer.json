@@ -1,14 +1,14 @@
 {
-  "name": "andy87/dnk",
+  "name": "andy87/yii2-dnk-generator",
   "description": "My Dnk workflow",
   "type": "project",
   "license": "MIT",
   "require": {
-    "php": "^8.0",
+    "php": "^8.0"
   },
   "autoload": {
     "psr-4": {
-      "andy87\\dnk\\": "vendor/andy87/dnk/src/"
+      "andy87\\dnk\\": "vendor/andy87/yii2_dnk_generator/src/"
     }
   }
 }
