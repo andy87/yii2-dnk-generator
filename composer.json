@@ -16,10 +16,10 @@
       "role": "Project lead"
     }
   ],
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "require": {
     "php": "^8.0",
-    "andy87/yii2-dnk-generator": "1.0.0"
+    "andy87/yii2-dnk-generator": "master"
   },
   "autoload": {
     "psr-4": {
