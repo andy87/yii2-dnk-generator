@@ -170,55 +170,6 @@ use frontend/resources/user/UsereViewProfileResources;
 
 
 
-## Yii2 setups
-
-### Install.
-
-1. Add in to file `composer.json` on part `repositories`
-
-```json
-{
-    "type": "git",
-    "url": "https://github.com/andy87/yii2-dnk-generator.git"
-}
-```
-
-2. exec command `composer require andy87/yii2-dnk-generator` 
-
-
-3. Update config file:
- - advanced: `@console\config\main.php`  
- - basic: `@app\config\console.php`
-
-
-```php
-//first add `use`
-use andy87\dnk\GenerateController;
-    
-//.. other add parts
-return [
-    'aliases' => [
-        // .. other config
-        '@root'   => dirname(dirname(__DIR__)), // new line
-    ],
-    'controllerMap' => [
-        // .. other config
-        'generate' => [  // new block
-            'class'     => GenerateController::class,
-            'baseClasses' => [
-                GenerateController::BASE_MIGRATE_CLASS => BaseMigration::class, // extends for `Migrations`
-                GenerateController::BASE_CONTROLLER_CLASS => BaseController::class, // extends for `Controllers`
-                GenerateController::BASE_MODEL_CLASS => BaseModel::class, // extends for `Source` models
-                GenerateController::BASE_SERVICE_CLASS => BaseService::class, // extends for `Services`
-                GenerateController::BASE_RESOURCE_CLASS => BaseResource::class, // extends for `Resources`
-            ]
-        ]
-    ]
-]
-```
-
-
-
 ## Use 
 
 ### command
@@ -339,3 +290,51 @@ generate file list:
    - `frontend/service/UserService.php` [view](src/templates/frontend/services/frontend-service.tpl)
 
 ______
+
+
+## Yii2 setups
+
+### Install.
+
+1. Add in to file `composer.json` on part `repositories`
+
+```json
+{
+    "type": "git",
+    "url": "https://github.com/andy87/yii2-dnk-generator.git"
+}
+```
+
+2. exec command `composer require andy87/yii2-dnk-generator:dev-master`
+
+
+3. Update config file:
+- advanced: `@console\config\main.php`
+- basic: `@app\config\console.php`
+
+
+```php
+//first add `use`
+use andy87\dnk\GenerateController;
+    
+//.. other add parts
+return [
+    'aliases' => [
+        // .. other config
+        '@root'   => dirname(dirname(__DIR__)), // new line
+    ],
+    'controllerMap' => [
+        // .. other config
+        'generate' => [  // new block
+            'class'     => GenerateController::class,
+            'baseClasses' => [
+                GenerateController::BASE_MIGRATE_CLASS => BaseMigration::class, // extends for `Migrations`
+                GenerateController::BASE_CONTROLLER_CLASS => BaseController::class, // extends for `Controllers`
+                GenerateController::BASE_MODEL_CLASS => BaseModel::class, // extends for `Source` models
+                GenerateController::BASE_SERVICE_CLASS => BaseService::class, // extends for `Services`
+                GenerateController::BASE_RESOURCE_CLASS => BaseResource::class, // extends for `Resources`
+            ]
+        ]
+    ]
+]
+```
