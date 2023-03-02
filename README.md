@@ -327,7 +327,7 @@ return [
         // .. other config
         'generate' => [  // new block
             'class'     => GenerateController::class,
-            'baseClasses' => '@root', // alias to root project
+            'root'      => '@root', // alias to root project
             'baseClasses' => [
                 GenerateController::BASE_MIGRATE_CLASS => BaseMigration::class, // extends for `Migrations`
                 GenerateController::BASE_CONTROLLER_CLASS => BaseController::class, // extends for `Controllers`
