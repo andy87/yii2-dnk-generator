@@ -13,13 +13,13 @@
       "name": "Kidin and_y87 Andrey",
       "email": "kidin_a@list.ru",
       "homepage": "https://andy87.ru",
-      "role": "Project lead"
+      "role": "Author"
     }
   ],
   "minimum-stability": "dev",
   "require": {
     "php": "^8.0",
-    "andy87/yii2-dnk-generator": "dev-master"
+    "andy87/yii2-dnk-generator": "1.0"
   },
   "autoload": {
     "psr-4": {
