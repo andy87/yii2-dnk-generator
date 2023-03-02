@@ -1,8 +1,22 @@
 {
   "name": "andy87/yii2-dnk-generator",
-  "description": "My Dnk workflow",
-  "type": "project",
+  "description": "My workflow for `template path` pattern",
+  "keywords": [
+    "yii2",
+    "generator"
+  ],
+  "type": "library",
   "license": "MIT",
+  "homepage": "https://github.com/andy87/yii2-dnk-generator",
+  "authors": [
+    {
+      "name": "Kidin and_y87 Andrey",
+      "email": "kidin_a@list.ru",
+      "homepage": "https://andy87.ru",
+      "role": "Project lead"
+    }
+  ],
+  "minimum-stability": "dev",
   "require": {
     "php": "^8.0"
   },
