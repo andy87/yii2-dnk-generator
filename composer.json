@@ -1,5 +1,5 @@
 {
-  "name": "andy87/yii2dnk-gen",
+  "name": "andy87/yii2-dnk-generator",
   "description": "My workflow for `template path` pattern",
   "type": "library",
   "keywords": [
@@ -16,10 +16,10 @@
       "role": "Author"
     }
   ],
+  "version"     : "1.0.0",
   "minimum-stability": "stable",
   "require": {
-    "php": "^8.0",
-    "andy87/yii2-dnk-generator": "dev-master"
+    "yiisoft/yii2": "*"
   },
   "repositories": [
     {
@@ -29,7 +29,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "andy87\\dnk\\": "vendor/andy87/yii2_dnk_generator/src/"
+      "andy87\\dnk\\": "src"
     }
   }
 }
