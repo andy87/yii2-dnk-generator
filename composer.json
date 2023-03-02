@@ -1,12 +1,11 @@
 {
-  "name": "andy87/yii2-dnk-generator",
+  "name": "andy87/yii2dnk-gen",
   "description": "My workflow for `template path` pattern",
+  "type": "library",
   "keywords": [
     "yii2",
     "generator"
   ],
-  "version"     : "1.0.0",
-  "type": "library",
   "license": "MIT",
   "homepage": "https://github.com/andy87/yii2-dnk-generator",
   "authors": [
@@ -17,19 +16,20 @@
       "role": "Author"
     }
   ],
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "require": {
-    "yiisoft/yii2": "*"
+    "php": "^8.0",
+    "andy87/yii2-dnk-generator": "dev-master"
   },
   "repositories": [
     {
-      "type"      : "vcs",
-      "url"       : "https://github.com/andy87/yii2-dnk-generator"
+      "type": "vcs",
+      "url": "https://github.com/andy87/yii2-dnk-generator"
     }
   ],
   "autoload": {
     "psr-4": {
-      "andy87\\dnk\\": "src"
+      "andy87\\dnk\\": "vendor/andy87/yii2_dnk_generator/src/"
     }
   }
 }
