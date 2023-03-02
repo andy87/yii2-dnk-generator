@@ -16,7 +16,7 @@
       "role": "Author"
     }
   ],
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "require": {
     "php": "^8.0",
     "andy87/yii2-dnk-generator": "1.0"
