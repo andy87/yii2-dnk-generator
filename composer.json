@@ -19,7 +19,7 @@
   "minimum-stability": "dev",
   "require": {
     "php": "^8.0",
-    "andy87/yii2-dnk-generator": "master"
+    "andy87/yii2-dnk-generator": "dev-master"
   },
   "autoload": {
     "psr-4": {
