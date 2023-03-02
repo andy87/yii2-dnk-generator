@@ -17,7 +17,7 @@
       "role": "Author"
     }
   ],
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "require": {
     "yiisoft/yii2": "*"
   },
