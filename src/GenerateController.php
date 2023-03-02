@@ -148,7 +148,7 @@ class GenerateController extends Controller
     {
         $this->copyDirectoryStructure(
             __DIR__ . DIRECTORY_SEPARATOR . 'source'. DIRECTORY_SEPARATOR,
-            Yii::getAlias($this->root ) . DIRECTORY_SEPARATOR
+            Yii::getAlias($this->root) . DIRECTORY_SEPARATOR
         );
 
         $this->stdout("Dnk `setup`: copied successfully.\n", BaseConsole::FG_GREEN);
