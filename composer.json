@@ -5,6 +5,7 @@
     "yii2",
     "generator"
   ],
+  "version"     : "1.0.0",
   "type": "library",
   "license": "MIT",
   "homepage": "https://github.com/andy87/yii2-dnk-generator",
@@ -18,11 +19,17 @@
   ],
   "minimum-stability": "stable",
   "require": {
-    "php": "^8.0"
+    "yiisoft/yii2": "*"
   },
+  "repositories": [
+    {
+      "type"      : "vcs",
+      "url"       : "https://github.com/andy87/yii2-dnk-generator"
+    }
+  ],
   "autoload": {
     "psr-4": {
-      "andy87\\dnk\\": "vendor/andy87/yii2_dnk_generator/src/"
+      "andy87\\dnk\\": "src"
     }
   }
 }
