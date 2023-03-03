@@ -144,6 +144,26 @@ class GenerateController extends Controller
                         ],
     ];
 
+    /** @var array mapping for `resources` */
+    public const BASE_RESOURCE = [
+        'backend-components-resources-crud-create' => [
+            self::SOURCE => 'backend/components/resources/crud/CreateResource.tpl',
+            self::TARGET => "@backend/components/resources/crud/CreateResource.php"
+        ],
+        'backend-components-resources-crud-list' => [
+            self::SOURCE => 'backend/components/resources/crud/ListResource.tpl',
+            self::TARGET => "@backend/components/resources/crud/ListResource.php"
+        ],
+        'backend-components-resources-crud-read' => [
+            self::SOURCE => 'backend/components/resources/crud/ReadResource.tpl',
+            self::TARGET => "@backend/components/resources/crud/ReadResource.php"
+        ],
+        'backend-components-resources-crud-update' => [
+            self::SOURCE => 'backend/components/resources/crud/UpdateResource.tpl',
+            self::TARGET => "@backend/components/resources/crud/UpdateResource.php"
+        ]
+    ];
+
 
 
     // Property
@@ -180,6 +200,19 @@ class GenerateController extends Controller
             Yii::getAlias($this->root) . DIRECTORY_SEPARATOR
         );
 
+        $root = $this->getTemplatePath();
+
+        $params = $this->getParams('model','Model');
+
+        foreach ( self::BASE_RESOURCE as $sourcePath => $targetPath )
+        {
+            $sourcePath = $root.$sourcePath;
+
+            $targetPath = Yii::getAlias($targetPath);
+
+            $this->generateFileFromTpl($sourcePath, $targetPath, $params);
+        }
+
         $this->stdout("Dnk `setup`: copied successfully.\n", BaseConsole::FG_GREEN);
     }
 
@@ -190,6 +223,7 @@ class GenerateController extends Controller
      *      php yii generate/gen user
      *
      * @param string $entity
+     * @param bool $overwrite
      * @return void
      */
     public function actionGen(string $entity, bool $overwrite = false ): void
@@ -301,6 +335,7 @@ class GenerateController extends Controller
      *
      * @param string $entity
      * @param string $filter
+     * @param bool $overwrite
      * @return void
      */
     private function generator(string $entity, string $filter = '', bool $overwrite = false): void
@@ -312,15 +347,7 @@ class GenerateController extends Controller
         $snakeCase = strtolower($entity);
         $camelCase = Inflector::id2camel($snakeCase,'_');
 
-        $timestamp = date('ymd_his');
-        $migrateFileName = "m{$timestamp}__create_table__$snakeCase" ;
-
-        $params = [
-            '{{migrateFileName}}' => $migrateFileName,
-            '{{snake_case}}' => $snakeCase,
-            '{{UPPER_CASE}}' => strtoupper($snakeCase),
-            '{{CamelCase}}' => $camelCase,
-        ];
+        $params = $this->getParams($snakeCase, $camelCase);
 
         $templatesMap = [];
 
@@ -336,12 +363,6 @@ class GenerateController extends Controller
 
             $templatesMap[$key] = str_replace($from, $to, $value);
         }
-
-        $params['{{BaseMigrationClassName}}'] = str_replace($from, $to, $this->baseClasses[self::BASE_MIGRATE_CLASS]);
-        $params['{{BaseModelClassName}}'] =str_replace($from, $to, $this->baseClasses[self::BASE_MODEL_CLASS]);
-        $params['{{BaseControllerClassName}}'] =str_replace($from, $to, $this->baseClasses[self::BASE_CONTROLLER_CLASS]);
-        $params['{{BaseServiceClassName}}'] =str_replace($from, $to, $this->baseClasses[self::BASE_SERVICE_CLASS]);
-        $params['{{BaseResourceClassName}}'] =str_replace($from, $to, $this->baseClasses[self::BASE_RESOURCE_CLASS]);
 
         $migrationStep = true;
 
@@ -415,6 +436,35 @@ class GenerateController extends Controller
                 $this->stdout("\r\n Dnk `setup`: copied failed.\n", BaseConsole::FG_RED);
             }
         }
+    }
+
+    /**
+     * @param string $snakeCase
+     * @param string $camelCase
+     * @return array
+     */
+    private function getParams( string $snakeCase, string $camelCase): array
+    {
+        $timestamp = date('ymd_his');
+        $migrateFileName = "m{$timestamp}__create_table__$snakeCase" ;
+
+        $params = [
+            '{{migrateFileName}}' => $migrateFileName,
+            '{{snake_case}}' => $snakeCase,
+            '{{UPPER_CASE}}' => strtoupper($snakeCase),
+            '{{CamelCase}}' => $camelCase,
+        ];
+
+        $from = array_keys($params);
+        $to = array_values($params);
+
+        $params['{{BaseMigrationClassName}}'] = str_replace($from, $to, $this->baseClasses[self::BASE_MIGRATE_CLASS]);
+        $params['{{BaseModelClassName}}'] =str_replace($from, $to, $this->baseClasses[self::BASE_MODEL_CLASS]);
+        $params['{{BaseControllerClassName}}'] =str_replace($from, $to, $this->baseClasses[self::BASE_CONTROLLER_CLASS]);
+        $params['{{BaseServiceClassName}}'] =str_replace($from, $to, $this->baseClasses[self::BASE_SERVICE_CLASS]);
+        $params['{{BaseResourceClassName}}'] =str_replace($from, $to, $this->baseClasses[self::BASE_RESOURCE_CLASS]);
+
+        return $params;
     }
 
     /**

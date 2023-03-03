@@ -3,7 +3,7 @@
 use yii\web\View;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use backend\models\forms\\{{CamelCase}}Form;
+use backend\models\forms\{{CamelCase}}Form;
 use backend\resources\{{snake_case}}\{{CamelCase}}CreateResource;
 use backend\resources\{{snake_case}}\{{CamelCase}}UpdateResource;
 
