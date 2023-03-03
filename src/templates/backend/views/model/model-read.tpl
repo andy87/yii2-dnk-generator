@@ -7,6 +7,8 @@ use backend\resources\{{snake_case}}\{{CamelCase}}ReadResource;
 /** @var View $this **/
 /** @var {{CamelCase}}ReadResource $R **/
 
+?>
+
 <?= DetailView::widget([
     'model' => $R->item,
     'attributes' => [

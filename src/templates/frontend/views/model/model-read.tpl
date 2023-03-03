@@ -7,6 +7,8 @@ use frontend\resources\{{snake_case}}\{{CamelCase}}ListResource;
 /** @var View $this **/
 /** @var {{CamelCase}}ListResource $R **/
 
+?>
+
 <?= DetailView::widget([
     'model' => $R->item,
     'attributes' => [
