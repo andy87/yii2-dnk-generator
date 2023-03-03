@@ -13,5 +13,5 @@ use backend\components\resources\crud\CreateResource;
 class {{CamelCase}}CreateResource extends CreateResource
 {
     /** @var string template name */
-    public const TEMPLATE = '{{snake_case}}-create'
+    public const TEMPLATE = '{{snake_case}}-create';
 }
