@@ -405,6 +405,22 @@ ______
 
 
 
+### command
+`php yii generate/source-models`
+
+Generate `yii gii/model ` for needle table(part).
+______
+
+
+
+### command
+`php yii generate/source-crud`
+
+Generate `yii gii/crud ` for needle table(part).
+______
+
+
+
 ## Yii2 setups
 
 ### Install.
