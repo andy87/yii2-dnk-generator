@@ -13,7 +13,7 @@ use yii\db\ActiveRecord;
 abstract class BaseService extends Component
 {
     /** @var int keyA to `resources` */
-    public const CRETE = 1;
+    public const CREATE = 1;
     /** @var int key to `resources` */
     public const READ = 2;
     /** @var int key to `resources` */
@@ -29,7 +29,7 @@ abstract class BaseService extends Component
     /** @var array  */
     public const RESOURCE = [
         self::LIST => null,
-        self::CRETE => null,
+        self::CREATE => null,
         self::UPDATE => null,
         self::READ => null,
     ];
