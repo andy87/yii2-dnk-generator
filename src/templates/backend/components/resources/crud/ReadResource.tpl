@@ -15,4 +15,15 @@ class ReadResource extends BaseResourceClass
 
     /** @var Model */
     public Model $item;
+
+    /**
+     * @param Model $item
+     * @param array $config
+     */
+    public function __construct( Model $item, array $config = [] )
+    {
+        $this->item = $item;
+
+        parent::__construct($config);
+    }
 }

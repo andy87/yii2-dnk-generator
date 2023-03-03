@@ -2,7 +2,7 @@
 
 namespace backend\components\resources\crud;
 
-use common\components\resources\GredViewResource;
+use common\components\resources\GridViewResource;
 use {{BaseResourceClassName}} as BaseResourceClass;
 
 /**
@@ -13,16 +13,17 @@ class ListResource extends BaseResourceClass
     /** @var string  */
     public string $title;
 
-    /** @var GredViewResource */
-    public GredViewResource $gredViewResource;
+    /** @var GridViewResource */
+    public GridViewResource $gridViewResource;
 
     /**
-     *
+     * @param GridViewResource $gridViewResource
+     * @param array $config
      */
-    public function __construct( GredViewResource $gredViewResource )
+    public function __construct( GridViewResource $gridViewResource, array $config = [] )
     {
-        parent::__construct();
+        $this->gridViewResource = $gridViewResource;
 
-        $this->gredViewResource = $gredViewResource;
+        parent::__construct($config);
     }
 }
