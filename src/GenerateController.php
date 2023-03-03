@@ -430,6 +430,8 @@ class GenerateController extends Controller
 
         foreach ($mapping as $step)
         {
+            if ( strpos('.', $step) !== false ) return;
+
             $dir .= "$step/";
 
             if (!is_dir($dir)) mkdir($dir);
