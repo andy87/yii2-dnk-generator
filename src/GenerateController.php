@@ -33,6 +33,13 @@ class GenerateController extends Controller
     public const BASE_RESOURCE_CLASS = 5;
 
 
+    /** @var string Key for `command` */
+    public const COMMAND_MODEL = 1;
+
+    /** @var string Key for `command` */
+    public const COMMAND_CRUD = 2;
+
+
     /** @var int mapping key */
     private const SOURCE = 1;
 
@@ -170,6 +177,12 @@ class GenerateController extends Controller
 
     /** @var string path to project root (setup from config) */
     public string $root = '';
+
+    /** @var array Commands */
+    public array $command = [
+        self::COMMAND_MODEL => null,
+        self::COMMAND_CRUD => null,
+    ];
 
     /** @var array bases classname for generated files (setup from config) */
     public array $baseClasses = [
@@ -346,9 +359,7 @@ class GenerateController extends Controller
      */
     public function actionSourceModels(string $entity)
     {
-        $command = "php yii gii/model --modelClass={{CamelCase}}Source --ns=common\\models\\sources --tableName={{snake_case}} --baseClass={{BaseModelClassName}} --overwrite=yes";
-
-        $this->generateGii($entity, $command);
+        $this->generateGii($entity, $this->command[ self::COMMAND_MODEL ]);
     }
 
     /**
@@ -356,9 +367,7 @@ class GenerateController extends Controller
      */
     public function actionSourceCrud(string $entity)
     {
-        $command = "php yii gii/crud --modelClass={{CamelCase}} --controllerNamespace=backend\\controllers\\crud --baseControllerClass=backend\\controllers\\cruds\\{{CamelCase}}Controller --viewPath=@backend\\views\\cruds\\{{snake_case}} --enableI18N=1 --overwrite=yes";
-
-        $this->generateGii($entity, $command);
+        $this->generateGii($entity, $this->command[ self::COMMAND_CRUD ]);
     }
 
     /**
