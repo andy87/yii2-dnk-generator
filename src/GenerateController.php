@@ -359,15 +359,15 @@ class GenerateController extends Controller
      */
     public function actionSourceModels(string $entity)
     {
-        $this->generateGii($entity, $this->command[ self::COMMAND_MODEL ]);
+        $this->generateGii($entity, 'php yii gii/model ' . $this->command[ self::COMMAND_MODEL ]);
     }
 
     /**
      * @return void
      */
-    public function actionSourceCrud(string $entity)
+    public function actionSourceCruds(string $entity)
     {
-        $this->generateGii($entity, $this->command[ self::COMMAND_CRUD ]);
+        $this->generateGii($entity, 'php yii gii/crud ' . $this->command[ self::COMMAND_CRUD ]);
     }
 
     /**

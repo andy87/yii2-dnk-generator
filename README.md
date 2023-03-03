@@ -409,12 +409,14 @@ ______
 `php yii generate/source-models`
 
 Generate `yii gii/model ` for needle table(part).
+
+
 ______
 
 
 
 ### command
-`php yii generate/source-crud`
+`php yii generate/source-cruds`
 
 Generate `yii gii/crud ` for needle table(part).
 ______
@@ -457,6 +459,10 @@ return [
         'generate' => [  // new block
             'class'     => GenerateController::class,
             'root'      => '@root', // alias to root project
+             'command'   => [
+                GenerateController::COMMAND_MODEL => "--modelClass={{CamelCase}}Source --ns=common\\models\\sources --tableName={{snake_case}} --baseClass={{BaseModelClassName}}",
+                GenerateController::COMMAND_CRUD => "--modelClass={{CamelCase}} --controllerNamespace=backend\\controllers\\crud --baseControllerClass=backend\\controllers\\cruds\\{{CamelCase}}Controller --viewPath=@backend\\views\\cruds\\{{snake_case}} --enableI18N=1",
+            ],
             'baseClasses' => [
                 GenerateController::BASE_MIGRATE_CLASS => BaseMigration::class, // extends for `Migrations`
                 GenerateController::BASE_CONTROLLER_CLASS => BaseController::class, // extends for `Controllers`
