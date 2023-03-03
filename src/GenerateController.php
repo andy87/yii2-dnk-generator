@@ -371,26 +371,34 @@ class GenerateController extends Controller
             echo "\r\n Generated file: ";
             $this->stdout($targetPath, BaseConsole::FG_GREEN);
 
-            if ( file_exists($targetPath) && !$overwrite )
+
+            if ( file_exists($targetPath) )
             {
-                $this->stdout("\r\n File exists!", BaseConsole::FG_RED);
-
-                echo "\r\nEnter `yes` if you want reGenerate this file:";
-
-                while (true)
+                if ( $overwrite )
                 {
-                    $input = BaseConsole::stdin('');
+                     unlink($targetPath);
 
-                    if ($input === 'yes')
+                }  else {
+
+                    $this->stdout("\r\n File exists!", BaseConsole::FG_RED);
+
+                    echo "\r\nEnter `yes` if you want reGenerate this file:";
+
+                    while (true)
                     {
-                        unlink($targetPath);
-                        break;
+                        $input = BaseConsole::stdin('');
 
-                    } else {
+                        if ($input === 'yes')
+                        {
+                            unlink($targetPath);
+                            break;
 
-                        $this->stdout("\r\nDnk `setup`: copied skipped.\n", BaseConsole::FG_RED);
+                        } else {
 
-                        continue 2;
+                            $this->stdout("\r\nDnk `setup`: copied skipped.\n", BaseConsole::FG_RED);
+
+                            continue 2;
+                        }
                     }
                 }
             }
