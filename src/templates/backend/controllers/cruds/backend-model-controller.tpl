@@ -43,7 +43,7 @@ class {{CamelCase}}Controller extends BackendController
      */
     public function actionRead(int $id)
     {
-        /** @var {{CamelCase}}ListResource $R */
+        /** @var {{CamelCase}}ReadResource $R */
         $R = new $this->service->getResource( {{CamelCase}}Service::READ );
 
         $R->item = $this->service->findWhere(['id' => $id])->one();

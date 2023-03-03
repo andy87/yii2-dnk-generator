@@ -29,9 +29,9 @@ class {{CamelCase}}Controller extends FrontendController
         $form = $this->service->getForm();
         $activeDataProvider = new ActiveDataProvider();
         $gridViewResource = new GridViewResource($form, $activeDataProvider);
-        
+
         /** @var {{CamelCase}}ListResource $R */
-        $R = new $resourceClass($gridViewResource)
+        $R = new $resourceClass($gridViewResource);
 
         return $R->content();
     }
