@@ -8,7 +8,7 @@ use backend\components\resources\crud\ReadResource;
 /**
  *  {{CamelCase}}ReadResource
  *
- *  @param {{CamelCase}}Form $item
+ *  @property {{CamelCase}}Form $item
  */
 class {{CamelCase}}ReadResource extends ReadResource
 {

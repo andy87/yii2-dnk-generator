@@ -8,7 +8,7 @@ use backend\components\resources\crud\CreateResource;
 /**
  *  {{CamelCase}}CreateResource
  *
- *  @param {{CamelCase}}Form $item
+ *  @property {{CamelCase}}Form $item
  */
 class {{CamelCase}}CreateResource extends CreateResource
 {

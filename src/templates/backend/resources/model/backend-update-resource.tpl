@@ -8,7 +8,7 @@ use backend\components\resources\crud\UpdateResource;
 /**
  *  {{CamelCase}}UpdateResource
  *
- *  @param {{CamelCase}}Form $item
+ *  @property {{CamelCase}}Form $item
  */
 class {{CamelCase}}UpdateResource extends UpdateResource
 {

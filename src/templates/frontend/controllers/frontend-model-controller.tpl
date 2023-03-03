@@ -12,7 +12,7 @@ use frontend\resources\{{snake_case}}\{{CamelCase}}ReadResource;
 /**
  * Controller for model `{{CamelCase}}` environment `frontend`
  *
- * @param {{CamelCase}}Service $servcie
+ * @property {{CamelCase}}Service $servcie
  */
 class {{CamelCase}}Controller extends FrontendController
 {
