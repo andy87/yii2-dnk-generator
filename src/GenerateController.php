@@ -363,10 +363,10 @@ class GenerateController extends Controller
 
     /**
      * @param string $entity
-     * @param string $command
+     * @param string $sourceCommand
      * @return void
      */
-    private function generateGii(string $entity, string $command)
+    private function generateGii(string $entity, string $sourceCommand)
     {
         $entityList = $this->getEntity($entity);
 
@@ -381,7 +381,7 @@ class GenerateController extends Controller
             $to = array_values($params);
 
 
-            $command = str_replace($from, $to, $command);
+            $command = str_replace($from, $to, $sourceCommand);
 
             echo "\r\nEntity: $camelCase table: $snakeCase";
             echo "\r\nCommand: \r\n\t $command";
