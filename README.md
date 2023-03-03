@@ -202,7 +202,7 @@ Interfaces list:
 
 Helpers classes list:
 - `console\components\core\BaseMigration`
-- `console\components\resources\GredViewResource` - GredView Resources ( search, dataProvider )
+- `console\components\resources\GridViewResource` - GredView Resources ( search, dataProvider )
 - `common\components\db\Config` - Data base config: CHARACTER, COLLATE, ENGINE
 - `common\components\Part` - service parts with labels
 - `common\components\db\Tables` - class with table names used Part::CONSTANT_NAME

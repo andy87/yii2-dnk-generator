@@ -6,7 +6,7 @@ use yii\base\Model;
 use {{BaseResourceClassName}} as BaseResourceClass;
 
 /**
- * Base file for `UpdateResource`
+ * Base file for `CreateResource`
  */
 class CreateResource extends BaseResourceClass
 {
