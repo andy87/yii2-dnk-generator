@@ -204,11 +204,11 @@ class GenerateController extends Controller
 
         $params = $this->getParams('model','Model');
 
-        foreach ( self::BASE_RESOURCE as $sourcePath => $targetPath )
+        foreach ( self::BASE_RESOURCE as $template )
         {
-            $sourcePath = $root.$sourcePath;
+            $sourcePath = $root.$template[self::SOURCE];
 
-            $targetPath = Yii::getAlias($targetPath);
+            $targetPath = Yii::getAlias($template[self::TARGET]);
 
             $this->generateFileFromTpl($sourcePath, $targetPath, $params);
         }
