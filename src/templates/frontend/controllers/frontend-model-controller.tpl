@@ -6,6 +6,8 @@ use yii\data\ActiveDataProvider;
 use common\components\resources\GridViewResource;
 use frontend\components\controllers\FrontendController;
 use frontend\services\{{CamelCase}}Service;
+use frontend\resources\{{snake_case}}\{{CamelCase}}ListResource;
+use frontend\resources\{{snake_case}}\{{CamelCase}}ReadResource;
 
 /**
  * Controller for model `{{CamelCase}}` environment `frontend`
