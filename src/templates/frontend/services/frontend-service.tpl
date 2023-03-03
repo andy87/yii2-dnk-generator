@@ -13,6 +13,7 @@ use frontend\resources\{{snake_case}}\{{CamelCase}}ReadResource;
  *
  * @method {{CamelCase}} getModel()
  * @method {{CamelCase}}Form getForm()
+ * @method {{CamelCase}}ReadResource|{{CamelCase}}ListResource getResource(int $key)
  */
 class {{CamelCase}}Service extends {{CamelCase}}CommonService
 {

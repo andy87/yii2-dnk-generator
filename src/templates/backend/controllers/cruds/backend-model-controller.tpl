@@ -13,7 +13,7 @@ use backend\resources\{{snake_case}}\{{CamelCase}}UpdateResource;
 /**
  * Controller for model `{{CamelCase}}` environment `backend`
  *
- * @param {{CamelCase}}Service $services
+ * @param {{CamelCase}}Service $service
  */
 class {{CamelCase}}Controller extends BackendController
 {
