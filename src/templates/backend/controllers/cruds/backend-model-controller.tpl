@@ -4,11 +4,11 @@ namespace backend\controllers;
 
 use common\components\core\BaseService;
 use backend\services\{{CamelCase}}Service;
+use backend\components\controllers\BackendController
 use backend\resources\{{snake_case}}\{{CamelCase}}ListResource;
 use backend\resources\{{snake_case}}\{{CamelCase}}ReadResource;
 use backend\resources\{{snake_case}}\{{CamelCase}}CreateResource;
 use backend\resources\{{snake_case}}\{{CamelCase}}UpdateResource;
-use backend\components\controllers\{{CamelCase}}Controller;
 
 /**
  * Controller for model `{{CamelCase}}` environment `backend`
