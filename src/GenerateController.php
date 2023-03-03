@@ -346,7 +346,7 @@ class GenerateController extends Controller
      */
     public function actionSourceModels(string $entity)
     {
-        $command = "php yii gii/model --modelClass={{CamelCase}}Source --ns=common\\models\\sources --tableName={{snake_case}} --baseClass={{BaseModelClassName}}";
+        $command = "php yii gii/model --modelClass={{CamelCase}}Source --ns=common\\models\\sources --tableName={{snake_case}} --baseClass={{BaseModelClassName}} --overwrite=yes";
 
         $this->generateGii($entity, $command);
     }
@@ -356,7 +356,7 @@ class GenerateController extends Controller
      */
     public function actionSourceCrud(string $entity)
     {
-        $command = "php yii gii/crud --modelClass={{CamelCase}} --controllerNamespace=backend\\controllers\\crud --baseControllerClass=backend\\controllers\\cruds\\{{CamelCase}}Controller --viewPath=@backend\\views\\cruds\\{{snake_case}} --enableI18N=1";
+        $command = "php yii gii/crud --modelClass={{CamelCase}} --controllerNamespace=backend\\controllers\\crud --baseControllerClass=backend\\controllers\\cruds\\{{CamelCase}}Controller --viewPath=@backend\\views\\cruds\\{{snake_case}} --enableI18N=1 --overwrite=yes";
 
         $this->generateGii($entity, $command);
     }
