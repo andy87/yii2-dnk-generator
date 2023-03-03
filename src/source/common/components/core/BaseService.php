@@ -12,6 +12,8 @@ use yii\db\ActiveRecord;
  */
 abstract class BaseService extends Component
 {
+    // const
+
     /** @var int keyA to `resources` */
     public const CREATE = 1;
     /** @var int key to `resources` */
@@ -34,6 +36,9 @@ abstract class BaseService extends Component
         self::READ => null,
     ];
 
+
+
+    // methods
 
     /**
      * 

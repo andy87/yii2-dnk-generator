@@ -20,9 +20,9 @@ class GridViewResource extends BaseResource
     /**
      *
      */
-    public function __construct( Model $searchForm, ActiveDataProvider $activeDataProvider )
+    public function __construct( Model $searchForm, ActiveDataProvider $activeDataProvider, array $config = [] )
     {
-        parent::__construct();
+        parent::__construct($config);
 
         $this->searchForm = $searchForm;
 

@@ -19,7 +19,7 @@ class Part
     /** @var int Ключ имени в множественном числе */
     public const NAME_MANY = 0;
 
-    /** @var int Ключ имени в удинственном числе */
+    /** @var int Ключ имени в единственном числе */
     public const NAME_ONE = 1;
 
 

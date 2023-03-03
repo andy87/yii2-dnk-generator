@@ -13,15 +13,21 @@ use common\components\interfaces\ControllerInterface;
  */
 abstract class BaseController extends Controller implements  ControllerInterface
 {
+    // const
+
     /** @var string  */
     public const SERVICE = ServiceInterface::class;
 
 
 
+    // property
+
     /** @var ServiceInterface  */
     protected ServiceInterface $service;
 
 
+
+    // methods
 
     /**
      * @return void

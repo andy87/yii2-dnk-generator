@@ -22,6 +22,7 @@ abstract class BaseResource extends Component implements ResourcesInterface
     public const KEY = 'R';
 
 
+
     // methods
 
     /**
