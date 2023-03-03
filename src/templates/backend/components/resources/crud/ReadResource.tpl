@@ -5,9 +5,9 @@ namespace backend\components\resources\crud;
 use yii\base\Model;
 
 /**
- * Base file for `ViewResource`
+ * Base file for `ReadResource`
  */
-class ViewResource extends {{BaseResourceClassName}}
+class ReadResource extends {{BaseResourceClassName}}
 {
     public string $title;
 

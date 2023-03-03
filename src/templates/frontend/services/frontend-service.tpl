@@ -2,10 +2,10 @@
 
 namespace frontend\services;
 
-use \frontend\models\items\{{CamelCase}};
-use \frontend\models\forms\{{CamelCase}}Form;
-use \frontend\resources\{{snake_case}}\{{CamelCase}}ListResource;
-use \frontend\resources\{{snake_case}}\{{CamelCase}}ViewResource;
+use frontend\models\items\{{CamelCase}};
+use frontend\models\forms\{{CamelCase}}Form;
+use frontend\resources\{{snake_case}}\{{CamelCase}}ListResource;
+use frontend\resources\{{snake_case}}\{{CamelCase}}ViewResource;
 
 /**
  *  Service for model `{{CamelCase}}` environment `frontend`
@@ -23,6 +23,6 @@ class {{CamelCase}}Service extends \common\services\{{CamelCase}}Service
 
     public const RESOURCES = [
         self::LIST => {{CamelCase}}ListResource::class,
-        self::VIEW => {{CamelCase}}ViewResource::class,
+        self::VIEW => {{CamelCase}}ReadResource::class,
     ];
 }

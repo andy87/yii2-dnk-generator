@@ -2,12 +2,12 @@
 
 namespace backend\services;
 
-use \backend\models\items\{{CamelCase}};
-use \backend\models\forms\{{CamelCase}}Form;
-use \backend\resources\{{snake_case}}\{{CamelCase}}CreateResource;
-use \backend\resources\{{snake_case}}\{{CamelCase}}ViewResource;
-use \backend\resources\{{snake_case}}\{{CamelCase}}UpdateResource;
-use \backend\resources\{{snake_case}}\{{CamelCase}}ListResource;
+use backend\models\items\{{CamelCase}};
+use backend\models\forms\{{CamelCase}}Form;
+use backend\resources\{{snake_case}}\{{CamelCase}}CreateResource;
+use backend\resources\{{snake_case}}\{{CamelCase}}ViewResource;
+use backend\resources\{{snake_case}}\{{CamelCase}}UpdateResource;
+use backend\resources\{{snake_case}}\{{CamelCase}}ListResource;
 
 /**
  *  Service for model `{{CamelCase}}` environment `backend`
@@ -25,8 +25,8 @@ class {{CamelCase}}Service extends \common\services\{{CamelCase}}Service
 
     public const RESOURCES = [
         self::CREATE => {{CamelCase}}CreateResource::class,
-        self::VIEW => {{CamelCase}}ViewResource::class,
+        self::VIEW => {{CamelCase}}ReadResource::class,
         self::UPDATE => {{CamelCase}}UpdateResource::class,
-        self::LIST => {{CamelCase}}IndexResource::class,
+        self::LIST => {{CamelCase}}ListResource::class,
     ];
 }

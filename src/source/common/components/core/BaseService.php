@@ -14,12 +14,12 @@ abstract class BaseService extends Component
 {
     /** @var int key to `resources` */
     public const LIST = 1;
-    /** @var int key to `resources` */
-    public const CREATE = 2;
+    /** @var int keyA to `resources` */
+    public const CRETE = 2;
     /** @var int key to `resources` */
     public const UPDATE = 3;
     /** @var int key to `resources` */
-    public const VIEW = 4;
+    public const READ = 4;
 
 
     /** @var string link to class */
@@ -27,6 +27,13 @@ abstract class BaseService extends Component
     /** @var string link to class */
     private const FORM = Model::class;
 
+    /** @var array  */
+    public const RESOURCE = [
+        self::LIST => null,
+        self::CRETE => null,
+        self::UPDATE => null,
+        self::READ => null,
+    ];
 
 
     /**
@@ -64,6 +71,24 @@ abstract class BaseService extends Component
 
         return new $class();
     }
+
+    /**
+     * @param int $key
+     * @return ?object
+     */
+    public function getResource( int $key ): ?object
+    {
+        if ( isset(static::RESOURCE[$key]) )
+        {
+            $class = static::RESOURCE[$key];
+
+            return new $class();
+        }
+
+        return null;
+    }
+
+
 
     /**
      * @param array $attributes

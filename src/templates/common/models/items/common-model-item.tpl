@@ -2,7 +2,7 @@
 
 namespace common\models\items;
 
-use \common\models\sources\{{CamelCase}}Source;
+use common\models\sources\{{CamelCase}}Source;
 
 /**
  * Model `UserRole` environment `common`

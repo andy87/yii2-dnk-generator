@@ -2,6 +2,7 @@
 
 namespace andy87\dnk;
 
+use common\components\Part;
 use Yii;
 use Exception;
 use yii\helpers\Inflector;
@@ -81,14 +82,34 @@ class GenerateController extends Controller
                     self::SOURCE => 'backend/resources/model/backend-update-resource.tpl',
                     self::TARGET => "@backend/resources/{{snake_case}}/{{CamelCase}}UpdateResource.php"
                 ],
-                'backend-view-resource' => [
-                    self::SOURCE => 'backend/resources/model/backend-view-resource.tpl',
-                    self::TARGET => "@backend/resources/{{snake_case}}/{{CamelCase}}ViewResource.php"
+                'backend-read-resource' => [
+                    self::SOURCE => 'backend/resources/model/backend-read-resource.tpl',
+                    self::TARGET => "@backend/resources/{{snake_case}}/{{CamelCase}}ReadResource.php"
                 ],
                     'backend-model-controller' => [
                         self::SOURCE => 'backend/controllers/cruds/backend-model-controller.tpl',
                         self::TARGET => "@backend/controllers/{{CamelCase}}Controller.php"
                     ],
+                        'backend-views-form' => [
+                            self::SOURCE => 'backend/views/model/_form-model.tpl',
+                            self::TARGET => "@backend/views/{{snake_case}}/_form-{{snake_case}}.php"
+                        ],
+                        'backend-views-create' => [
+                            self::SOURCE => 'backend/views/model/model-create.tpl',
+                            self::TARGET => "@backend/views/{{snake_case}}/{{snake_case}}-create.php"
+                        ],
+                        'backend-views-list' => [
+                            self::SOURCE => 'backend/views/model/model-list.tpl',
+                            self::TARGET => "@backend/views/{{snake_case}}/{{snake_case}}-list.php"
+                        ],
+                        'backend-views-read' => [
+                            self::SOURCE => 'backend/views/model/model-read.tpl',
+                            self::TARGET => "@backend/views/{{snake_case}}/{{snake_case}}-read.php"
+                        ],
+                        'backend-views-update' => [
+                            self::SOURCE => 'backend/views/model/model-update.tpl',
+                            self::TARGET => "@backend/views/{{snake_case}}/{{snake_case}}-update.php"
+                        ],
         'frontend-model-item' => [
             self::SOURCE => 'frontend/models/items/frontend-model-item.tpl',
             self::TARGET => "@frontend/models/items/{{CamelCase}}.php"
@@ -105,14 +126,22 @@ class GenerateController extends Controller
                     self::SOURCE => 'frontend/resources/model/frontend-list-resource.tpl',
                     self::TARGET => "@frontend/resources/{{snake_case}}/{{CamelCase}}ListResource.php"
                 ],
-                'frontend-view-resource' => [
-                    self::SOURCE => 'frontend/resources/model/frontend-view-resource.tpl',
-                    self::TARGET => "@frontend/resources/{{snake_case}}/{{CamelCase}}ViewResource.php"
+                'frontend-read-resource' => [
+                    self::SOURCE => 'frontend/resources/model/frontend-read-resource.tpl',
+                    self::TARGET => "@frontend/resources/{{snake_case}}/{{CamelCase}}ReadResource.php"
                 ],
                     'frontend-model-controller' => [
                         self::SOURCE => 'frontend/controllers/frontend-model-controller.tpl',
                         self::TARGET => "@frontend/controllers/{{CamelCase}}Controller.php"
                     ],
+                        'frontend-views-list' => [
+                            self::SOURCE => 'frontend/views/model/model-list.tpl',
+                            self::TARGET => "@frontend/views/{{snake_case}}/{{snake_case}}-list.php"
+                        ],
+                        'frontend-views-read' => [
+                            self::SOURCE => 'frontend/views/model/model-read.tpl',
+                            self::TARGET => "@frontend/views/{{snake_case}}/{{snake_case}}-read.php"
+                        ],
     ];
 
 
@@ -173,6 +202,8 @@ class GenerateController extends Controller
 
             $entityList = [$entity];
         }
+
+        if ( $entity === '*' ) $entityList = array_keys(Part::DATA);
 
         foreach ($entityList as $entity)
         {
@@ -235,6 +266,34 @@ class GenerateController extends Controller
     public function actionGenModels(string $entity)
     {
         $this->actionList($entity, 'common-model-source,common-model-item,backend-model-item,backend-model-form,frontend-model-item,frontend-model-form');
+    }
+
+    /**
+     * Generate backend/views files for entity
+     *
+     * example:
+     *      php yii generate/gen-backend-views user
+     *
+     * @param string $entity
+     * @return void
+     */
+    public function actionGenBackendViews(string $entity)
+    {
+        $this->actionList($entity, 'backend-views-form,backend-views-create,backend-views-list,backend-views-read,backend-views-update');
+    }
+
+    /**
+     * Generate frontend/views files for entity
+     *
+     * example:
+     *      php yii generate/gen-frontend-views user
+     *
+     * @param string $entity
+     * @return void
+     */
+    public function actionGenFrontendViews(string $entity)
+    {
+        $this->actionList($entity, 'frontend-views-list,frontend-views-read');
     }
 
     /**

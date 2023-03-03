@@ -2,7 +2,7 @@
 
 namespace common\services;
 
-use \common\models\items\{{CamelCase}};
+use common\models\items\{{CamelCase}};
 
 /**
  *  Service for model `{{CamelCase}}` environment `common`

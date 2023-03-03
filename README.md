@@ -26,7 +26,7 @@ Legend:
 
 
 
-### Servcice
+### Service
 ```
 📄 common/components/core/BaseService.php              // S_P&M > all services on Env:`all`
 |
@@ -47,29 +47,31 @@ Legend:
   └─📄 frontend/controllers/__Model__Controller.php          // S_P&M > controllers for moled `__Model__` on Env:`frontend`
 ```
 
-### Rsources.
+### Resources.
 ```
 📄 common/components/core/BaseResource.php                         // S_P&M > all resources on Env:`all` 
 |
 ├─📄 backend/components/core/resources/BackendResource.php         // S_P&M > all resources on Env:`backend`
 | |
-| ├─📄 backend/components/resources/CrudIndexResource.php          // S_P&M > all resources for view `index` on Env:`backend`
-| | └─📄 backend/resources/__model__/__Model__IndexResource.php    // S_P&M > resources for moled `__Model__` on view `index` Env:`backend`
+| ├─📄 backend/components/resources/CrudListResource.php          // S_P&M > all resources for view `index` on Env:`backend`
+| | └─📄 backend/resources/__model__/__Model__ListResource.php    // S_P&M > resources for moled `__Model__` on view `index` Env:`backend`
 | |
-| ├─📄 backend/components/resources/CrudViewResource.php           // S_P&M > all resources for view `view` on Env:`backend`
-| | └─📄 backend/resources/__model__/__Model__ViewResource.php     // S_P&M > resources for moled `__Model__` on view `view` Env:`backend`
+| ├─📄 backend/components/resources/CrudReadResource.php           // S_P&M > all resources for view `view` on Env:`backend`
+| | └─📄 backend/resources/__model__/__Model__ReadResource.php     // S_P&M > resources for moled `__Model__` on view `read` Env:`backend`
 | |
 | └─📄 backend/components/resources/CrudUpdateResource.php         // S_P&M > all resources for view `update` on Env:`backend`
 |   └─📄 backend/resources/__model__/__Model__UpdateResource.php   // S_P&M > resources for moled `__Model__` on view `update` Env:`backend`
 |
 └─📄 frontend/components/core/resources/FrontendResource.php       // S_P&M > all resources on Env:`frontend` 
   |
-  ├─📄 frontend/resources/ViewResource.php                         // S_P&M > all resources for view `view` on Env:`frontend`
-  | └─📄 frontend/resources/__model__/__Model__ViewResource.php    // S_P&M > resources for moled `__Model__` on view `view` Env:`frontend`
+  ├─📄 frontend/resources/ReadResource.php                         // S_P&M > all resources for view `view` on Env:`frontend`
+  | └─📄 frontend/resources/__model__/__Model__ReadResource.php    // S_P&M > resources for moled `__Model__` on view `read` Env:`frontend`
   |
   └─📄 frontend/resources/ListResource                             // S_P&M > all resources for view `list` on `frontend` environment
     └─📄 frontend/resources/__model__/__Model__ListResource.php    // S_P&M > resources for moled `__Model__` on view `list` Env:`frontend`
 ```
+
+
 
 # Profit.
 
@@ -241,12 +243,19 @@ generate basic file pack:
  - **backend/resources**
    - backend-create-resource `backend/resources/user/UserCreateResource.php` [view](src/templates/backend/resources/model/backend-create-resource.tpl)
    - backend-list-resource `backend/resources/user/UserListResource.php` [view](src/templates/backend/resources/model/backend-list-resource.tpl)
-   - backend-list-resource `backend/resources/user/UserViewResource.php` [view](src/templates/backend/resources/model/backend-list-resource.tpl)
+   - backend-list-resource `backend/resources/user/UserReadResource.php` [view](src/templates/backend/resources/model/backend-list-resource.tpl)
    - backend-update-resource `backend/resources/user/UserUpdateResource.php` [view](src/templates/backend/resources/model/backend-update-resource.tpl)
 
 
  - **backend/controller**
    - backend-model-controller `backend/controller/cruds/UserController.php` [view](src/templates/backend/controllers/cruds/backend-model-controller.tpl)
+
+ - **backend/views**
+   - backend-views-form `backend/views/user/_form-user.php` [view](src/templates/backend/views/model/_form-model.tpl)
+   - backend-views-create `backend/views/user/user-create.php` [view](src/templates/backend/views/model/model-create.tpl)
+   - backend-views-update `backend/views/user/user-update.php` [view](src/templates/backend/views/model/model-update.tpl)
+   - backend-views-read `backend/views/user/user-read.php` [view](src/templates/backend/views/model/model-read.tpl)
+   - backend-views-list `backend/views/user/user-list.php` [view](src/templates/backend/views/model/model-list.tpl)
 
 
  - **frontend/models**
@@ -259,18 +268,38 @@ generate basic file pack:
 
 
  - **frontend/resources**
-   - frontend-**list-reso**urce `frontend/resources/user/UserListResource.php` [view](src/templates/frontend/resources/model/frontend-list-resource.tpl)
-   - frontend-view-resource`frontend/resources/user/UserViewResource.php` [view](src/templates/frontend/resources/model/frontend-view-resource.tpl)
+   - frontend-list-resource `frontend/resources/user/UserListResource.php` [view](src/templates/frontend/resources/model/frontend-list-resource.tpl)
+   - frontend-read-resource`frontend/resources/user/UserReadResource.php` [view](src/templates/frontend/resources/model/frontend-read-resource.tpl)
 
 
  - **frontend/controllers**
    - frontend-model-controller `frontend/consrollers/UserController.php` [view](src/templates/frontend/controllers/frontend-model-controller.tpl)
+ 
+ - **frontend/views**
+    - frontend-views-read `frontend/views/user/user-read.php` [view](src/templates/frontend/views/model/model-read.tpl)
+    - frontend-views-list `frontend/views/user/user-list.php` [view](src/templates/frontend/views/model/model-list.tpl)
 _____
 
 
 
 ### command
 `php yii generate/gen-services user`
+
+Generate `service` files for needle table(part).
+
+- **common/services**
+   - common-service `common/services/UserService.php` [view](src/templates/common/services/common-service.tpl)
+
+- **backend/services**
+   -  backend-service `backend/services/UserService.php` [view](src/templates/backend/services/backend-service.tpl)
+
+- **frontend/service**
+   - frontend-service `frontend/service/UserService.php` [view](src/templates/frontend/services/frontend-service.tpl)
+_____
+
+
+### command
+`php yii generate/gen-backend-views user`
 
 Generate `service` files for needle table(part).
 
@@ -311,7 +340,6 @@ _____
 
 Generate `controller` files for needle table(part).
 
-
 - **backend/controller**
    - backend-model-controller `backend/controller/cruds/UserController.php` [view](src/templates/backend/controllers/cruds/backend-model-controller.tpl)
 
@@ -320,30 +348,61 @@ Generate `controller` files for needle table(part).
 _____
 
 
+### command
+`php yii generate/gen-backend-views user`
+
+Generate `views` files for needle table(part).
+
+- **backend/views**
+    - backend-views-form `backend/views/user/_form-user.php` [view](src/templates/backend/views/model/_form-model.tpl)
+    - backend-views-create `backend/views/user/user-create.php` [view](src/templates/backend/views/model/model-create.tpl)
+    - backend-views-update `backend/views/user/user-update.php` [view](src/templates/backend/views/model/model-update.tpl)
+    - backend-views-read `backend/views/user/user-read.php` [view](src/templates/backend/views/model/model-read.tpl)
+    - backend-views-list `backend/views/user/user-list.php` [view](src/templates/backend/views/model/model-list.tpl)
+
+alias `php yii generate/list user backend-views-form,backend-views-create,backend-views-update,backend-views-read,backend-views-list`
+_____
+
+
+### command
+`php yii generate/gen-frontend-views user`
+
+Generate `views` files for needle table(part).
+
+
+- **frontend/views**
+    - frontend-views-read `frontend/views/user/user-read.php` [view](src/templates/frontend/views/model/model-read.tpl)
+    - frontend-views-list `frontend/views/user/user-list.php` [view](src/templates/frontend/views/model/model-list.tpl)
+
+alias `php yii generate/list user frontend-views-read,frontend-views-list`
+_____
+
+
 
 ### command
 `php yii generate/list user common/services`
 
-Generate selected files for needle table(part).
+Generate selected fileType(list fileType) for needle table(part).
 
 
 #### description
 
 
-##### Generate once type file.
-`php yii generate/list user common/services`
+##### Generate once file.
+`php yii generate/list user common-services`
 
 generate only: `common/services/UserService.php` [view](src/templates/common/services/common-service.tpl)
 
 
-##### Example for generate some files.
-`php yii generate/list user common/services,common-model-source,frontend/service`
+##### Generate selected files.
+`php yii generate/list user common-services,common-model-source,frontend-service`
 
 generate file list:
    - `common/services/UserService.php` [view](src/templates/common/services/common-service.tpl)
    - `common/models/sources/UserSource.php` [view](src/templates/common/models/sources/common-model-source.tpl)
    - `frontend/service/UserService.php` [view](src/templates/frontend/services/frontend-service.tpl)
 ______
+
 
 
 ## Yii2 setups
