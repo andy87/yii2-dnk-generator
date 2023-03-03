@@ -3,7 +3,7 @@
 namespace frontend\resources\{{snake_case}};
 
 use frontend\models\items\{{CamelCase}};
-use common\components\resources\GridViewResourc;
+use common\components\resources\GridViewResource;
 
 /**
  * List Resource for model `{{CamelCase}}` environment `frontend`
