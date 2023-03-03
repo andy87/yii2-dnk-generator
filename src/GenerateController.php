@@ -380,9 +380,12 @@ class GenerateController extends Controller
             $from = array_keys($params);
             $to = array_values($params);
 
+
             $command = str_replace($from, $to, $command);
 
-            shell_exec( $command );
+            echo "\r\nEntity: $camelCase table: $snakeCase";
+            echo "\r\nCommand: \r\n\t $command";
+            echo "\r\n\tresult: " . shell_exec( $command );
         }
     }
 
