@@ -228,6 +228,20 @@ class GenerateController extends Controller
      */
     public function actionGen(string $entity, bool $overwrite = false ): void
     {
+        $entityList = $this->getEntity($entity);
+
+        foreach ($entityList as $entity)
+        {
+            $this->generator($entity, '', $overwrite);
+        }
+    }
+
+    /**
+     * @param string $entity
+     * @return array
+     */
+    private function getEntity(string $entity): array
+    {
         if ( strpos($entity, ',') !== false )
         {
             $entityList = explode(',', $entity);
@@ -239,10 +253,7 @@ class GenerateController extends Controller
 
         if ( $entity === '*' ) $entityList = array_keys(Part::DATA);
 
-        foreach ($entityList as $entity)
-        {
-            $this->generator($entity, '', $overwrite);
-        }
+        return $entityList;
     }
 
     /**
@@ -328,6 +339,51 @@ class GenerateController extends Controller
     public function actionGenFrontendViews(string $entity)
     {
         $this->actionList($entity, 'frontend-views-list,frontend-views-read');
+    }
+
+    /**
+     * @return void
+     */
+    public function actionSourceModels(string $entity)
+    {
+        $command = "php yii gii/model --modelClass=common\\models\\sources\\{{CamelCase}} --tableName={{snake_case}} --ns=common\\models\\sources --baseClass={{BaseModelClassName}}";
+
+        $this->generateGii($entity, $command);
+    }
+
+    /**
+     * @return void
+     */
+    public function actionSourceCrud(string $entity)
+    {
+        $command = "php yii gii/crud --modelClass=backend\\models\\items\\{{CamelCase}} --controllerNamespace=backend\\controllers\\crud --baseControllerClass=backend\\controllers\\cruds\\{{CamelCase}}Controller --viewPath=@backend\\views\\cruds\\{{snake_case}} --enableI18N=1";
+
+        $this->generateGii($entity, $command);
+    }
+
+    /**
+     * @param string $entity
+     * @param string $command
+     * @return void
+     */
+    private function generateGii(string $entity, string $command)
+    {
+        $entityList = $this->getEntity($entity);
+
+        foreach ($entityList as $entity )
+        {
+            $snakeCase = strtolower($entity);
+            $camelCase = Inflector::id2camel($snakeCase,'_');
+
+            $params = $this->getParams($snakeCase, $camelCase);
+
+            $from = array_keys($params);
+            $to = array_values($params);
+
+            $command = str_replace($from, $to, $command);
+
+            shell_exec( $command );
+        }
     }
 
     /**
@@ -425,7 +481,6 @@ class GenerateController extends Controller
             }
 
             $status = $this->generateFileFromTpl($sourcePath, $targetPath, $params);
-
 
             if ($status) {
 
