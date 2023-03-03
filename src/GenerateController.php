@@ -284,8 +284,25 @@ class GenerateController extends Controller
         $params['{{BaseServiceClassName}}'] =str_replace($from, $to, $this->baseClasses[self::BASE_SERVICE_CLASS]);
         $params['{{BaseResourceClassName}}'] =str_replace($from, $to, $this->baseClasses[self::BASE_RESOURCE_CLASS]);
 
+        $migrationStep = true;
+
         foreach ($templatesMap as $sourcePath => $targetPath)
         {
+            if ( $migrationStep )
+            {
+                $migrationStep = false;
+
+                $pathFiles = glob(Yii::getAlias('@console/migrations/*_create_table_*.php'));
+
+                foreach ( $pathFiles as $pathFile )
+                {
+                    if ( strpos($pathFile, "_create_table__$snakeCase") !== false )
+                    {
+                        continue 2;
+                    }
+                }
+            }
+            
             $sourcePath = $root.$sourcePath;
             $targetPath = Yii::getAlias($targetPath);
 
