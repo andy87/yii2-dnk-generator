@@ -2,6 +2,7 @@
 
 namespace frontend\services;
 
+use common\services\{{CamelCase}}Service as {{CamelCase}}CommonService
 use frontend\models\items\{{CamelCase}};
 use frontend\models\forms\{{CamelCase}}Form;
 use frontend\resources\{{snake_case}}\{{CamelCase}}ListResource;
@@ -13,7 +14,7 @@ use frontend\resources\{{snake_case}}\{{CamelCase}}ViewResource;
  * @method {{CamelCase}} getModel()
  * @method {{CamelCase}}Form getForm()
  */
-class {{CamelCase}}Service extends \common\services\{{CamelCase}}Service
+class {{CamelCase}}Service extends {{CamelCase}}CommonService
 {
     /** @var string  */
     public const MODEL = {{CamelCase}}::class;
@@ -23,6 +24,6 @@ class {{CamelCase}}Service extends \common\services\{{CamelCase}}Service
 
     public const RESOURCES = [
         self::LIST => {{CamelCase}}ListResource::class,
-        self::VIEW => {{CamelCase}}ReadResource::class,
+        self::READ => {{CamelCase}}ReadResource::class,
     ];
 }

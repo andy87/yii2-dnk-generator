@@ -12,15 +12,14 @@ use yii\db\ActiveRecord;
  */
 abstract class BaseService extends Component
 {
-    /** @var int key to `resources` */
-    public const LIST = 1;
     /** @var int keyA to `resources` */
-    public const CRETE = 2;
+    public const CRETE = 1;
+    /** @var int key to `resources` */
+    public const READ = 2;
     /** @var int key to `resources` */
     public const UPDATE = 3;
     /** @var int key to `resources` */
-    public const READ = 4;
-
+    public const LIST = 4;
 
     /** @var string link to class */
     private const MODEL = Model::class;

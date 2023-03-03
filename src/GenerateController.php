@@ -366,7 +366,7 @@ class GenerateController extends Controller
             $targetPath = Yii::getAlias($targetPath);
 
 
-            echo "\r\n\r\nNew generate iteration\r\n Template: ";
+            echo "\r\n\r\nNew generate iteration $camelCase \r\n Template: ";
             $this->stdout($sourcePath, BaseConsole::FG_CYAN);
             echo "\r\n Generated file: ";
             $this->stdout($targetPath, BaseConsole::FG_GREEN);
@@ -399,8 +399,11 @@ class GenerateController extends Controller
 
 
             if ($status) {
+
                 $this->stdout("\r\n Dnk `setup`: copied successfully.\n", BaseConsole::FG_GREEN);
+
             } else {
+
                 $this->stdout("\r\n Dnk `setup`: copied failed.\n", BaseConsole::FG_RED);
             }
         }
