@@ -192,7 +192,7 @@ class GenerateController extends Controller
      * @param string $entity
      * @return void
      */
-    public function actionGen(string $entity): void
+    public function actionGen(string $entity, bool $overwrite = false ): void
     {
         if ( strpos($entity, ',') !== false )
         {
@@ -207,7 +207,7 @@ class GenerateController extends Controller
 
         foreach ($entityList as $entity)
         {
-            $this->generator($entity);
+            $this->generator($entity, '', $overwrite);
         }
     }
 
@@ -303,7 +303,7 @@ class GenerateController extends Controller
      * @param string $filter
      * @return void
      */
-    private function generator(string $entity, string $filter = ''): void
+    private function generator(string $entity, string $filter = '', bool $overwrite = false): void
     {
         $root = $this->getTemplatePath();
 
@@ -371,7 +371,7 @@ class GenerateController extends Controller
             echo "\r\n Generated file: ";
             $this->stdout($targetPath, BaseConsole::FG_GREEN);
 
-            if ( file_exists($targetPath) )
+            if ( file_exists($targetPath) && !$overwrite )
             {
                 $this->stdout("\r\n File exists!", BaseConsole::FG_RED);
 
