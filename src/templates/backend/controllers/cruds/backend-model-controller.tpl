@@ -15,6 +15,6 @@ class {{CamelCase}}Controller extends BackendController
     public const SERVICE = {{CamelCase}}Service::class;
 
     // call console command:
-    //
+    // shell_exec("./yii gii/crud --modelClass=backend\\models\\items\\{{CamelCase}}Source --controllerNamespace=backend\\controllers\\crud --baseControllerClass=backend\\controllers\\cruds\\{{CamelCase}}Controller --viewPath=@backend\\views\\cruds\\{{snake_case}} --enableI18N=1")
 
 }

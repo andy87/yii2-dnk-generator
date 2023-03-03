@@ -168,7 +168,7 @@ class GenerateController extends Controller
         if ( strpos($entity, ',') !== false )
         {
             $entityList = explode(',', $entity);
-            
+
         } else {
 
             $entityList = [$entity];
