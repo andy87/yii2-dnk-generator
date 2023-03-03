@@ -302,7 +302,7 @@ class GenerateController extends Controller
                     }
                 }
             }
-            
+
             $sourcePath = $root.$sourcePath;
             $targetPath = Yii::getAlias($targetPath);
 
@@ -447,7 +447,7 @@ class GenerateController extends Controller
 
         foreach ($mapping as $step)
         {
-            if ( strpos('.', $step) !== false ) return;
+            if ( strpos($step,'.' ) !== false ) return;
 
             $dir .= "$step/";
 
