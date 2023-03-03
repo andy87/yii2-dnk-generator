@@ -56,9 +56,9 @@ abstract class BaseService extends Component
      */
     public function getModel(): Model
     {
-        $class = $this->getClassForm();
-
-        return new $class();
+        return $this->createClass(
+            $this->getClassForm()
+        );
     }
 
     /**
@@ -66,9 +66,9 @@ abstract class BaseService extends Component
      */
     public function getForm()
     {
-        $class = $this->getClassForm();
-
-        return new $class();
+        return $this->createClass(
+            $this->getClassForm()
+        );
     }
 
     /**
@@ -77,14 +77,20 @@ abstract class BaseService extends Component
      */
     public function getResource( int $key ): ?object
     {
-        if ( isset(static::RESOURCE[$key]) )
-        {
-            $class = static::RESOURCE[$key];
+        $class = static::RESOURCE[$key] ?? false;
 
-            return new $class();
-        }
+        if ( $class ) return $this->createClass($class);
 
         return null;
+    }
+
+    /**
+     * @param string $class
+     * @return mixed
+     */
+    private function createClass(string $class)
+    {
+        return new $class();
     }
 
 
