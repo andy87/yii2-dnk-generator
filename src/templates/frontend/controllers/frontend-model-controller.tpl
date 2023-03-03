@@ -8,7 +8,7 @@ use frontend\components\controllers\FrontendController;
 /**
  * Controller for model `{{CamelCase}}` environment `frontend`
  *
- * @property {{CamelCase}}Service $servIce
+ * @property {{CamelCase}}Service $service
  */
 class {{CamelCase}}Controller extends FrontendController
 {
