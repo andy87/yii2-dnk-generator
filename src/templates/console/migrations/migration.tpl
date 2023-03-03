@@ -2,11 +2,12 @@
 
 use common\components\db\Config;
 use common\components\Part;
+use {{BaseMigrationClassName}} as BaseMigrationClass;
 
 /**
  * Создание таблицы `{{snake_case}}`
  */
-class {{migrateFileName}} extends {{BaseMigrationClassName}}
+class {{migrateFileName}} extends BaseMigrationClass
 {
     /** @var string Имя таблицы */
     public string $part = Part::{{UPPER_CASE}};

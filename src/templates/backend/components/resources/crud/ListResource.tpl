@@ -3,11 +3,12 @@
 namespace backend\components\resources\crud;
 
 use common\components\resources\GredViewResource;
+use {{BaseResourceClassName}} as BaseResourceClass;
 
 /**
  * Base file for `ListResource`
  */
-class ListResource extends {{BaseResourceClassName}}
+class ListResource extends BaseResourceClass
 {
     public string $title;
 
