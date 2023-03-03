@@ -10,6 +10,7 @@ use {{BaseResourceClassName}} as BaseResourceClass;
  */
 class UpdateResource extends BaseResourceClass
 {
+    /** @var string  */
     public string $title;
 
     /** @var Model */

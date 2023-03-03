@@ -10,6 +10,7 @@ use {{BaseResourceClassName}} as BaseResourceClass;
  */
 class ListResource extends BaseResourceClass
 {
+    /** @var string  */
     public string $title;
 
     /** @var GredViewResource */
