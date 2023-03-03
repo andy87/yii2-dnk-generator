@@ -165,7 +165,19 @@ class GenerateController extends Controller
      */
     public function actionGen(string $entity): void
     {
-        $this->generator($entity);
+        if ( strpos($entity, ',') !== false )
+        {
+            $entityList = explode(',', $entity);
+            
+        } else {
+
+            $entityList = [$entity];
+        }
+
+        foreach ($entityList as $entity)
+        {
+            $this->generator($entity);
+        }
     }
 
     /**
