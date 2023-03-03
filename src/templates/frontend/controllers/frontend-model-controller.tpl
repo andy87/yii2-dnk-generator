@@ -3,7 +3,7 @@
 namespace frontend\controllers;
 
 use yii\data\ActiveDataProvider;
-use common\components\resources\GridViewResourc;
+use common\components\resources\GridViewResource;
 use frontend\components\controllers\FrontendController;
 use frontend\services\{{CamelCase}}Service;
 
@@ -31,16 +31,13 @@ class {{CamelCase}}Controller extends FrontendController
         return $R->content();
     }
 
-    public function actionList()
+    public function actionRead(int $id)
     {
         /** @var {{CamelCase}}ListResource $R */
-        $R = new $this->service->getResource( {{CamelCase}}Service::LIST );
+        $R = new $this->service->getResource( {{CamelCase}}Service::READ );
 
-        $form = $this->service->getForm();
-        $activeDataProvider = new ActiveDataProvider();
+        $R->item = $this->service->findWhere(['id' => $id])->one();
 
-        $gridViewResource = new GridViewResource($form, $activeDataProvider);
-
-        $R->gridViewResource = $gridViewResource;
+        return $R->content();
     }
 }

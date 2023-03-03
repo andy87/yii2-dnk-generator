@@ -2,7 +2,7 @@
 
 namespace frontend\services;
 
-use common\services\{{CamelCase}}Service as {{CamelCase}}CommonService
+use common\services\{{CamelCase}}Service as {{CamelCase}}CommonService;
 use frontend\models\items\{{CamelCase}};
 use frontend\models\forms\{{CamelCase}}Form;
 use frontend\resources\{{snake_case}}\{{CamelCase}}ListResource;

@@ -99,6 +99,8 @@ abstract class BaseService extends Component
 
         if ( !empty($attributes) ) $model->setAttributes($attributes);
 
+        $model->save();
+
         return $model;
     }
 
