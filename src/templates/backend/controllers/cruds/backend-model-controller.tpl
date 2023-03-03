@@ -28,12 +28,14 @@ class {{CamelCase}}Controller extends BackendController
     {
         $resourceClass = {{CamelCase}}Service::RESOURCES[{{CamelCase}}Service::LIST];
 
-         $form = $this->service->getForm();
+        $form = $this->service->getForm();
+
         $activeDataProvider = new ActiveDataProvider();
+
         $gridViewResource = new GridViewResource($form, $activeDataProvider);
 
         /** @var {{CamelCase}}ListResource $R */
-        $R = new $resourceClass($gridViewResource)
+        $R = new $resourceClass($gridViewResource);
 
         return $R->content();
     }
