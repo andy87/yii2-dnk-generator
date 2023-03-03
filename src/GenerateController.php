@@ -145,7 +145,7 @@ class GenerateController extends Controller
     ];
 
     /** @var array mapping for `resources` */
-    public const BASE_RESOURCE = [
+    public const BASE_RESOURCES = [
         'backend-components-resources-crud-create' => [
             self::SOURCE => 'backend/components/resources/crud/CreateResource.tpl',
             self::TARGET => "@backend/components/resources/crud/CreateResource.php"
@@ -204,7 +204,7 @@ class GenerateController extends Controller
 
         $params = $this->getParams('model','Model');
 
-        foreach ( self::BASE_RESOURCE as $template )
+        foreach ( self::BASE_RESOURCES as $template )
         {
             $sourcePath = $root.$template[self::SOURCE];
 

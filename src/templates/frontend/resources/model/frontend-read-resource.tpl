@@ -6,13 +6,13 @@ use frontend\models\items\{{CamelCase}};
 use {{BaseResourceClassName}} as BaseResourceClass;
 
 /**
- * View Resource for model `{{CamelCase}}` environment `frontend`
+ * View Resource for model `{{CamelCase}}` environment `frontend
  */
 class {{CamelCase}}ReadResource extends BaseResourceClass
 {
     /** @var string template name */
     public const TEMPLATE = '{{snake_case}}-read';
 
-    /** @var {{CamelCase}} */
+    /** @var {{CamelCase}} $item */
     public {{CamelCase}} $item;
 }

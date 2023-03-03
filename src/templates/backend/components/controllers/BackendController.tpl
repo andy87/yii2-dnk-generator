@@ -11,4 +11,6 @@ use {{BaseControllerClassName}} as BaseControllerClass;
 abstract class BackendController extends BaseControllerClass
 {
     public const SERVICE = BaseService::class;
+
+
 }

@@ -27,7 +27,7 @@ abstract class BaseService extends Component
     private const FORM = Model::class;
 
     /** @var array  */
-    public const RESOURCE = [
+    public const RESOURCES = [
         self::LIST => null,
         self::CREATE => null,
         self::UPDATE => null,
@@ -77,7 +77,7 @@ abstract class BaseService extends Component
      */
     public function getResource( int $key ): ?object
     {
-        $class = static::RESOURCE[$key] ?? false;
+        $class = static::RESOURCES[$key] ?? false;
 
         if ( $class ) return $this->createClass($class);
 

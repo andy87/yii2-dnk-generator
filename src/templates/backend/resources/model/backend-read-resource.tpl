@@ -2,13 +2,13 @@
 
 namespace backend\resources\{{snake_case}};
 
-use backend\models\items\{{CamelCase}};
+use backend\models\items\{{CamelCase}}Form;
 use backend\components\resources\crud\ReadResource;
 
 /**
  *  {{CamelCase}}ReadResource
  *
- *  @param {{CamelCase}} $item
+ *  @param {{CamelCase}}Form $item
  */
 class {{CamelCase}}ReadResource extends ReadResource
 {

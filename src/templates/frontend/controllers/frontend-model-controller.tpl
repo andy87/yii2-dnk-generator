@@ -16,23 +16,29 @@ use frontend\resources\{{snake_case}}\{{CamelCase}}ReadResource;
  */
 class {{CamelCase}}Controller extends FrontendController
 {
+    /** @var SERVICE */
     public const SERVICE = {{CamelCase}}Service::class;
 
+    /**
+     *  action `List`
+     */
     public function actionList()
     {
-        /** @var {{CamelCase}}ListResource $R */
-        $R = new $this->service->getResource( {{CamelCase}}Service::LIST );
+        $resourceClass = {{CamelCase}}Service::RESOURCES[{{CamelCase}}Service::LIST];
 
         $form = $this->service->getForm();
         $activeDataProvider = new ActiveDataProvider();
-
         $gridViewResource = new GridViewResource($form, $activeDataProvider);
-
-        $R->gridViewResource = $gridViewResource;
+        
+        /** @var {{CamelCase}}ListResource $R */
+        $R = new $resourceClass($gridViewResource)
 
         return $R->content();
     }
 
+    /**
+    *   action `Read`
+    */
     public function actionRead(int $id)
     {
         /** @var {{CamelCase}}ReadResource $R */

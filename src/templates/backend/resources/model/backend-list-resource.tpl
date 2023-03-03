@@ -2,12 +2,11 @@
 
 namespace backend\resources\{{snake_case}};
 
+use backend\models\forms\{{CamelCase}};
 use backend\components\resources\crud\ListResource;
 
 /**
  *  {{CamelCase}}ListResource
- *
- *  @param {{CamelCase}}[] $item
  */
 class {{CamelCase}}ListResource extends ListResource
 {

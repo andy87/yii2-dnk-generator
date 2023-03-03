@@ -21,23 +21,26 @@ class {{CamelCase}}Controller extends BackendController
     // call console command:
     // shell_exec("./yii gii/crud --modelClass=backend\\models\\items\\{{CamelCase}}Source --controllerNamespace=backend\\controllers\\crud --baseControllerClass=backend\\controllers\\cruds\\{{CamelCase}}Controller --viewPath=@backend\\views\\cruds\\{{snake_case}} --enableI18N=1")
 
-
+    /**
+     *  action `List`
+     */
     public function actionList()
     {
-        /** @var {{CamelCase}}ListResource $R */
-        $R = new $this->service->getResource( {{CamelCase}}Service::LIST );
+        $resourceClass = {{CamelCase}}Service::RESOURCES[{{CamelCase}}Service::LIST];
 
-        $form = $this->service->getForm();
+         $form = $this->service->getForm();
         $activeDataProvider = new ActiveDataProvider();
-
         $gridViewResource = new GridViewResource($form, $activeDataProvider);
 
-        $R->gridViewResource = $gridViewResource;
+        /** @var {{CamelCase}}ListResource $R */
+        $R = new $resourceClass($gridViewResource)
 
         return $R->content();
     }
 
-
+    /**
+     *  action `Read`
+     */
     public function actionRead(int $id)
     {
         /** @var {{CamelCase}}ListResource $R */
@@ -48,6 +51,9 @@ class {{CamelCase}}Controller extends BackendController
         return $R->content();
     }
 
+    /**
+     *  action `Update`
+     */
     public function actionUpdate(int $id)
     {
         /** @var {{CamelCase}}UpdateResource $R */
@@ -67,6 +73,9 @@ class {{CamelCase}}Controller extends BackendController
         return $R->content();
     }
 
+    /**
+     *  action `Create`
+     */
     public function actionCreate()
     {
         /** @var {{CamelCase}}CreateResource $R */
