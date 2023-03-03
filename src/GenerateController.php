@@ -53,7 +53,7 @@ class GenerateController extends Controller
                 self::SOURCE => 'common/models/items/common-model-item.tpl',
                 self::TARGET => "@common/models/items/{{CamelCase}}.php"
             ],
-                'common-service.tpl' => [
+                'common-service' => [
                     self::SOURCE => 'common/services/common-service.tpl',
                     self::TARGET => "@common/services/{{CamelCase}}Service.php"
                 ],
@@ -65,7 +65,7 @@ class GenerateController extends Controller
             self::SOURCE => 'backend/models/forms/backend-model-form.tpl',
             self::TARGET => "@backend/models/forms/{{CamelCase}}Form.php"
         ],
-            'backend-service.tpl' => [
+            'backend-service' => [
                 self::SOURCE => 'backend/services/backend-service.tpl',
                 self::TARGET => "@backend/services/{{CamelCase}}Service.php"
             ],
@@ -97,7 +97,7 @@ class GenerateController extends Controller
             self::SOURCE => 'frontend/models/forms/frontend-model-form.tpl',
             self::TARGET => "@frontend/models/forms/{{CamelCase}}Form.php"
         ],
-            'frontend-service.tpl' => [
+            'frontend-service' => [
                 self::SOURCE => 'frontend/services/frontend-service.tpl',
                 self::TARGET => "@frontend/services/{{CamelCase}}Service.php"
             ],
@@ -181,6 +181,48 @@ class GenerateController extends Controller
     public function actionList(string $entity, string $filter): void
     {
         $this->generator($entity, $filter );
+    }
+
+    /**
+     * Generate services files for entity
+     *
+     * example:
+     *      php yii generate/gen-services user
+     *
+     * @param string $entity
+     * @return void
+     */
+    public function actionGenServices(string $entity)
+    {
+        $this->actionList($entity, 'common-service,backend-service,frontend-service');
+    }
+
+    /**
+     * Generate services files for entity
+     *
+     * example:
+     *      php yii generate/gen-controllers user
+     *
+     * @param string $entity
+     * @return void
+     */
+    public function actionGenControllers(string $entity)
+    {
+        $this->actionList($entity, 'backend-model-controller,frontend-model-controller');
+    }
+
+    /**
+     * Generate services files for entity
+     *
+     * example:
+     *      php yii generate/gen-models user
+     *
+     * @param string $entity
+     * @return void
+     */
+    public function actionGenModels(string $entity)
+    {
+        $this->actionList($entity, 'common-model-source,common-model-item,backend-model-item,backend-model-form,frontend-model-item,frontend-model-form');
     }
 
     /**

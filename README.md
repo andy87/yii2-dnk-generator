@@ -167,10 +167,13 @@ use frontend/resources/user/UsereViewProfileResources;
 <div>Age: <?= $R->age ?></div>
 
 ```
+_____
 
 
 
 ## Use 
+
+
 
 ### command
 `php yii generate/setup`  
@@ -201,9 +204,9 @@ Helpers classes list:
 - `common\components\db\Config` - Data base config: CHARACTER, COLLATE, ENGINE
 - `common\components\Part` - service parts with labels
 - `common\components\db\Tables` - class with table names used Part::CONSTANT_NAME
-
-
 _____
+
+
 
 ### command  
 `php yii generate/gen user`  
@@ -260,10 +263,62 @@ generate basic file pack:
    - frontend-view-resource`frontend/resources/user/UserViewResource.php` [view](src/templates/frontend/resources/model/frontend-view-resource.tpl)
 
 
- - **frontend/consrollers**
+ - **frontend/controllers**
    - frontend-model-controller `frontend/consrollers/UserController.php` [view](src/templates/frontend/controllers/frontend-model-controller.tpl)
-
 _____
+
+
+
+### command
+`php yii generate/gen-services user`
+
+Generate `service` files for needle table(part).
+
+- **common/services**
+   - common-service `common/services/UserService.php` [view](src/templates/common/services/common-service.tpl)
+
+- **backend/services**
+   -  backend-service `backend/services/UserService.php` [view](src/templates/backend/services/backend-service.tpl)
+
+- **frontend/service**
+   - frontend-service `frontend/service/UserService.php` [view](src/templates/frontend/services/frontend-service.tpl)
+_____
+
+
+
+### command
+`php yii generate/gen-models user`
+
+Generate `model` files for needle table(part).
+
+- **common/models**
+   - common-model-source `common/models/sources/UserSource.php` [view](src/templates/common/models/sources/common-model-source.tpl)
+   - common-model-item `common/models/items/User.php` [view](src/templates/common/models/items/common-model-item.tpl)
+
+- **backend/models**
+   - backend-model-item `backend/models/items/User.php` [view](src/templates/backend/models/items/backend-model-item.tpl)
+   - backend-model-form `backend/models/forms/UserForm.php` [view](src/templates/backend/models/forms/backend-model-form.tpl)
+
+- **frontend/models**
+   - frontend-model-item `frontend/models/items/User.php` [view](src/templates/frontend/models/items/frontend-model-item.tpl)
+   - frontend-model-form `frontend/models/forms/UserForm.php` [view](src/templates/frontend/models/forms/frontend-model-form.tpl)
+_____
+
+
+
+### command
+`php yii generate/gen-controllers user`
+
+Generate `controller` files for needle table(part).
+
+
+- **backend/controller**
+   - backend-model-controller `backend/controller/cruds/UserController.php` [view](src/templates/backend/controllers/cruds/backend-model-controller.tpl)
+
+- **frontend/controllers**
+   - frontend-model-controller `frontend/consrollers/UserController.php` [view](src/templates/frontend/controllers/frontend-model-controller.tpl)
+_____
+
 
 
 ### command
@@ -288,7 +343,6 @@ generate file list:
    - `common/services/UserService.php` [view](src/templates/common/services/common-service.tpl)
    - `common/models/sources/UserSource.php` [view](src/templates/common/models/sources/common-model-source.tpl)
    - `frontend/service/UserService.php` [view](src/templates/frontend/services/frontend-service.tpl)
-
 ______
 
 
