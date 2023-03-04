@@ -211,10 +211,11 @@ class GenerateController extends Controller
      * example:
      *      php yii generate/setup
      *
+     * @param bool $overwrite
      * @return void
      * @throws Exception
      */
-    public function actionSetup(): void
+    public function actionSetup( bool $overwrite = false ): void
     {
         $this->copyDirectoryStructure(
             __DIR__ . DIRECTORY_SEPARATOR . 'source'. DIRECTORY_SEPARATOR,
@@ -230,6 +231,19 @@ class GenerateController extends Controller
             $sourcePath = $root.$template[self::SOURCE];
 
             $targetPath = Yii::getAlias($template[self::TARGET]);
+
+            if ( file_exists($targetPath) )
+            {
+                if ($overwrite)
+                {
+                    unlink($targetPath);
+
+                } else {
+
+                    $this->stdout("\r\n Dnk `setup`: copied failed (file exist).\n", BaseConsole::FG_RED);
+                    continue;
+                }
+            } 
 
             $status = $this->generateFileFromTpl($sourcePath, $targetPath, $params);
 
