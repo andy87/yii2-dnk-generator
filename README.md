@@ -460,8 +460,21 @@ return [
             'class'     => GenerateController::class,
             'root'      => '@root', // alias to root project
              'command'   => [
-                GenerateController::COMMAND_MODEL => "--modelClass={{CamelCase}}Source --ns=common\\models\\sources --tableName={{snake_case}} --baseClass={{BaseModelClassName}}",
-                GenerateController::COMMAND_CRUD => "--modelClass={{CamelCase}} --controllerNamespace=backend\\controllers\\crud --baseControllerClass=backend\\controllers\\cruds\\{{CamelCase}}Controller --viewPath=@backend\\views\\cruds\\{{snake_case}} --enableI18N=1",
+                GenerateController::COMMAND_MODEL => implode(' ', [
+                    '--modelClass={{CamelCase}}Source',
+                    '--ns=common\\models\\sources',
+                    '--tableName={{snake_case}}',
+                    '--baseClass={{BaseModelClassName}}',
+                    '&& yes'
+                ]),
+                GenerateController::COMMAND_CRUD => implode(' ', [
+                    '--modelClass={{CamelCase}}',
+                    '--controllerNamespace=backend\\controllers\\crud',
+                    '--baseControllerClass=backend\\controllers\\cruds\\{{CamelCase}}Controller',
+                    '--viewPath=@backend\\views\\cruds\\{{snake_case}}',
+                    '--enableI18N=1',
+                    '&& yes'
+                ])
             ],
             'baseClasses' => [
                 GenerateController::BASE_MIGRATE_CLASS => BaseMigration::class, // extends for `Migrations`

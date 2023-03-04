@@ -9,27 +9,32 @@ use common\components\interfaces\ServiceInterface;
 use common\components\interfaces\ControllerInterface;
 
 /**
- *
+ *  Базовый клас для контроллеров.
+ *      Содержит: константы, свойства и методы, наследуемые всеми рабочими контроллерам
  */
 abstract class BaseController extends Controller implements  ControllerInterface
 {
-    // const
+    // Константы, Свойства, Методы наследуемые всеми рабочими контроллерами
 
-    /** @var string  */
+    // константы
+
+    /** @var string Имя класса сервиса */
     public const SERVICE = ServiceInterface::class;
 
 
 
-    // property
+    // свойства
 
-    /** @var ServiceInterface  */
+    /** @var ServiceInterface Экземпляр класса сервиса */
     protected ServiceInterface $service;
 
 
 
-    // methods
+    // методы
 
     /**
+     * Инициализация
+     *
      * @return void
      * @throws InvalidConfigException
      */
@@ -41,6 +46,8 @@ abstract class BaseController extends Controller implements  ControllerInterface
     }
 
     /**
+     * Установка сервиса
+     *
      * @return void
      * @throws InvalidConfigException
      */

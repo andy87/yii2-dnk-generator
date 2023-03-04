@@ -8,27 +8,30 @@ use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
- *
+ *  Базовый клас для сервисов.
+ *      Содержит: константы, свойства и методы, наследуемые всеми рабочими сервисами
  */
 abstract class BaseService extends Component
 {
-    // const
+    // константы
 
-    /** @var int keyA to `resources` */
+    /** @var int Ключ для массива ресурсов */
     public const CREATE = 1;
-    /** @var int key to `resources` */
+    /** @var int Ключ для массива ресурсов */
     public const READ = 2;
-    /** @var int key to `resources` */
+    /** @var int Ключ для массива ресурсов */
     public const UPDATE = 3;
-    /** @var int key to `resources` */
+    /** @var int Ключ для массива ресурсов */
     public const LIST = 4;
 
-    /** @var string link to class */
+
+    /** @var string Имя класса Модели */
     private const MODEL = Model::class;
-    /** @var string link to class */
+    /** @var string Имя класса Формы */
     private const FORM = Model::class;
 
-    /** @var array  */
+
+    /** @var array Массив ресурсов */
     public const RESOURCES = [
         self::LIST => null,
         self::CREATE => null,
@@ -38,10 +41,10 @@ abstract class BaseService extends Component
 
 
 
-    // methods
+    // методы
 
     /**
-     * 
+     * Возвращает полное имя класса модели, с которой работает сервис
      */ 
     public function getClassModel(): string
     {
@@ -49,7 +52,7 @@ abstract class BaseService extends Component
     }
 
     /**
-     * 
+     * Возвращает полное имя класса формы, с которой работает сервис
      */
     public function getClassForm(): string
     {
@@ -57,6 +60,7 @@ abstract class BaseService extends Component
     }
 
     /**
+     * Возвращает экземпляр класса модели, с которой работает сервис
      * @return Model
      */
     public function getModel(): Model
@@ -67,7 +71,7 @@ abstract class BaseService extends Component
     }
 
     /**
-     * 
+     * Возвращает экземпляр класса формы, с которой работает сервис
      */
     public function getForm()
     {
@@ -77,6 +81,8 @@ abstract class BaseService extends Component
     }
 
     /**
+     * Возвращает экземпляр класса ресурса
+     *
      * @param int $key
      * @return ?object
      */
@@ -90,7 +96,9 @@ abstract class BaseService extends Component
     }
 
     /**
-     * @param string $class
+     * Возвращает экземпляр класса, переданного в аргументе `$class`
+     *
+     * @param string $class Имя класса, экземпляр которого будет создан
      * @return mixed
      */
     private function createClass(string $class)
@@ -101,6 +109,8 @@ abstract class BaseService extends Component
 
 
     /**
+     * Создание сущности/модели
+     *
      * @param array $attributes
      * @return Model
      */
@@ -116,6 +126,8 @@ abstract class BaseService extends Component
     }
 
     /**
+     * Сохранение сущности/модели
+     *
      * @param ActiveRecord $model
      * @param array $attributes
      * @return ActiveRecord
@@ -130,6 +142,8 @@ abstract class BaseService extends Component
     }
 
     /**
+     * Поиск модели
+     *
      * @param array $criteria
      * @return ActiveQuery
      */

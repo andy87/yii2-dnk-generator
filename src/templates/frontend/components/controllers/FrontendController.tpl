@@ -2,6 +2,8 @@
 
 namespace frontend\components\controllers;
 
+use yii\web\Response;
+use yii\web\ErrorAction;
 use common\components\core\BaseService;
 use common\components\resources\GridViewResource;
 use {{BaseControllerClassName}} as BaseControllerClass;
@@ -11,14 +13,39 @@ use {{BaseControllerClassName}} as BaseControllerClass;
  */
 abstract class FrontendController extends BaseControllerClass
 {
-    // const
+    // константы
 
     /** @var string className Сервиса */
     public const SERVICE = BaseService::class;
 
+    /**
+     * @return array
+     */
+    public function actions(): array
+    {
+            return [
+                'error' => [
+                'class' => ErrorAction::class,
+            ],
+        ];
+    }
 
+    /**
+    * @return bool
+    */
+    public function isJsonResponse(): bool
+    {
+        if ($this->request->get('type') === 'json')
+        {
+            $this->response = Response::FORMAT_JSON;
 
-    // methods
+            return true;
+        }
+
+        return false;
+    }
+
+    // методы
 
     /**
      *  action `List`

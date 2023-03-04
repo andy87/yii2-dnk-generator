@@ -11,14 +11,14 @@ use {{BaseControllerClassName}} as BaseControllerClass;
  */
 abstract class BackendController extends BaseControllerClass
 {
-    // const
+    // константы
 
     /** @var string className Сервиса */
     public const SERVICE = BaseService::class;
 
 
 
-    // methods
+    // методы
 
     /**
      *  action `List`

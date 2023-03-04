@@ -12,7 +12,7 @@ use backend\components\controllers\BackendController;
  */
 class {{CamelCase}}Controller extends BackendController
 {
-    // const
+    // константы
 
     /** @var string className Сервиса */
     public const SERVICE = {{CamelCase}}Service::class;

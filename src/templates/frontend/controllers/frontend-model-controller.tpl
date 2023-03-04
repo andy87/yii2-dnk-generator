@@ -12,7 +12,7 @@ use frontend\components\controllers\FrontendController;
  */
 class {{CamelCase}}Controller extends FrontendController
 {
-    // const
+    // константы
 
     /** @var string className Сервиса */
     public const SERVICE = {{CamelCase}}Service::class;
