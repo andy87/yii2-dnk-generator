@@ -9,7 +9,7 @@ use common\components\interfaces\resources\crud\ListResourcesInterface;
 /**
  * Base file for `ListResource`
  */
-class ListResource extends BaseResourceClass implement ListResourcesInterface
+class ListResource extends BaseResourceClass implements ListResourcesInterface
 {
     /** @var string  */
     public string $title;

@@ -5,7 +5,7 @@ namespace common\components\interfaces\models\common;
 /**
  * Интерфейс моделей в `common` генерируемых библиотекой
  */
-interface ModelInterface
+interface BaseModelInterface
 {
 
 }

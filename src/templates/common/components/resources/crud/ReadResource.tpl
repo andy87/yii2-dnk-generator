@@ -9,7 +9,7 @@ use common\components\interfaces\resources\crud\ReadResourcesInterface;
 /**
  * Base file for `ReadResource`
  */
-class ReadResource extends BaseResourceClass implement ReadResourcesInterface
+class ReadResource extends BaseResourceClass implements ReadResourcesInterface
 {
     /** @var string  */
     public string $title;

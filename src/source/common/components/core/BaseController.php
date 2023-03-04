@@ -5,28 +5,28 @@ namespace common\components\core;
 use Yii;
 use yii\web\Controller;
 use yii\base\InvalidConfigException;
-use common\components\interfaces\ServiceInterface;
-use common\components\interfaces\ControllerInterface;
+use common\components\interfaces\services\common\ServiceCommonInterface;
+use common\components\interfaces\controllers\common\ControllerCommonInterface;
 
 /**
  *  Базовый клас для контроллеров.
  *      Содержит: константы, свойства и методы, наследуемые всеми рабочими контроллерам
  */
-abstract class BaseController extends Controller implements  ControllerInterface
+abstract class BaseController extends Controller implements  ControllerCommonInterface
 {
     // Константы, Свойства, Методы наследуемые всеми рабочими контроллерами
 
     // константы
 
     /** @var string Имя класса сервиса */
-    public const SERVICE = ServiceInterface::class;
+    public const SERVICE = ServiceCommonInterface::class;
 
 
 
     // свойства
 
-    /** @var ServiceInterface Экземпляр класса сервиса */
-    protected ServiceInterface $service;
+    /** @var ServiceCommonInterface Экземпляр класса сервиса */
+    protected ServiceCommonInterface $service;
 
 
 
@@ -53,7 +53,7 @@ abstract class BaseController extends Controller implements  ControllerInterface
      */
     private function setupService(): void
     {
-        /** @var ServiceInterface $service */
+        /** @var ServiceCommonInterface $service */
         $service = Yii::createObject(static::SERVICE);
 
         $this->service = $service;

@@ -8,7 +8,7 @@ use common\components\interfaces\models\common\ModelInterface;
 /**
  * Model `UserRole` environment `common`
  */
-class {{CamelCase}} extends {{CamelCase}}Source implement ModelInterface
+class {{CamelCase}} extends {{CamelCase}}Source implements ModelInterface
 {
     // custom code ...
 }

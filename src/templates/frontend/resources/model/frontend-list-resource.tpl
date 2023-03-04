@@ -10,7 +10,7 @@ use common\components\interfaces\resources\crud\ListResourcesInterface;
 /**
  * List Resource for model `{{CamelCase}}` environment `frontend`
  */
-class {{CamelCase}}ListResource extends BaseResourceClass implement ListResourcesInterface
+class {{CamelCase}}ListResource extends BaseResourceClass implements ListResourcesInterface
 {
     /** @var string template name */
     public const TEMPLATE = '{{snake_case}}-list';

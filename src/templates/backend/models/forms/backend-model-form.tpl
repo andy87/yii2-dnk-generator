@@ -8,7 +8,7 @@ use common\components\interfaces\models\backend\ModelFormInterface;
 /**
  * Form by model `{{CamelCase}}` environment `backend`
  */
-class {{CamelCase}}Form extends {{CamelCase}} implement ModelFormInterface
+class {{CamelCase}}Form extends {{CamelCase}} implements ModelFormInterface
 {
     // custom code ...
 }

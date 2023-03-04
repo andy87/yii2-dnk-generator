@@ -2,15 +2,20 @@
 
 namespace backend\components\controllers;
 
+use yii\data\ActiveDataProvider;
 use common\components\core\BaseService;
 use common\components\resources\GridViewResource;
 use {{BaseControllerClassName}} as BaseControllerClass;
 use common\components\interfaces\controllers\backend\ControllerBackendInterface;
+use common\components\resources\crud\ListResource;
+use common\components\resources\crud\CreateResource;
+use common\components\resources\crud\UpdateResource;
+use common\components\resources\crud\ReadResource;
 
 /**
  * Base Controller for environment `backend`
  */
-abstract class BackendController extends BaseControllerClass implement ControllerBackendInterface
+abstract class BackendController extends BaseControllerClass implements ControllerBackendInterface
 {
     // константы
 
@@ -32,7 +37,7 @@ abstract class BackendController extends BaseControllerClass implement Controlle
 
         $gridViewResource = new GridViewResource($form, $activeDataProvider);
 
-        /** @var {{CamelCase}}ListResource $R */
+        /** @var ListResource $R */
         $R = new $this->service->getResource(BaseService::LIST, [
             'gridViewResource' => $gridViewResource
         ]);
@@ -46,7 +51,7 @@ abstract class BackendController extends BaseControllerClass implement Controlle
     */
     public function actionRead(int $id)
     {
-        /** @var {{CamelCase}}ReadResource $R */
+        /** @var ReadResource $R */
         $R = $this->service->getResource(BaseService::READ, [
             'item' => $this->service->findWhere(['id' => $id])->one()
         ]);
@@ -62,7 +67,7 @@ abstract class BackendController extends BaseControllerClass implement Controlle
     {
         $formClass = $this->service->getClassForm();
 
-        /** @var {{CamelCase}}CreateResource $R */
+        /** @var CreateResource $R */
         $R = $this->service->getResource(BaseService::CREATE, [
             'item' => $formClass::findOne($id)
         ]);
@@ -77,13 +82,17 @@ abstract class BackendController extends BaseControllerClass implement Controlle
 
 
     /**
-    *  action `Update`
-    */
-    public function actionUpdate(int $id)
+     *  action `Update`
+     *
+     *  @param int $id
+     *
+     * @return string|array
+     */
+    public function actionUpdate(int $id): array|string
     {
         $formClass = $this->service->getClassForm();
 
-        /** @var {{CamelCase}}UpdateResource $R */
+        /** @var UpdateResource $R */
         $R = $this->service->getResource(BaseService::UPDATE, [
             'item' => $formClass::findOne($id)
         ]);
@@ -95,5 +104,4 @@ abstract class BackendController extends BaseControllerClass implement Controlle
 
         return $R->render();
     }
-
 }

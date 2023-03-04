@@ -8,7 +8,7 @@ use common\components\interfaces\models\frontend\ModelInterface;
 /**
  * Model `{{CamelCase}}` environment `frontend`
  */
-class {{CamelCase}} extends {{CamelCase}}Common implement ModelInterface
+class {{CamelCase}} extends {{CamelCase}}Common implements ModelInterface
 {
     // custom code ...
 }

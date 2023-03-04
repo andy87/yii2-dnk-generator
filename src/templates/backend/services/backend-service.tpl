@@ -18,7 +18,7 @@ use backend\resources\{{snake_case}}\{{CamelCase}}ListResource;
  * @method {{CamelCase}}Form getForm()
  * @method {{CamelCase}}CreateResource|{{CamelCase}}ReadResource|{{CamelCase}}UpdateResource|{{CamelCase}}ListResource getResource(int $key)
  */
-class {{CamelCase}}Service extends {{CamelCase}}CommonService implement ServiceBackendInterface
+class {{CamelCase}}Service extends {{CamelCase}}CommonService implements ServiceBackendInterface
 {
     /** @var string  */
     public const MODEL = {{CamelCase}}::class;

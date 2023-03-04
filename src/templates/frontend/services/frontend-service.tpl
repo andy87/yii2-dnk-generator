@@ -16,7 +16,7 @@ use frontend\resources\{{snake_case}}\{{CamelCase}}ReadResource;
  * @method {{CamelCase}}Form getForm()
  * @method {{CamelCase}}ReadResource|{{CamelCase}}ListResource getResource(int $key)
  */
-class {{CamelCase}}Service extends {{CamelCase}}CommonService implement ServiceFrontendInterface
+class {{CamelCase}}Service extends {{CamelCase}}CommonService implements ServiceFrontendInterface
 {
     /** @var string  */
     public const MODEL = {{CamelCase}}::class;

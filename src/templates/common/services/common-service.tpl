@@ -11,7 +11,7 @@ use common\components\interfaces\services\common\ServiceCommonInterface;
  *
  * @method {{CamelCase}} getModel()
  */
-class {{CamelCase}}Service extends BaseServiceClass implement ServiceCommonInterface
+class {{CamelCase}}Service extends BaseServiceClass implements ServiceCommonInterface
 {
     /** @var string */
     public const MODEL = {{CamelCase}}::class;

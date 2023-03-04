@@ -161,21 +161,21 @@ class GenerateController extends Controller
             self::SOURCE => 'frontend/components/controllers/FrontendController.tpl',
             self::TARGET => "@frontend/components/controllers/FrontendController.php"
         ],
-        'backend-components-resources-crud-create' => [
-            self::SOURCE => 'backend/components/resources/crud/CreateResource.tpl',
-            self::TARGET => "@backend/components/resources/crud/CreateResource.php"
+        'common-components-resources-crud-create' => [
+            self::SOURCE => 'common/components/resources/crud/CreateResource.tpl',
+            self::TARGET => "@common/components/resources/crud/CreateResource.php"
         ],
-        'backend-components-resources-crud-list' => [
-            self::SOURCE => 'backend/components/resources/crud/ListResource.tpl',
-            self::TARGET => "@backend/components/resources/crud/ListResource.php"
+        'common-components-resources-crud-list' => [
+            self::SOURCE => 'common/components/resources/crud/ListResource.tpl',
+            self::TARGET => "@common/components/resources/crud/ListResource.php"
         ],
-        'backend-components-resources-crud-read' => [
-            self::SOURCE => 'backend/components/resources/crud/ReadResource.tpl',
-            self::TARGET => "@backend/components/resources/crud/ReadResource.php"
+        'common-components-resources-crud-read' => [
+            self::SOURCE => 'common/components/resources/crud/ReadResource.tpl',
+            self::TARGET => "@common/components/resources/crud/ReadResource.php"
         ],
-        'backend-components-resources-crud-update' => [
-            self::SOURCE => 'backend/components/resources/crud/UpdateResource.tpl',
-            self::TARGET => "@backend/components/resources/crud/UpdateResource.php"
+        'common-components-resources-crud-update' => [
+            self::SOURCE => 'common/components/resources/crud/UpdateResource.tpl',
+            self::TARGET => "@common/components/resources/crud/UpdateResource.php"
         ]
     ];
 

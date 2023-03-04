@@ -9,7 +9,7 @@ use common\components\interfaces\resources\crud\ReadResourcesInterface;
 /**
  * View Resource for model `{{CamelCase}}` environment `frontend
  */
-class {{CamelCase}}ReadResource extends BaseResourceClass implement ReadResourcesInterface
+class {{CamelCase}}ReadResource extends BaseResourceClass implements ReadResourcesInterface
 {
     /** @var string template name */
     public const TEMPLATE = '{{snake_case}}-read';

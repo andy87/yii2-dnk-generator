@@ -4,9 +4,9 @@ namespace common\components\core;
 
 use ReflectionClass;
 use ReflectionException;
-use yii\base\InvalidArgumentException;
 use yii\base\Model;
 use yii\base\Component;
+use yii\base\InvalidArgumentException;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 

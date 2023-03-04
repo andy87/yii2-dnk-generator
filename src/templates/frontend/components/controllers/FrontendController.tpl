@@ -8,11 +8,13 @@ use common\components\core\BaseService;
 use common\components\resources\GridViewResource;
 use {{BaseControllerClassName}} as BaseControllerClass;
 use common\components\interfaces\controllers\frontend\ControllerFrontendInterface;
+use common\components\resources\crud\ListResource;
+use common\components\resources\crud\ReadResource;
 
 /**
  * Base Controller for environment `frontend`
  */
-abstract class FrontendController extends BaseControllerClass implement ControllerFrontendInterface
+abstract class FrontendController extends BaseControllerClass implements ControllerFrontendInterface
 {
     // константы
 
@@ -31,21 +33,6 @@ abstract class FrontendController extends BaseControllerClass implement Controll
         ];
     }
 
-    /**
-    * @return bool
-    */
-    public function isJsonResponse(): bool
-    {
-        if ($this->request->get('type') === 'json')
-        {
-            $this->response = Response::FORMAT_JSON;
-
-            return true;
-        }
-
-        return false;
-    }
-
     // методы
 
     /**
@@ -59,7 +46,7 @@ abstract class FrontendController extends BaseControllerClass implement Controll
 
         $gridViewResource = new GridViewResource($form, $activeDataProvider);
 
-        /** @var {{CamelCase}}ListResource $R */
+        /** @var ListResource $R */
         $R = new $this->service->getResource(BaseService::LIST, [
             'gridViewResource' => $gridViewResource
         ]);
@@ -73,11 +60,26 @@ abstract class FrontendController extends BaseControllerClass implement Controll
     */
     public function actionRead(int $id)
     {
-        /** @var {{CamelCase}}ReadResource $R */
+        /** @var ReadResource $R */
         $R = $this->service->getResource(BaseService::READ, [
             'item' => $this->service->findWhere(['id' => $id])->one()
         ]);
 
         return $R->render();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isJsonResponse(): bool
+    {
+        if ($this->request->get('type') === 'json')
+        {
+            Yii::$app->response = Response::FORMAT_JSON;
+
+            return true;
+        }
+
+        return false;
     }
 }

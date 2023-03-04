@@ -9,7 +9,7 @@ use common\components\interfaces\models\backend\ModelInterface;
 /**
  * Model `{{CamelCase}}` environment `backend`
  */
-class {{CamelCase}} extends {{CamelCase}}Common implement ModelInterface
+class {{CamelCase}} extends {{CamelCase}}Common implements ModelInterface
 {
     // custom code ...
 }
