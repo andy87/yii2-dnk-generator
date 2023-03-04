@@ -231,7 +231,16 @@ class GenerateController extends Controller
 
             $targetPath = Yii::getAlias($template[self::TARGET]);
 
-            $this->generateFileFromTpl($sourcePath, $targetPath, $params);
+            $status = $this->generateFileFromTpl($sourcePath, $targetPath, $params);
+
+            if ($status) {
+
+                $this->stdout("\r\n Dnk `setup`: copied successfully.\n", BaseConsole::FG_GREEN);
+
+            } else {
+
+                $this->stdout("\r\n Dnk `setup`: copied failed.\n", BaseConsole::FG_RED);
+            }
         }
 
         $this->stdout("Dnk `setup`: copied successfully.\n", BaseConsole::FG_GREEN);
@@ -568,18 +577,16 @@ class GenerateController extends Controller
 
             } else {
 
-                if (!file_exists($destination))
-                {
-                    echo "\r\n Copy `setup`: $source.";
+                echo "\r\n Copy file: $source.";
 
+                if (!file_exists($destination)){
                     if (copy($source, $destination)) {
-
                         $this->stdout("\r\n\t successfully.\n", BaseConsole::FG_GREEN);
-
                     } else {
-
                         $this->stdout("\r\n\t failed.\n", BaseConsole::FG_RED);
                     }
+                } else {
+                    $this->stdout("\r\n\t file exists.\n", BaseConsole::FG_PURPLE);
                 }
             }
         }
