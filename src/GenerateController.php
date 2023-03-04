@@ -219,7 +219,8 @@ class GenerateController extends Controller
     {
         $this->copyDirectoryStructure(
             __DIR__ . DIRECTORY_SEPARATOR . 'source'. DIRECTORY_SEPARATOR,
-            Yii::getAlias($this->root) . DIRECTORY_SEPARATOR
+            Yii::getAlias($this->root) . DIRECTORY_SEPARATOR,
+            $overwrite
         );
 
         $root = $this->getTemplatePath();
@@ -571,7 +572,7 @@ class GenerateController extends Controller
      *
      * @throws Exception
      */
-    private function copyDirectoryStructure($root, $target)
+    private function copyDirectoryStructure(string $root, string $target, bool $overwrite = false)
     {
         if (!is_dir($root)) throw new Exception('Директория-источник не найдена: ' . $root);
 
@@ -594,14 +595,24 @@ class GenerateController extends Controller
 
                 echo "\r\n Copy file: $source.";
 
-                if (!file_exists($destination)){
-                    if (copy($source, $destination)) {
-                        $this->stdout("\r\n\t successfully.\n", BaseConsole::FG_GREEN);
+                if ( file_exists($destination) )
+                {
+                    if ( $overwrite )
+                    {
+                        unlink($destination);
+
                     } else {
-                        $this->stdout("\r\n\t failed.\n", BaseConsole::FG_RED);
+
+                        $this->stdout("\r\n\t file exists.\n", BaseConsole::FG_PURPLE);
+
+                        continue;
                     }
+                }
+
+                if (copy($source, $destination)) {
+                    $this->stdout("\r\n\t successfully.\n", BaseConsole::FG_GREEN);
                 } else {
-                    $this->stdout("\r\n\t file exists.\n", BaseConsole::FG_PURPLE);
+                    $this->stdout("\r\n\t failed.\n", BaseConsole::FG_RED);
                 }
             }
         }
