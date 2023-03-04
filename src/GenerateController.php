@@ -219,11 +219,15 @@ class GenerateController extends Controller
      * @return void
      * @throws Exception
      */
-    public function actionSetup( $overwrite = false ): void
+    public function actionSetup( bool $overwrite = false ): void
     {
         $root = $this->getTemplatePath();
 
         $copyFiles = [
+            'common-base-model' => [
+                self::SOURCE => 'common/components/core/common-base-model.php',
+                self::TARGET => "@common/components/core/BaseModel.php"
+            ],
             'common-components-db-table' => [
                 self::SOURCE => 'common/components/db/Tables.php',
                 self::TARGET => "@common/components/db/Tables.php"
