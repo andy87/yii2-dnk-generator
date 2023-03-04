@@ -224,12 +224,12 @@ class GenerateController extends Controller
         $root = $this->getTemplatePath();
 
         $this->copyDirectoryStructure(
-            "common/components/interfaces/",
+            __DIR__ . "/source/common/components/interfaces/",
             Yii::getAlias('@common/components/interfaces/')
         );
 
         $this->copyDirectoryStructure(
-            "common/components/resources/",
+            __DIR__ . "/source/common/components/resources/",
             Yii::getAlias('@common/components/resources/')
         );
 
@@ -612,7 +612,7 @@ class GenerateController extends Controller
      */
     private function copyDirectoryStructure(string $root, string $target, bool $overwrite = false)
     {
-        if (!is_dir($root)) throw new Exception('Директория-источник не найдена: ' . $root);
+        if (!is_dir($root)) throw new Exception('Directory not found: ' . $root);
 
         if (!is_dir($target)) mkdir($target, 0777, true);
 
