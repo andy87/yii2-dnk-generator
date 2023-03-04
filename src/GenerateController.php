@@ -225,16 +225,16 @@ class GenerateController extends Controller
 
         $copyFiles = [
             'common-base-model' => [
-                self::SOURCE => 'common/components/core/common-base-model.php',
-                self::TARGET => "@common/components/core/BaseModel.php"
+                self::SOURCE => 'common/components/core/common-base-model.tpl',
+                self::TARGET => '@common/components/core/BaseModel.php'
             ],
             'common-components-db-table' => [
                 self::SOURCE => 'common/components/db/Tables.php',
-                self::TARGET => "@common/components/db/Tables.php"
+                self::TARGET => '@common/components/db/Tables.php'
             ],
             'common-components-parts' => [
                 self::SOURCE => 'common/components/Part.php',
-                self::TARGET => "@common/components/Part.php"
+                self::TARGET => '@common/components/Part.php'
             ],
         ];
 
