@@ -3,17 +3,15 @@
 namespace frontend\resources\{{snake_case}};
 
 use frontend\models\items\{{CamelCase}};
-use {{BaseResourceClassName}} as BaseResourceClass;
-use common\components\interfaces\resources\crud\ReadResourcesInterface;
+use common\components\resources\crud\ReadResource;
 
 /**
  * View Resource for model `{{CamelCase}}` environment `frontend
+ *
+ * @property {{CamelCase}} $item
  */
-class {{CamelCase}}ReadResource extends BaseResourceClass implements ReadResourcesInterface
+class {{CamelCase}}ReadResource extends ReadResource
 {
     /** @var string template name */
     public const TEMPLATE = '{{snake_case}}-read';
-
-    /** @var {{CamelCase}} $item */
-    public {{CamelCase}} $item;
 }

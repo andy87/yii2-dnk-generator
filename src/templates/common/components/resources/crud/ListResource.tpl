@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\components\resources\crud;
+namespace common\components\resources\crud;
 
 use common\components\resources\GridViewResource;
 use {{BaseResourceClassName}} as BaseResourceClass;

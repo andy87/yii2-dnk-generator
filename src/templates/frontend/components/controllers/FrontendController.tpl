@@ -2,8 +2,10 @@
 
 namespace frontend\components\controllers;
 
+use ReflectionException;
 use yii\web\Response;
 use yii\web\ErrorAction;
+use yii\data\ActiveDataProvider;
 use common\components\core\BaseService;
 use common\components\resources\GridViewResource;
 use {{BaseControllerClassName}} as BaseControllerClass;
@@ -33,37 +35,46 @@ abstract class FrontendController extends BaseControllerClass implements Control
         ];
     }
 
+
+
     // методы
 
     /**
      *  action `List`
+     *
+     * @return ListResource|string
+     * @throws ReflectionException
      */
-    public function actionList()
+    public function actionList(): ListResource|string
     {
         $form = $this->service->getForm();
 
-        $activeDataProvider = new ActiveDataProvider();
-
-        $gridViewResource = new GridViewResource($form, $activeDataProvider);
-
         /** @var ListResource $R */
         $R = new $this->service->getResource(BaseService::LIST, [
-            'gridViewResource' => $gridViewResource
+            'gridViewResource' => new GridViewResource($form, new ActiveDataProvider())
         ]);
+
+        if ( $this->isJsonResponse() ) return $R;
 
         return $R->render();
     }
 
 
     /**
-    *  action `Read`
-    */
-    public function actionRead(int $id)
+     *  action `Read`
+     *
+     * @param int $id
+     * @return ReadResource|string
+     * @throws ReflectionException
+     */
+    public function actionRead(int $id): ReadResource|string
     {
         /** @var ReadResource $R */
         $R = $this->service->getResource(BaseService::READ, [
             'item' => $this->service->findWhere(['id' => $id])->one()
         ]);
+
+        if ( $this->isJsonResponse() ) return $R;
 
         return $R->render();
     }
@@ -75,7 +86,7 @@ abstract class FrontendController extends BaseControllerClass implements Control
     {
         if ($this->request->get('type') === 'json')
         {
-            Yii::$app->response = Response::FORMAT_JSON;
+            $this->response = Response::FORMAT_JSON;
 
             return true;
         }

@@ -2,6 +2,7 @@
 
 namespace backend\components\controllers;
 
+use ReflectionException;
 use yii\data\ActiveDataProvider;
 use common\components\core\BaseService;
 use common\components\resources\GridViewResource;
@@ -28,28 +29,28 @@ abstract class BackendController extends BaseControllerClass implements Controll
 
     /**
      *  action `List`
+     * @throws ReflectionException
      */
-    public function actionList()
+    public function actionList(): string
     {
         $form = $this->service->getForm();
 
         $activeDataProvider = new ActiveDataProvider();
 
-        $gridViewResource = new GridViewResource($form, $activeDataProvider);
-
         /** @var ListResource $R */
-        $R = new $this->service->getResource(BaseService::LIST, [
-            'gridViewResource' => $gridViewResource
+        $R = $this->service->getResource(BaseService::LIST, [
+            'gridViewResource' => new GridViewResource($form, $activeDataProvider)
         ]);
 
         return $R->render();
     }
 
-
     /**
-    *  action `Read`
-    */
-    public function actionRead(int $id)
+     *  action `Read`
+     *
+     * @throws ReflectionException
+     */
+    public function actionRead(int $id): string
     {
         /** @var ReadResource $R */
         $R = $this->service->getResource(BaseService::READ, [
@@ -59,11 +60,12 @@ abstract class BackendController extends BaseControllerClass implements Controll
         return $R->render();
     }
 
-
     /**
-    *  action `Create`
-    */
-    public function actionCreate(int $id)
+     *  action `Create`
+     *
+     * @throws ReflectionException
+     */
+    public function actionCreate(int $id): string
     {
         $formClass = $this->service->getClassForm();
 
@@ -80,15 +82,15 @@ abstract class BackendController extends BaseControllerClass implements Controll
         return $R->render();
     }
 
-
     /**
      *  action `Update`
      *
-     *  @param int $id
+     * @param int $id
      *
-     * @return string|array
+     * @return string
+     * @throws ReflectionException
      */
-    public function actionUpdate(int $id): array|string
+    public function actionUpdate(int $id): string
     {
         $formClass = $this->service->getClassForm();
 
