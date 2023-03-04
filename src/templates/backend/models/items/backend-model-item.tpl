@@ -1,10 +1,9 @@
-
 <?php
 
 namespace backend\models\items;
 
 use common\models\items\{{CamelCase}} as {{CamelCase}}Common;
-use  andy87\dnk\common\components\interfaces\models\backend\ModelInterface;
+use andy87\dnk\common\components\interfaces\models\backend\ModelInterface;
 
 /**
  * Model `{{CamelCase}}` environment `backend`
