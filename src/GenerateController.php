@@ -223,6 +223,16 @@ class GenerateController extends Controller
     {
         $root = $this->getTemplatePath();
 
+        $this->copyDirectoryStructure(
+            "$root/common/components/interfaces/",
+            Yii::getAlias('@common/components/interfaces/')
+        );
+
+        $this->copyDirectoryStructure(
+            "$root/common/components/resources/",
+            Yii::getAlias('@common/components/resources/')
+        );
+
         $copyFiles = [
             'common-base-model' => [
                 self::SOURCE => 'common/components/core/common-base-model.tpl',
