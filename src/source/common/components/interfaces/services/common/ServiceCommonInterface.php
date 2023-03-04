@@ -1,6 +1,6 @@
 <?php
 
-namespace common\components\interfaces\services\common;
+namespace andy87\dnk\common\components\interfaces\services\common;
 
 /**
  * Интерфейс сервиса `common` генерируемого библиотекой

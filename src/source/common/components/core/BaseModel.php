@@ -1,9 +1,9 @@
 <?php
 
-namespace common\components\core;
+namespace andy87\dnk\common\components\core;
 
 use yii\db\ActiveRecord;
-use common\components\interfaces\models\common\BaseModelInterface;
+use  andy87\dnk\common\components\interfaces\models\common\BaseModelInterface;
 
 /**
  *  Базовый клас для моделей.

@@ -3,7 +3,7 @@
 namespace frontend\models\forms;
 
 use common\models\items\{{CamelCase}};
-use common\components\interfaces\models\frontend\ModelFormInterface;
+use  andy87\dnk\common\components\interfaces\models\frontend\ModelFormInterface;
 
 /**
  * Form by model `{{CamelCase}}` environment `frontend`

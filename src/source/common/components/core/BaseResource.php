@@ -1,11 +1,11 @@
 <?php
 
-namespace common\components\core;
+namespace andy87\dnk\common\components\core;
 
 use Yii;
 use yii\web\Response;
 use yii\base\Component;
-use common\components\interfaces\resources\ResourcesInterface;
+use  andy87\dnk\common\components\interfaces\resources\ResourcesInterface;
 
 /**
  *  Базовый клас для ресурсов страниц, экшенов, компонентов.

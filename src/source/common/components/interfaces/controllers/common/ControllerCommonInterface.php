@@ -1,6 +1,6 @@
 <?php
 
-namespace common\components\interfaces\controllers\common;
+namespace andy87\dnk\common\components\interfaces\controllers\common;
 
 /**
  * Интерфейс контроллеров `common` генерируемых библиотекой

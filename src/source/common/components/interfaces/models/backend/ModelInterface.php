@@ -1,6 +1,6 @@
 <?php
 
-namespace common\components\interfaces\models\backend;
+namespace andy87\dnk\common\components\interfaces\models\backend;
 
 /**
  * Интерфейс моделей в `backend` генерируемых библиотекой

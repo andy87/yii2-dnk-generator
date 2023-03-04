@@ -1,6 +1,6 @@
 <?php
 
-namespace common\components\interfaces\controllers\frontend;
+namespace andy87\dnk\common\components\interfaces\controllers\frontend;
 
 /**
  * Интерфейс контроллеров `frontend` генерируемых библиотекой

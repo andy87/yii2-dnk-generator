@@ -217,13 +217,29 @@ class GenerateController extends Controller
      */
     public function actionSetup( $overwrite = false ): void
     {
-        $this->copyDirectoryStructure(
-            __DIR__ . DIRECTORY_SEPARATOR . 'source'. DIRECTORY_SEPARATOR,
-            Yii::getAlias($this->root) . DIRECTORY_SEPARATOR,
-            (bool) $overwrite
-        );
-
         $root = $this->getTemplatePath();
+
+        $copyFiles = [
+            'common-components-db-table' => [
+                self::SOURCE => 'common/components/db/Table.php',
+                self::TARGET => "@common/components/db/Table.php"
+            ],
+            'common-components-parts' => [
+                self::SOURCE => 'common/components/Part.php',
+                self::TARGET => "@common/components/Part.php"
+            ],
+        ];
+
+        foreach ( $copyFiles as $template )
+        {
+            $sourcePath = $root.$template[self::SOURCE];
+
+            echo "\r\n Generate file: $sourcePath.";
+
+            $targetPath = Yii::getAlias($template[self::TARGET]);
+
+            $this->copy($sourcePath, $targetPath);
+        }
 
         $params = $this->getParams('model','Model');
 
@@ -595,31 +611,49 @@ class GenerateController extends Controller
 
             } else {
 
-                echo "\r\n Copy file: $source.";
+                $status = $this->copy($source, $destination, $overwrite);
 
-                if ( file_exists($destination) )
-                {
-                    if ( $overwrite )
-                    {
-                        unlink($destination);
-
-                    } else {
-
-                        $this->stdout("\r\n\t file exists.\n", BaseConsole::FG_PURPLE);
-
-                        continue;
-                    }
-                }
-
-                if (copy($source, $destination)) {
-                    $this->stdout("\r\n\t successfully.\n", BaseConsole::FG_GREEN);
-                } else {
-                    $this->stdout("\r\n\t failed.\n", BaseConsole::FG_RED);
-                }
+                if ( $status === null ) continue;
             }
         }
 
         closedir($dir);
+    }
+
+    /**
+     * @param string $source
+     * @param string $destination
+     * @param bool $overwrite
+     * @return ?bool
+     */
+    private function copy(string $source, string $destination, bool $overwrite = false): ?bool
+    {
+        echo "\r\n Copy file: $source.";
+
+        if ( file_exists($destination) )
+        {
+            if ( $overwrite )
+            {
+                unlink($destination);
+
+            } else {
+
+                $this->stdout("\r\n\t file exists.\n", BaseConsole::FG_PURPLE);
+
+                return null;
+            }
+        }
+
+        if (copy($source, $destination)) {
+            $this->stdout("\r\n\t successfully.\n", BaseConsole::FG_GREEN);
+
+            return true;
+        } else {
+
+            $this->stdout("\r\n\t failed.\n", BaseConsole::FG_RED);
+
+            return false;
+        }
     }
 
     /**

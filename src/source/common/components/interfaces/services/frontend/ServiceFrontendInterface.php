@@ -1,6 +1,6 @@
 <?php
 
-namespace common\components\interfaces\services\frontend;
+namespace andy87\dnk\common\components\interfaces\services\frontend;
 
 /**
  * Интерфейс сервиса `frontend` генерируемого библиотекой

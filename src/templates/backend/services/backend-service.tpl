@@ -3,7 +3,7 @@
 namespace backend\services;
 
 use common\services\{{CamelCase}}Service as {{CamelCase}}CommonService;
-use common\components\interfaces\services\backend\ServiceBackendInterface;
+use  andy87\dnk\common\components\interfaces\services\backend\ServiceBackendInterface;
 use backend\models\items\{{CamelCase}};
 use backend\models\forms\{{CamelCase}}Form;
 use backend\resources\{{snake_case}}\{{CamelCase}}CreateResource;

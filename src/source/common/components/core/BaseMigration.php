@@ -1,13 +1,12 @@
 <?php
 
-namespace console\components\migrations;
+namespace andy87\dnk\common\components\core;
 
-use common\components\db\Setup;
 use yii\base\InvalidConfigException;
 use yii\db\Migration;
 use common\components\Part;
 use common\components\db\Tables;
-use common\components\db\Config;
+use common\components\db\Setup;
 
 /**
  * Базовый класс миграций.
