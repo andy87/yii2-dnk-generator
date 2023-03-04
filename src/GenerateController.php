@@ -224,12 +224,12 @@ class GenerateController extends Controller
         $root = $this->getTemplatePath();
 
         $this->copyDirectoryStructure(
-            "$root/source/common/components/interfaces/",
+            "/common/components/interfaces/",
             Yii::getAlias('@common/components/interfaces/')
         );
 
         $this->copyDirectoryStructure(
-            "$root/source/common/components/resources/",
+            "/common/components/resources/",
             Yii::getAlias('@common/components/resources/')
         );
 
