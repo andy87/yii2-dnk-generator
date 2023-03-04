@@ -237,13 +237,14 @@ class GenerateController extends Controller
                 if ($overwrite)
                 {
                     unlink($targetPath);
+                    $this->stdout("\r\n Dnk `setup`: overwrite file.\n", BaseConsole::FG_RED);
 
                 } else {
 
-                    $this->stdout("\r\n Dnk `setup`: copied failed (file exist).\n", BaseConsole::FG_RED);
+                    $this->stdout("\r\n Dnk `setup`: copied skip (file exist) .\n", BaseConsole::FG_RED);
                     continue;
                 }
-            } 
+            }
 
             $status = $this->generateFileFromTpl($sourcePath, $targetPath, $params);
 
@@ -257,7 +258,7 @@ class GenerateController extends Controller
             }
         }
 
-        $this->stdout("Dnk `setup`: copied successfully.\n", BaseConsole::FG_GREEN);
+        echo "\r\n Dnk `setup`: copied finish.";
     }
 
     /**
