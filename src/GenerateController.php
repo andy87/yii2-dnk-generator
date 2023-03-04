@@ -245,6 +245,8 @@ class GenerateController extends Controller
             echo "\r\n Generate file: $sourcePath.";
 
             $targetPath = Yii::getAlias($template[self::TARGET]);
+            
+            $this->createDirectories($targetPath);
 
             $this->copy($sourcePath, $targetPath);
         }
