@@ -476,6 +476,7 @@ return [
                     '&& yes'
                 ])
             ],
+            'parts' => array_keys(\common\components\Part::DATA),
             'baseClasses' => [
                 GenerateController::BASE_MIGRATE_CLASS => BaseMigration::class, // extends for `Migrations`
                 GenerateController::BASE_CONTROLLER_CLASS => BaseController::class, // extends for `Controllers`

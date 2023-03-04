@@ -192,6 +192,9 @@ class GenerateController extends Controller
         self::COMMAND_CRUD => null,
     ];
 
+    /** @var array Список таблиц */
+    public array $parts = [];
+
     /** @var array bases classname for generated files (setup from config) */
     public array $baseClasses = [
         self::BASE_MIGRATE_CLASS => null,
@@ -204,6 +207,7 @@ class GenerateController extends Controller
 
 
     // Methods
+
 
     /**
      * Copy directory with based classes (call once)
@@ -315,7 +319,7 @@ class GenerateController extends Controller
             $entityList = [$entity];
         }
 
-        if ( $entity === '*' ) $entityList = array_keys(Part::DATA);
+        if ( $entity === '*' ) $entityList = $this->parts;
 
         return $entityList;
     }
