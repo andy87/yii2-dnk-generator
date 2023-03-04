@@ -153,6 +153,14 @@ class GenerateController extends Controller
 
     /** @var array mapping for `resources` */
     public const BASE_RESOURCES = [
+        'backend-components-controller' => [
+            self::SOURCE => 'backend/components/controllers/BackendController.tpl',
+            self::TARGET => "@backend/components/controllers/BackendController.php"
+        ],
+        'frontend-components-controller' => [
+            self::SOURCE => 'frontend/components/controllers/FrontendController.tpl',
+            self::TARGET => "@frontend/components/controllers/FrontendController.php"
+        ],
         'backend-components-resources-crud-create' => [
             self::SOURCE => 'backend/components/resources/crud/CreateResource.tpl',
             self::TARGET => "@backend/components/resources/crud/CreateResource.php"
@@ -560,7 +568,19 @@ class GenerateController extends Controller
 
             } else {
 
-                if (!file_exists($destination)) copy($source, $destination);
+                if (!file_exists($destination))
+                {
+                    echo "\r\n Copy `setup`: $source.";
+
+                    if (copy($source, $destination)) {
+
+                        $this->stdout("\r\n\t successfully.\n", BaseConsole::FG_GREEN);
+
+                    } else {
+
+                        $this->stdout("\r\n\t failed.\n", BaseConsole::FG_RED);
+                    }
+                }
             }
         }
 
