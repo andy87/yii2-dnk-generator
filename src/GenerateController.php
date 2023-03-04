@@ -223,15 +223,6 @@ class GenerateController extends Controller
     {
         $root = $this->getTemplatePath();
 
-        $this->copyDirectoryStructure(
-            __DIR__ . "/source/common/components/interfaces/",
-            Yii::getAlias('@common/components/interfaces/')
-        );
-
-        $this->copyDirectoryStructure(
-            __DIR__ . "/source/common/components/resources/",
-            Yii::getAlias('@common/components/resources/')
-        );
 
         $copyFiles = [
             'common-base-model' => [
@@ -260,6 +251,7 @@ class GenerateController extends Controller
 
             $this->copy($sourcePath, $targetPath);
         }
+
 
         $params = $this->getParams('model','Model');
 
@@ -428,7 +420,7 @@ class GenerateController extends Controller
     /**
      * @return void
      */
-    public function actionSourceModels(string $entity)
+    public function actionGiiModel(string $entity)
     {
         $this->generateGii($entity, 'php yii gii/model ' . $this->command[ self::COMMAND_MODEL ]);
     }
@@ -436,7 +428,7 @@ class GenerateController extends Controller
     /**
      * @return void
      */
-    public function actionSourceCruds(string $entity)
+    public function actionGiiCrud(string $entity)
     {
         $this->generateGii($entity, 'php yii gii/crud ' . $this->command[ self::COMMAND_CRUD ]);
     }

@@ -390,6 +390,7 @@ Generate selected fileType(list fileType) for needle table(part).
 
 ##### Generate once file.
 `php yii generate/list user common-services`
+\* - generate list from config `parts`
 
 generate only: `common/services/UserService.php` [view](src/templates/common/services/common-service.tpl)
 
@@ -406,19 +407,33 @@ ______
 
 
 ### command
-`php yii generate/source-models`
+`php yii generate/gii-model`  
 
-Generate `yii gii/model ` for needle table(part).
+Generate gii `model` for select table(part).
 
+\* - generate list from config `parts`
 
+#### Examples  
+`php yii generate/gii-model user`  
+`php yii generate/gii-model *`  
+
+alias `php yii gii/model`
 ______
 
 
 
 ### command
-`php yii generate/source-cruds`
+`php yii generate/gii-crud`  
 
-Generate `yii gii/crud ` for needle table(part).
+Generate gii `crud` for select table(part).  
+\* - generate list from config `parts`
+
+#### Examples
+
+`php yii generate/gii-crud user`  
+`php yii generate/gii-crud *`  
+
+alias `php yii gii/crud`
 ______
 
 
