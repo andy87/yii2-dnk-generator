@@ -231,6 +231,8 @@ class GenerateController extends Controller
         {
             $sourcePath = $root.$template[self::SOURCE];
 
+            echo "\r\n Generate file: $sourcePath.";
+
             $targetPath = Yii::getAlias($template[self::TARGET]);
 
             if ( file_exists($targetPath) )
@@ -238,11 +240,11 @@ class GenerateController extends Controller
                 if ($overwrite)
                 {
                     unlink($targetPath);
-                    $this->stdout("\r\n Dnk `setup`: overwrite file.\n", BaseConsole::FG_RED);
+                    $this->stdout("\r\n\t overwrite file.", BaseConsole::FG_RED);
 
                 } else {
 
-                    $this->stdout("\r\n Dnk `setup`: copied skip (file exist) .\n", BaseConsole::FG_RED);
+                    $this->stdout("\r\n\t copied skip (file exist) .\n", BaseConsole::FG_RED);
                     continue;
                 }
             }
@@ -251,11 +253,11 @@ class GenerateController extends Controller
 
             if ($status) {
 
-                $this->stdout("\r\n Dnk `setup`: copied successfully.\n", BaseConsole::FG_GREEN);
+                $this->stdout("\r\n\t copied successfully.\n", BaseConsole::FG_GREEN);
 
             } else {
 
-                $this->stdout("\r\n Dnk `setup`: copied failed.\n", BaseConsole::FG_RED);
+                $this->stdout("\r\n\r copied failed.\n", BaseConsole::FG_RED);
             }
         }
 
