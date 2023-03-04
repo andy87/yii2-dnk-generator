@@ -1,6 +1,6 @@
 <?php
 
-namespace andy87\dnk\common\components\core;
+namespace common\components\core;
 
 use yii\db\ActiveRecord;
 use andy87\dnk\common\components\interfaces\models\common\BaseModelInterface;
