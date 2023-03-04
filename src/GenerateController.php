@@ -245,7 +245,7 @@ class GenerateController extends Controller
             echo "\r\n Generate file: $sourcePath.";
 
             $targetPath = Yii::getAlias($template[self::TARGET]);
-            
+
             $this->createDirectories($targetPath);
 
             $this->copy($sourcePath, $targetPath);
@@ -727,15 +727,16 @@ class GenerateController extends Controller
      */
     private function createDirectories($path): void
     {
-        $mapping = explode('/', $path);
+        $path = str_replace(['\\','/'], '/', $path);
 
         $dir = '';
 
+        $pathInfo = pathinfo($path);
+        $mapping = explode('/', $pathInfo['dirname']);
+
         foreach ($mapping as $step)
         {
-            if ( strpos($step,'.' ) !== false ) return;
-
-            $dir .= "$step/";
+            $dir .= ($step . DIRECTORY_SEPARATOR);
 
             if (!is_dir($dir)) mkdir($dir);
         }
