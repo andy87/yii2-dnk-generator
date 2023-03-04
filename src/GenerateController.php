@@ -215,12 +215,12 @@ class GenerateController extends Controller
      * @return void
      * @throws Exception
      */
-    public function actionSetup( bool $overwrite = false ): void
+    public function actionSetup( $overwrite = false ): void
     {
         $this->copyDirectoryStructure(
             __DIR__ . DIRECTORY_SEPARATOR . 'source'. DIRECTORY_SEPARATOR,
             Yii::getAlias($this->root) . DIRECTORY_SEPARATOR,
-            $overwrite
+            (bool) $overwrite
         );
 
         $root = $this->getTemplatePath();
@@ -589,7 +589,7 @@ class GenerateController extends Controller
 
             if (is_dir($source))
             {
-                $this->copyDirectoryStructure($source, $destination);
+                $this->copyDirectoryStructure($source, $destination, $overwrite);
 
             } else {
 
