@@ -5,11 +5,12 @@ namespace backend\components\controllers;
 use common\components\core\BaseService;
 use common\components\resources\GridViewResource;
 use {{BaseControllerClassName}} as BaseControllerClass;
+use common\components\interfaces\controllers\backend\ControllerBackendInterface;
 
 /**
  * Base Controller for environment `backend`
  */
-abstract class BackendController extends BaseControllerClass
+abstract class BackendController extends BaseControllerClass implement ControllerBackendInterface
 {
     // константы
 
@@ -32,7 +33,9 @@ abstract class BackendController extends BaseControllerClass
         $gridViewResource = new GridViewResource($form, $activeDataProvider);
 
         /** @var {{CamelCase}}ListResource $R */
-        $R = new $this->service->getResource(BaseService::LIST)($gridViewResource);
+        $R = new $this->service->getResource(BaseService::LIST, [
+            'gridViewResource' => $gridViewResource
+        ]);
 
         return $R->render();
     }
@@ -43,10 +46,10 @@ abstract class BackendController extends BaseControllerClass
     */
     public function actionRead(int $id)
     {
-        $item = $this->service->findWhere(['id' => $id])->one();
-
         /** @var {{CamelCase}}ReadResource $R */
-        $R = $this->service->getResource(BaseService::READ)($item);
+        $R = $this->service->getResource(BaseService::READ, [
+            'item' => $this->service->findWhere(['id' => $id])->one()
+        ]);
 
         return $R->render();
     }
@@ -59,15 +62,13 @@ abstract class BackendController extends BaseControllerClass
     {
         $formClass = $this->service->getClassForm();
 
-        $item = $formClass::findOne($id);
-
         /** @var {{CamelCase}}CreateResource $R */
-        $R = $this->service->getResource(BaseService::CREATE)($item);
+        $R = $this->service->getResource(BaseService::CREATE, [
+            'item' => $formClass::findOne($id)
+        ]);
 
-        if ( $this->request->isPost )
-        {
+        if ( $this->request->isPost ){
             $R->item->load(Yii::$app->request->post());
-
             $this->service->create($R->item);
         }
 
@@ -82,15 +83,13 @@ abstract class BackendController extends BaseControllerClass
     {
         $formClass = $this->service->getClassForm();
 
-        $item = $formClass::findOne($id);
-
         /** @var {{CamelCase}}UpdateResource $R */
-        $R = $this->service->getResource(BaseService::UPDATE)($item);
+        $R = $this->service->getResource(BaseService::UPDATE, [
+            'item' => $formClass::findOne($id)
+        ]);
 
-        if ( $this->request->isPost )
-        {
+        if ( $this->request->isPost ){
             $R->item->load(Yii::$app->request->post());
-
             $this->service->update($R->item);
         }
 

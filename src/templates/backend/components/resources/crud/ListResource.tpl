@@ -4,11 +4,12 @@ namespace backend\components\resources\crud;
 
 use common\components\resources\GridViewResource;
 use {{BaseResourceClassName}} as BaseResourceClass;
+use common\components\interfaces\resources\crud\ListResourcesInterface;
 
 /**
  * Base file for `ListResource`
  */
-class ListResource extends BaseResourceClass
+class ListResource extends BaseResourceClass implement ListResourcesInterface
 {
     /** @var string  */
     public string $title;

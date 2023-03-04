@@ -4,11 +4,12 @@ namespace backend\components\resources\crud;
 
 use yii\base\Model;
 use {{BaseResourceClassName}} as BaseResourceClass;
+use common\components\interfaces\resources\crud\ReadResourcesInterface;
 
 /**
  * Base file for `ReadResource`
  */
-class ReadResource extends BaseResourceClass
+class ReadResource extends BaseResourceClass implement ReadResourcesInterface
 {
     /** @var string  */
     public string $title;

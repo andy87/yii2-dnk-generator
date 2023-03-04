@@ -2,11 +2,15 @@
 
 namespace common\components\db;
 
+use yii\base\Component;
+
 /**
- *
+ *  Настройки базы данных
  */
-class Config
+class Setup extends Component
 {
+    // Константы
+
     /** @var string Кодировка */
     public const CHARACTER = 'utf8mb4';
 
@@ -20,5 +24,24 @@ class Config
     public const COLUMN = [
         'created_at' => 'timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP',
         'updated_at' => 'timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP',
+    ];
+
+
+
+    // Свойства
+
+    /** @var string Кодировка */
+    public string $character = self::CHARACTER;
+
+
+    /** @var string Сравнение */
+    public string $collate = self::COLLATE;
+
+    /** @var string Сравнение */
+    public string $engine = self::ENGINE;
+
+    public array $columns = [
+        'created_at' => self::COLUMN['created_at'],
+        'updated_at' => self::COLUMN['updated_at'],
     ];
 }

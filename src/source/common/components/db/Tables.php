@@ -2,12 +2,13 @@
 
 namespace common\components\db;
 
+use yii\base\Component;
 use common\components\Part;
 
 /**
  *  Таблицы в системе
  */
-class Tables
+class Tables extends Component
 {
     /** @var array Список имён таблиц для `разделов` */
     public const NAMES = [

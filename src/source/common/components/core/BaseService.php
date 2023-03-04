@@ -2,6 +2,9 @@
 
 namespace common\components\core;
 
+use ReflectionClass;
+use ReflectionException;
+use yii\base\InvalidArgumentException;
 use yii\base\Model;
 use yii\base\Component;
 use yii\db\ActiveQuery;
@@ -25,9 +28,9 @@ abstract class BaseService extends Component
     public const LIST = 4;
 
 
-    /** @var string Имя класса Модели */
+    /** @var string Имя класса Модели ActiveRecord */
     private const MODEL = Model::class;
-    /** @var string Имя класса Формы */
+    /** @var string Имя класса Формы ActiveRecord */
     private const FORM = Model::class;
 
 
@@ -61,9 +64,11 @@ abstract class BaseService extends Component
 
     /**
      * Возвращает экземпляр класса модели, с которой работает сервис
-     * @return Model
+     *
+     * @return ActiveRecord
+     * @throws ReflectionException
      */
-    public function getModel(): Model
+    public function getModel(): ActiveRecord
     {
         return $this->createClass(
             $this->getClassForm()
@@ -72,6 +77,8 @@ abstract class BaseService extends Component
 
     /**
      * Возвращает экземпляр класса формы, с которой работает сервис
+     *
+     * @throws ReflectionException
      */
     public function getForm()
     {
@@ -84,13 +91,16 @@ abstract class BaseService extends Component
      * Возвращает экземпляр класса ресурса
      *
      * @param int $key
+     * @param array $params
      * @return ?object
+     * @throws ReflectionException
      */
-    public function getResource( int $key ): ?object
+    public function getResource( int $key, array $params = []): ?object
     {
-        $class = static::RESOURCES[$key] ?? false;
-
-        if ( $class ) return $this->createClass($class);
+        if ( ($class = static::RESOURCES[$key] ?? false) )
+        {
+            return $this->createClass($class, $params);
+        }
 
         return null;
     }
@@ -99,24 +109,45 @@ abstract class BaseService extends Component
      * Возвращает экземпляр класса, переданного в аргументе `$class`
      *
      * @param string $class Имя класса, экземпляр которого будет создан
+     * @param array $params Параметры класса
      * @return mixed
+     * @throws ReflectionException
      */
-    private function createClass(string $class)
+    private function createClass(string $class, array $params = []): object
     {
-        return new $class();
+        $reflection = new ReflectionClass($class);
+
+        $constructorParams = $reflection->getConstructor() ? $reflection->getConstructor()->getParameters() : [];
+
+        foreach ($constructorParams as $param)
+        {
+            if (!array_key_exists($param->name, $params) && !$param->isOptional()) {
+                throw new InvalidArgumentException("Missing required parameter: {$param->name}");
+            }
+        }
+
+        return $reflection->newInstanceArgs($params);
     }
 
-
+    /**
+     * @return ActiveRecord
+     * @throws ReflectionException
+     */
+    public function getEntity(): ActiveRecord
+    {
+        return $this->getModel();
+    }
 
     /**
      * Создание сущности/модели
      *
      * @param array $attributes
-     * @return Model
+     * @return ActiveRecord
+     * @throws ReflectionException
      */
-    public function create( array $attributes = [] ): Model
+    public function create( array $attributes = [] ): ActiveRecord
     {
-        $model = $this->getModel();
+        $model = $this->getEntity();
 
         if ( !empty($attributes) ) $model->setAttributes($attributes);
 

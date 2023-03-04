@@ -3,6 +3,7 @@
 namespace backend\services;
 
 use common\services\{{CamelCase}}Service as {{CamelCase}}CommonService;
+use common\components\interfaces\services\backend\ServiceBackendInterface;
 use backend\models\items\{{CamelCase}};
 use backend\models\forms\{{CamelCase}}Form;
 use backend\resources\{{snake_case}}\{{CamelCase}}CreateResource;
@@ -17,7 +18,7 @@ use backend\resources\{{snake_case}}\{{CamelCase}}ListResource;
  * @method {{CamelCase}}Form getForm()
  * @method {{CamelCase}}CreateResource|{{CamelCase}}ReadResource|{{CamelCase}}UpdateResource|{{CamelCase}}ListResource getResource(int $key)
  */
-class {{CamelCase}}Service extends {{CamelCase}}CommonService
+class {{CamelCase}}Service extends {{CamelCase}}CommonService implement ServiceBackendInterface
 {
     /** @var string  */
     public const MODEL = {{CamelCase}}::class;
@@ -31,4 +32,13 @@ class {{CamelCase}}Service extends {{CamelCase}}CommonService
         self::UPDATE => {{CamelCase}}UpdateResource::class,
         self::LIST => {{CamelCase}}ListResource::class,
     ];
+
+    /**
+     * @return ActiveRecord
+     * @throws ReflectionException
+     */
+    public function getEntity(): ActiveRecord
+    {
+        return $this->getForm();
+    }
 }

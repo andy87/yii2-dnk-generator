@@ -3,10 +3,9 @@
 namespace common\components\core;
 
 use Yii;
-use yii\base\Component;
-use common\components\interfaces\ResourcesInterface;
 use yii\web\Response;
-use yii\web\View;
+use yii\base\Component;
+use common\components\interfaces\resources\ResourcesInterface;
 
 /**
  *  Базовый клас для ресурсов страниц, экшенов, компонентов.

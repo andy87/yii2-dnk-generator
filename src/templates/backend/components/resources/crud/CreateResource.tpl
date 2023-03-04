@@ -4,11 +4,12 @@ namespace backend\components\resources\crud;
 
 use yii\base\Model;
 use {{BaseResourceClassName}} as BaseResourceClass;
+use common\components\interfaces\resources\crud\CreateResourcesInterface;
 
 /**
  * Base file for `CreateResource`
  */
-class CreateResource extends BaseResourceClass
+class CreateResource extends BaseResourceClass implement CreateResourcesInterface
 {
     /** @var string  */
     public string $title;

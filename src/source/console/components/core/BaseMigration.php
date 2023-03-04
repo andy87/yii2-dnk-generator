@@ -2,9 +2,11 @@
 
 namespace console\components\migrations;
 
-use common\components\db\Tables;
-use common\components\Part;
+use common\components\db\Setup;
+use yii\base\InvalidConfigException;
 use yii\db\Migration;
+use common\components\Part;
+use common\components\db\Tables;
 use common\components\db\Config;
 
 /**
@@ -16,6 +18,9 @@ abstract class BaseMigration extends Migration
     // Свойства
     /** @var string Ключ `раздела` в системе */
     public string $part;
+
+    /** @var Setup Настройки базы данных */
+    protected Setup $setup;
 
     /** @var string Имя таблицы */
     protected string $tableName;
@@ -31,19 +36,33 @@ abstract class BaseMigration extends Migration
      * Инициализация
      *
      * @return void
+     * @throws InvalidConfigException
      */
     public function init(): void
     {
         parent::init();
 
+        $this->setSetup();
+
         $this->tableName = Tables::NAMES[ $this->part ];
 
         $this->tableOptions = sprintf(
             'CHARACTER SET %s COLLATE %s ENGINE=%s',
-            Config::CHARACTER,
-            Config::COLLATE,
-            Config::ENGINE
+            $this->setup->character,
+            $this->setup->collate,
+            $this->setup->engine
         );
+    }
+
+    /**
+     * @return void
+     * @throws InvalidConfigException
+     */
+    private function setSetup()
+    {
+        $setup = \Yii::createObject(Setup::class);
+
+        $this->setup = $setup;
     }
 
     /**

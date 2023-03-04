@@ -3,11 +3,12 @@
 namespace backend\models\forms;
 
 use backend\models\items\{{CamelCase}};
+use common\components\interfaces\models\backend\ModelFormInterface;
 
 /**
  * Form by model `{{CamelCase}}` environment `backend`
  */
-class {{CamelCase}}Form extends {{CamelCase}}
+class {{CamelCase}}Form extends {{CamelCase}} implement ModelFormInterface
 {
     // custom code ...
 }

@@ -7,11 +7,12 @@ use yii\web\ErrorAction;
 use common\components\core\BaseService;
 use common\components\resources\GridViewResource;
 use {{BaseControllerClassName}} as BaseControllerClass;
+use common\components\interfaces\controllers\frontend\ControllerFrontendInterface;
 
 /**
  * Base Controller for environment `frontend`
  */
-abstract class FrontendController extends BaseControllerClass
+abstract class FrontendController extends BaseControllerClass implement ControllerFrontendInterface
 {
     // константы
 
@@ -59,7 +60,9 @@ abstract class FrontendController extends BaseControllerClass
         $gridViewResource = new GridViewResource($form, $activeDataProvider);
 
         /** @var {{CamelCase}}ListResource $R */
-        $R = new $this->service->getResource(BaseService::LIST)($gridViewResource);
+        $R = new $this->service->getResource(BaseService::LIST, [
+            'gridViewResource' => $gridViewResource
+        ]);
 
         return $R->render();
     }
@@ -70,10 +73,10 @@ abstract class FrontendController extends BaseControllerClass
     */
     public function actionRead(int $id)
     {
-        $item = $this->service->findWhere(['id' => $id])->one();
-
         /** @var {{CamelCase}}ReadResource $R */
-        $R = $this->service->getResource(BaseService::READ)($item);
+        $R = $this->service->getResource(BaseService::READ, [
+            'item' => $this->service->findWhere(['id' => $id])->one()
+        ]);
 
         return $R->render();
     }
