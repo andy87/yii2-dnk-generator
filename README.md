@@ -585,10 +585,9 @@ composer require andy87/yii2-dnk-generator:dev-master
 #OR
 php composer.local require andy87/yii2-dnk-generator:dev-master
 ```
-3. exec command [generate/setup](#command-setup)
 
 <a name="setup-config"></a>
-4. Update config file:
+2. Update config file:
 - advanced: `@console\config\main.php`
 
 
@@ -643,3 +642,4 @@ return [
 * `parts` - table lis. for user *  in command property  
 * `baseClasses` - list of based class names for generated file
 
+3. exec command [generate/setup](#command-setup)
