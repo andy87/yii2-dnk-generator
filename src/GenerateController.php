@@ -253,7 +253,9 @@ class GenerateController extends Controller
             $sourcePath = $sourceRoot.$template[self::SOURCE];
             $targetPath = Yii::getAlias($template[self::TARGET]);
 
-            echo "\r\n\t Copy: $sourcePath";
+            echo "\r\n Copy";
+            echo ($overwrite) ? ' (overwrite)' : '';
+            echo ": $sourcePath";
             echo "\r\n\t to: $targetPath";
 
             $this->createDirectories($targetPath);
@@ -273,7 +275,9 @@ class GenerateController extends Controller
 
             $targetPath = Yii::getAlias($template[self::TARGET]);
 
-            echo "\r\n Generate: $sourcePath";
+            echo "\r\n Generate";
+            echo ($overwrite) ? ' (overwrite)' : '';
+            echo ": $sourcePath";
             echo "\r\n to: $targetPath.";
 
             if ( file_exists($targetPath) )
