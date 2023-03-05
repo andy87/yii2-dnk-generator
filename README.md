@@ -26,7 +26,6 @@ Personal library on `Yii2 advanced` for generate files pack and follow pattern: 
   * [Resource](#profit-resources)
 * ### [Setup](#setup)
   * [composer](#setup-composer)
-  * [require](#setup-require)
   * [config](#setup-config)
 
 
@@ -580,18 +579,7 @@ _____
 ### Install.
 
 <a name="setup-composer"></a>
-1. Add in to file `composer.json` on part `repositories`
-
-
-```json
-{
-    "type": "git",
-    "url": "https://github.com/andy87/yii2-dnk-generator.git"
-}
-```
-
-<a name="setup-require"></a>
-2. exec command 
+1. exec command 
 ```bash
 composer require andy87/yii2-dnk-generator:dev-master
 #OR
