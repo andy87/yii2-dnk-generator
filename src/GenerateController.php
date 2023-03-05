@@ -208,11 +208,11 @@ class GenerateController extends Controller
     public const GENERATE_TESTS = [
         'common-tests-unit-services' => [
             self::SOURCE => 'common/tests/unit/services/common-test-unit-service.tpl',
-            self::TARGET => '@common/common/tests/unit/services/{{CamelCase}}Service.php'
+            self::TARGET => '@common/tests/unit/services/{{CamelCase}}Service.php'
         ],
             'common-tests-unit-model-items' => [
                 self::SOURCE => 'common/tests/unit/models/items/common-test-unit-model-item.tpl',
-                self::TARGET => '@common/common/tests/unit/models/items/{{CamelCase}}.php'
+                self::TARGET => '@common/tests/unit/models/items/{{CamelCase}}.php'
             ],
         'backend-tests-unit-services' => [
             self::SOURCE => 'backend/tests/unit/services/backend-test-unit-service.tpl',
@@ -383,11 +383,15 @@ class GenerateController extends Controller
     {
         $root = $this->getTemplatePath();
 
+        $from = array_keys($params);
+        $to = array_keys($params);
+
         foreach ($list as $template )
         {
             $sourcePath = $root.$template[self::SOURCE];
 
             $targetPath = Yii::getAlias($template[self::TARGET]);
+            $targetPath = str_replace($from,$to,$targetPath);
 
             echo "\r\n Generate";
             echo ($overwrite) ? ' (overwrite)' : '';
