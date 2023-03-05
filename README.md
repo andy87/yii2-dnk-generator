@@ -25,6 +25,10 @@ Personal library for generate files pack and follow pattern: `template path`, `a
   * [Service](#profit-services)
   * [Resource](#profit-resources)
 * ### [Setup](#setup)
+  * [composer](#setup-composer)
+  * [require](#setup-require)
+  * [config](#setup-config)
+
 
 ## Description
 
@@ -34,8 +38,8 @@ Legend:
 * Env:`backend` == environment `backend`
 * Env:`frontend` == environment `frontend`
 
-### Models & Forms.
 <a name="description-models-forms"></a>
+### Models & Forms.
 
 ```
 📄 common/components/core/BaseModel.php            // S_P&M > all children models on Env:`all`
@@ -51,10 +55,8 @@ Legend:
       └─📄 frontend/models/forms/__Model__Form.php // S_P&M > `form` on model `frontend/models/items/__Model__` on Env:`frontend`
 ```
 
-
-
-### Services.
 <a name="description-services"></a>
+### Services.
 
 ```
 📄 common/components/core/BaseService.php              // S_P&M > all services on Env:`all`
@@ -64,8 +66,8 @@ Legend:
 └─📄 frontend/components/services/__Model__Service.php // S_P&M > services by part `__Model__` on Env:`frontend`
 ```
 
-### Controllers.
 <a name="description-controllers"></a>
+### Controllers.
 
 ```
 📄 common/components/core/BaseController.php                 // S_P&M > all controllers on Env:`all`
@@ -78,8 +80,8 @@ Legend:
   └─📄 frontend/controllers/__Model__Controller.php          // S_P&M > controllers for moled `__Model__` on Env:`frontend`
 ```
 
-### Resources.
 <a name="description-resources"></a>
+### Resources.
 
 ```
 📄 common/components/core/BaseResource.php                         // S_P&M > all resources on Env:`all` 
@@ -108,9 +110,8 @@ Legend:
 
 ## Usage/Examples.
 
-
-### command  
 <a name="command-setup"></a>
+### command  
 
 ```bash
 php yii generate/setup
@@ -145,17 +146,16 @@ Helpers classes list:
 _____
 
 
-
-### command  
 <a name="command-gen"></a>
+### command  
 
 ```bash
 php yii generate/gen user
 ```
 
-| Parameter | Type     | Description   |
-|:----------| :------- |:--------------|
-| `entiry`  | `string` | **Required**. |
+| Parameter | Type     | Description                                                                       |
+|:----------| :------- |:----------------------------------------------------------------------------------|
+| `entity`  | `string` | **Required**. model/table to work with </br> * for use list fron property `parts` |
 
 generate basic file pack:
 
@@ -224,9 +224,8 @@ generate basic file pack:
     - frontend-views-list `frontend/views/user/user-list.php` [view](src/templates/frontend/views/model/model-list.tpl)
 _____
 
-
-### command  
 <a name="command-gii-model"></a>
+### command  
 
 ```bash
 php yii generate/gii-model
@@ -234,7 +233,7 @@ php yii generate/gii-model
 
 | Parameter | Type     | Description   |
 |:----------| :------- |:--------------|
-| `entiry`  | `string` | **Required**. |
+| `entity`  | `string` | **Required**. model/table to work with </br> * for use list fron property `parts` |
 
 Generate gii `model` for select table(part).
 
@@ -254,9 +253,8 @@ php yii gii/model
 ______
 
 
-
-### command  
 <a name="command-gii-crud"></a>
+### command  
 
 ```bash
 php yii generate/gii-crud
@@ -264,7 +262,7 @@ php yii generate/gii-crud
 
 | Parameter | Type     | Description                            |
 |:----------| :------- |:---------------------------------------|
-| `entiry`  | `string` | **Required**. model/table to work with |
+| `entiry`  | `string` | **Required**. model/table to work with </br> * for use list fron property `parts` |
 
 Generate gii `crud` for select table(part).  
 \* - generate list from config `parts`
@@ -279,9 +277,8 @@ alias `php yii gii/crud`
 ______
 
 
-
-### command  
 <a name="command-list"></a>
+### command  
 
 ```bash
 php yii generate/list user common/services
@@ -289,7 +286,7 @@ php yii generate/list user common/services
 
 | Parameter | Type     | Description                            |
 |:----------| :------- |:---------------------------------------|
-| `entiry`  | `string` | **Required**. model/table to work with |
+| `entiry`  | `string` | **Required**. model/table to work with </br> * for use list fron property `parts` |
 | `map`     | `string` | **Required**. list of files to generate |
 
 Generate selected fileType(list fileType) for needle table(part).
@@ -322,9 +319,8 @@ generate file list:
 ______
 
 
-
-### command  
 <a name="command-gen-models"></a>
+### command  
 
 ```bash
 php yii generate/gen-models user
@@ -346,9 +342,8 @@ Generate `model` files for needle table(part).
 _____
 
 
-
-### command  
 <a name="command-gen-controllers"></a>
+### command  
 
 ```bash
 php yii generate/gen-controllers user
@@ -364,9 +359,8 @@ Generate `controller` files for needle table(part).
 _____
 
 
-
-### command  
 <a name="command-gen-services"></a>
+### command  
 
 ```bash
 php yii generate/gen-services user
@@ -386,9 +380,8 @@ Generate `service` files for needle table(part).
 _____
 
 
-
-### command  
 <a name="command-gen-backend-service"></a>
+### command  
 
 ```bash
 php yii generate/gen-backend-service user
@@ -407,9 +400,8 @@ Generate `service` files for needle table(part).
 _____
 
 
-
-### command  
 <a name="command-gen-backend-views"></a>
+### command  
 
 ```bash
 php yii generate/gen-backend-views user
@@ -428,9 +420,8 @@ alias `php yii generate/list user backend-views-form,backend-views-create,backen
 _____
 
 
-
-### command  
 <a name="command-gen-frontend-views"></a>
+### command  
 
 ```bash
 php yii generate/gen-frontend-views user
@@ -453,8 +444,8 @@ _____
 
 # Profit.  
 
-## Service profit  
 <a name="profit-services"></a>
+## Service profit  
 
 ### Example for model `User`
 
@@ -500,8 +491,9 @@ tests/unit/user/CreateTest {
 }
 ```
 
-## Resource Profit  
 <a name="profit-resources"></a>
+## Resource Profit  
+
 
 ```
 example:
@@ -552,11 +544,14 @@ use frontend/resources/user/UsereViewProfileResources;
 _____
 
 
-## Yii2 setups  {#setup}  
+<a name="setup"></a>
+## Yii2 setups  
 
 ### Install.
 
+<a name="setup-composer"></a>
 1. Add in to file `composer.json` on part `repositories`
+
 
 ```json
 {
@@ -565,9 +560,11 @@ _____
 }
 ```
 
+<a name="setup-require"></a>
 2. exec command `composer require andy87/yii2-dnk-generator:dev-master`
 
 
+<a name="setup-config"></a>
 3. Update config file:
 - advanced: `@console\config\main.php`
 - basic: `@app\config\console.php`
@@ -581,14 +578,14 @@ use andy87\dnk\GenerateController;
 return [
     'aliases' => [
         // .. other config
-        '@root'   => dirname(dirname(__DIR__)), // new line
+        '@root'   => dirname(__DIR__, 2), // new line
     ],
     'controllerMap' => [
         // .. other config
         'generate' => [  // new block
             'class'     => GenerateController::class,
             'root'      => '@root', // alias to root project
-             'command'   => [
+            'command'   => [
                 GenerateController::COMMAND_MODEL => implode(' ', [
                     '--modelClass={{CamelCase}}Source',
                     '--ns=common\\models\\sources',
@@ -617,3 +614,9 @@ return [
     ]
 ]
 ```
+
+
+* `root` - directory with folders 'frontend',backend',common' ...  
+* `command` - part of gii/... command  
+* `parts` - table lis. for user *  in command property  
+* `baseClasses` - list of based class names for generated file
