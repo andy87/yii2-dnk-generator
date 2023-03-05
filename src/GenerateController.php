@@ -285,7 +285,7 @@ class GenerateController extends Controller
                 if ($overwrite)
                 {
                     unlink($targetPath);
-                    $this->stdout("\r\n\t overwrite file.", BaseConsole::FG_RED);
+                    $this->stdout("\r\n\t remove old file: $targetPath", BaseConsole::FG_RED);
 
                 } else {
 
