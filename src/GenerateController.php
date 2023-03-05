@@ -196,7 +196,7 @@ class GenerateController extends Controller
         ],
     ];
 
-
+    /** @var array mapping for `setup` generate  */
     public const SETUP_COPY_SETUP_FILES = [
         'common-resources-grid' => [
             self::SOURCE => '/source/common/components/resources/GridViewResource.php',
@@ -204,6 +204,41 @@ class GenerateController extends Controller
         ],
     ];
 
+    /** @var array mapping for `tests` generate */
+    public const GENERATE_TESTS = [
+        'common-tests-unit-services' => [
+            self::SOURCE => '/source/common/tests/unit/services/common-test-unit-service.tpl',
+            self::TARGET => '@common/common/tests/unit/services/{{CamelCase}}Service.php'
+        ],
+            'common-tests-unit-model-items' => [
+                self::SOURCE => '/source/common/tests/unit/models/items/common-test-unit-model-item.tpl',
+                self::TARGET => '@common/common/tests/unit/models/items/{{CamelCase}}.php'
+            ],
+        'backend-tests-unit-services' => [
+            self::SOURCE => 'backend/tests/unit/services/backend-test-unit-service.tpl',
+            self::TARGET => '@backend/tests/unit/services/{{CamelCase}}Service.php'
+        ],
+            'backend-tests-unit-model-items' => [
+                self::SOURCE => 'backend/tests/unit/models/items/backend-test-unit-model-item.tpl',
+                self::TARGET => '@backend/tests/unit/models/items/{{CamelCase}}.php'
+            ],
+                'backend-tests-unit-model-forms' => [
+                    self::SOURCE => 'backend/tests/unit/models/forms/backend-test-unit-model-form.tpl',
+                    self::TARGET => '@backend/tests/unit/models/items/{{CamelCase}}.php'
+                ],
+        'frontend-tests-unit-model-forms' => [
+            self::SOURCE => 'frontend/tests/unit/models/forms/frontend-test-unit-model-form.tpl',
+            self::TARGET => '@frontend/tests/unit/models/items/{{CamelCase}}.php'
+        ],
+            'frontend-tests-unit-services' => [
+                self::SOURCE => 'frontend/tests/unit/services/frontend-test-unit-service.tpl',
+                self::TARGET => '@frontend/tests/unit/services/{{CamelCase}}Service.php'
+            ],
+                'frontend-tests-unit-model-items' => [
+                    self::SOURCE => 'frontend/tests/unit/models/items/frontend-test-unit-model-item.tpl',
+                    self::TARGET => '@frontend/tests/unit/models/items/{{CamelCase}}.php'
+                ],
+    ];
 
 
 
@@ -263,48 +298,12 @@ class GenerateController extends Controller
             $this->copy($sourcePath, $targetPath);
         }
 
-        $root = $this->getTemplatePath();
-
         $params = $this->getParams('model','Model');
 
-        echo "\r\n Generate files.";
+        echo "\r\n Generate `setup` files.";
 
-        foreach (self::SETUP_GENERATE_SETUP_FILES as $template )
-        {
-            $sourcePath = $root.$template[self::SOURCE];
+        $this->generateList(self::SETUP_GENERATE_SETUP_FILES, $params, $overwrite);
 
-            $targetPath = Yii::getAlias($template[self::TARGET]);
-
-            echo "\r\n Generate";
-            echo ($overwrite) ? ' (overwrite)' : '';
-            echo ": $sourcePath";
-            echo "\r\n to: $targetPath.";
-
-            if ( file_exists($targetPath) )
-            {
-                if ($overwrite)
-                {
-                    unlink($targetPath);
-                    $this->stdout("\r\n\t remove old file: $targetPath", BaseConsole::FG_RED);
-
-                } else {
-
-                    $this->stdout("\r\n\t copied skip (file exist) .\n", BaseConsole::FG_RED);
-                    continue;
-                }
-            }
-
-            $status = $this->generateFileFromTpl($sourcePath, $targetPath, $params);
-
-            if ($status) {
-
-                $this->stdout("\r\n\t generate successfully.\n", BaseConsole::FG_GREEN);
-
-            } else {
-
-                $this->stdout("\r\n\r generate failed.\n", BaseConsole::FG_RED);
-            }
-        }
 
         echo "\r\n  copied finish.";
     }
@@ -347,6 +346,79 @@ class GenerateController extends Controller
         foreach ( $entityList as $entity)
         {
             $this->generator($entity, $map, $overwrite);
+        }
+    }
+
+    /**
+     * @param string $entity
+     * @param bool $overwrite
+     * @return void
+     */
+    public function actionTests(string $entity, bool $overwrite = false)
+    {
+        $entityList = $this->getEntity($entity);
+
+
+        echo "\r\n Generate `test` files.";
+
+        foreach ( $entityList as $entity )
+        {
+            $snakeCase = strtolower($entity);
+            $camelCase = Inflector::id2camel($snakeCase,'_');
+
+            $params = $this->getParams($snakeCase,$camelCase);
+
+            $this->generateList(self::GENERATE_TESTS, $params, $overwrite);
+        }
+
+        echo "\r\n  copied finish.";
+    }
+
+    /**
+     * @param array $list
+     * @param array $params
+     * @param bool $overwrite
+     * @return void
+     */
+    private function generateList(array $list, array $params, bool $overwrite = false)
+    {
+        $root = $this->getTemplatePath();
+
+        foreach ($list as $template )
+        {
+            $sourcePath = $root.$template[self::SOURCE];
+
+            $targetPath = Yii::getAlias($template[self::TARGET]);
+
+            echo "\r\n Generate";
+            echo ($overwrite) ? ' (overwrite)' : '';
+            echo ": $sourcePath";
+            echo "\r\n to: $targetPath.";
+
+            if ( file_exists($targetPath) )
+            {
+                if ($overwrite)
+                {
+                    unlink($targetPath);
+                    $this->stdout("\r\n\t remove old file: $targetPath", BaseConsole::FG_RED);
+
+                } else {
+
+                    $this->stdout("\r\n\t copied skip (file exist) .\n", BaseConsole::FG_RED);
+                    continue;
+                }
+            }
+
+            $status = $this->generateFileFromTpl($sourcePath, $targetPath, $params);
+
+            if ($status) {
+
+                $this->stdout("\r\n\t generate successfully.\n", BaseConsole::FG_GREEN);
+
+            } else {
+
+                $this->stdout("\r\n\r generate failed.\n", BaseConsole::FG_RED);
+            }
         }
     }
 
