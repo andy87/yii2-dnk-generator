@@ -152,7 +152,20 @@ class GenerateController extends Controller
     ];
 
     /** @var array mapping for `resources` */
-    public const BASE_RESOURCES = [
+    public const SETUP_GENERATE_SETUP_FILES = [
+
+        'common-components-parts' => [
+            self::SOURCE => 'common/components/Part.tpl' ,
+            self::TARGET => '@common/components/Part.php'
+        ],
+        'common-components-db-setup' => [
+            self::SOURCE => 'common/components/db/Setup.tpl',
+            self::TARGET => '@common/components/db/Setup.php'
+        ],
+        'common-components-db-table' => [
+            self::SOURCE => 'common/components/db/Tables.tpl',
+            self::TARGET => '@common/components/db/Tables.php'
+        ],
         'common-base-model' => [
             self::SOURCE => 'common/components/core/common-base-model.tpl',
             self::TARGET => '@common/components/core/BaseModel.php'
@@ -180,8 +193,17 @@ class GenerateController extends Controller
         'common-components-resources-crud-update' => [
             self::SOURCE => 'common/components/resources/crud/UpdateResource.tpl',
             self::TARGET => '@common/components/resources/crud/UpdateResource.php'
-        ]
+        ],
     ];
+
+
+    public const SETUP_COPY_SETUP_FILES = [
+        'common-resources-grid' => [
+            self::SOURCE => '/source/common/components/resources/GridViewResource.php',
+            self::TARGET => '@common/components/resources/GridViewResource.php'
+        ],
+    ];
+
 
 
 
@@ -224,32 +246,14 @@ class GenerateController extends Controller
     {
         $sourceRoot = __DIR__;
 
-        $copyFiles = [
-            'common-components-db-table' => [
-                self::SOURCE => '/source/common/components/db/Tables.php',
-                self::TARGET => '@common/components/db/Tables.php'
-            ],
-            'common-components-db-setup' => [
-                self::SOURCE => '/source/common/components/db/Setup.php',
-                self::TARGET => '@common/components/db/Setup.php'
-            ],
-            'common-components-parts' => [
-                self::SOURCE => '/source/common/components/Part.php',
-                self::TARGET => '@common/components/Part.php'
-            ],
-            'common-resources-grid' => [
-                self::SOURCE => '/source/common/components/resources/GridViewResource.php',
-                self::TARGET => '@common/components/resources/GridViewResource.php'
-            ],
-        ];
-
-        foreach ( $copyFiles as $template )
+        foreach ( self::SETUP_COPY_SETUP_FILES as $template )
         {
             $sourcePath = $sourceRoot.$template[self::SOURCE];
-
-            echo "\r\n Generate file: $sourcePath.";
-
             $targetPath = Yii::getAlias($template[self::TARGET]);
+
+            echo "\r\n Copy:";
+            echo "\r\n\t from: $sourcePath";
+            echo "\r\n\t to: $targetPath";
 
             $this->createDirectories($targetPath);
 
@@ -260,8 +264,7 @@ class GenerateController extends Controller
 
         $params = $this->getParams('model','Model');
 
-
-        foreach ( self::BASE_RESOURCES as $template )
+        foreach (self::SETUP_GENERATE_SETUP_FILES as $template )
         {
             $sourcePath = $root.$template[self::SOURCE];
 
