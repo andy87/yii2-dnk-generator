@@ -2,7 +2,7 @@
 
 use common\components\db\Config;
 use common\components\Part;
-use {{BaseMigrationClassName}} as BaseMigrationClass;
+use andy87\dnk\common\components\core\BaseMigration as BaseMigrationClass;
 
 /**
  * Создание таблицы `{{snake_case}}`
