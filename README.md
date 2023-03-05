@@ -643,3 +643,8 @@ return [
 * `baseClasses` - list of based class names for generated file
 
 3. exec command [generate/setup](#command-setup)
+    
+4. Check : 
+   * current command
+   * array parts
+   * import base classes
