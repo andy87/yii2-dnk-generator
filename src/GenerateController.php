@@ -365,7 +365,7 @@ class GenerateController extends Controller
             $snakeCase = strtolower($entity);
             $camelCase = Inflector::id2camel($snakeCase,'_');
 
-            $params = $this->getParams($snakeCase,$camelCase);
+            $params = $this->getParams($snakeCase, $camelCase);
 
             $this->generateList(self::GENERATE_TESTS, $params, $overwrite);
         }
@@ -384,7 +384,7 @@ class GenerateController extends Controller
         $root = $this->getTemplatePath();
 
         $from = array_keys($params);
-        $to = array_keys($params);
+        $to = array_values($params);
 
         foreach ($list as $template )
         {
@@ -575,7 +575,6 @@ class GenerateController extends Controller
 
             $from = array_keys($params);
             $to = array_values($params);
-
 
             $command = str_replace($from, $to, $sourceCommand);
 
