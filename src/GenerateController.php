@@ -295,7 +295,7 @@ class GenerateController extends Controller
             }
         }
 
-        echo "\r\n Dnk `setup`: copied finish.";
+        echo "\r\n  copied finish.";
     }
 
     /**
@@ -533,14 +533,10 @@ class GenerateController extends Controller
             $templatesMap[$key] = str_replace($from, $to, $value);
         }
 
-        $migrationStep = true;
-
         foreach ($templatesMap as $sourcePath => $targetPath)
         {
-            if ( $migrationStep )
+            if ( strpos($sourcePath, '_create_table_') !== false )
             {
-                $migrationStep = false;
-
                 $pathFiles = glob(Yii::getAlias('@console/migrations/*_create_table_*.php'));
 
                 foreach ( $pathFiles as $pathFile )
@@ -585,7 +581,7 @@ class GenerateController extends Controller
 
                         } else {
 
-                            $this->stdout("\r\nDnk `setup`: copied skipped.\n", BaseConsole::FG_RED);
+                            $this->stdout("\r\n copied skipped.\n", BaseConsole::FG_RED);
 
                             continue 2;
                         }
@@ -597,11 +593,11 @@ class GenerateController extends Controller
 
             if ($status) {
 
-                $this->stdout("\r\n Dnk `setup`: copied successfully.\n", BaseConsole::FG_GREEN);
+                $this->stdout("\r\n  copied successfully.\n", BaseConsole::FG_GREEN);
 
             } else {
 
-                $this->stdout("\r\n Dnk `setup`: copied failed.\n", BaseConsole::FG_RED);
+                $this->stdout("\r\n  copied failed.\n", BaseConsole::FG_RED);
             }
         }
     }
