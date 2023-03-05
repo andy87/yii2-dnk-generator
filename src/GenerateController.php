@@ -331,7 +331,12 @@ class GenerateController extends Controller
      */
     public function actionList(string $entity, string $map, bool $overwrite = false): void
     {
-        $this->generator($entity, $map, $overwrite);
+        $entityList = $this->getEntity($entity);
+
+        foreach ( $entityList as $entity)
+        {
+            $this->generator($entity, $map, $overwrite);
+        }
     }
 
     /**
