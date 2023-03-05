@@ -113,7 +113,7 @@ abstract class BaseService extends Component
      * @return mixed
      * @throws ReflectionException
      */
-    private function createClass(string $class, array $params = []): object
+    public function createClass(string $class, array $params = []): object
     {
         $reflection = new ReflectionClass($class);
 
