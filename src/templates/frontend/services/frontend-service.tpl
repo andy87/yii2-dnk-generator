@@ -30,6 +30,25 @@ class {{CamelCase}}Service extends {{CamelCase}}CommonService implements Service
     ];
 
     /**
+     * @return Model
+     * @throws ReflectionException
+     */
+    public function getForm(): Model
+    {
+        return $this->createClass(
+            $this->getClassForm()
+        );
+    }
+
+    /**
+     * @return string
+     */
+    public function getClassForm(): string
+    {
+        return static::FORM;
+    }
+
+    /**
      * @return ActiveRecord
      * @throws ReflectionException
      */
