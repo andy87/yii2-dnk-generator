@@ -18,6 +18,7 @@ Personal library on `Yii2 advanced` for generate files pack and follow pattern: 
   * [generate/gen-models](#command-gen-models)
   * [generate/gen-controllers](#command-gen-controllers)
   * [generate/gen-services](#command-gen-services)
+  * [generate/gen-tests](#command-gen-tests)
   * [generate/gen-backend-views](#command-gen-backend-views)
   * [generate/gen-backend-views](#command-gen-backend-views)
   * [generate/gen-frontend-views](#command-gen-frontend-views)
@@ -391,6 +392,41 @@ Generate `service` files for needle table(part).
 
 - **frontend/service**
    - frontend-service `frontend/service/UserService.php` [view](src/templates/frontend/services/frontend-service.tpl)
+_____
+
+
+<a name="command-gen-tests"></a>
+### command  
+
+```bash
+php yii generate/gen-tests `string` `bool`
+```
+
+| Parameter | Type     | Description                            |
+|:----------| :------- |:---------------------------------------|
+| `entiry`  | `string` | **Required**. model/table to work with </br> * for use list fron property `parts` |
+| `overwrite`  | `bool` | **optional**. overwrite exists file. default: `false` |
+
+Generate `test` files for needle table(part).
+
+Example:
+```bash
+php yii generate/gen-tests user
+```
+
+- **common/test/unit/**
+   - service `common/tests/unit/services/UserServiceTest.php` [view](src/templates/common/tests/unit/services/common-test-unit-service.tpl)
+   - item `common/tests/unit/models/items/UserTest.php` [view](src/templates/common/tests/unit/models/items/common-test-unit-model-item.tpl)
+
+- **backend/test/unit/**
+    - service `backend/tests/unit/services/UserServiceTest.php` [view](src/templates/backend/tests/unit/services/backend-test-unit-service.tpl)
+    - item `backend/tests/unit/models/items/UserTest.php` [view](src/templates/backend/tests/unit/models/items/backend-test-unit-model-item.tpl)
+    - form `backend/tests/unit/models/items/UserFormTest.php` [view](src/templates/backend/tests/unit/models/forms/backend-test-unit-model-form.tpl)
+
+- **frontend/test/unit/**
+    - service `frontend/tests/unit/services/UserServiceTest.php` [view](src/templates/frontend/tests/unit/services/frontend-test-unit-service.tpl)
+    - item `frontend/tests/unit/models/items/UserTest.php` [view](src/templates/frontend/tests/unit/models/items/frontend-test-unit-model-item.tpl)
+    - form `frontend/tests/unit/models/items/UserFormTest.php` [view](src/templates/frontend/tests/unit/models/forms/frontend-test-unit-model-form.tpl)
 _____
 
 

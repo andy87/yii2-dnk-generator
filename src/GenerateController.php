@@ -355,7 +355,7 @@ class GenerateController extends Controller
      * @param bool $overwrite
      * @return void
      */
-    public function actionTests(string $entity, bool $overwrite = false)
+    public function actionGenTests(string $entity, bool $overwrite = false)
     {
         $entityList = $this->getEntity($entity);
 
