@@ -1,6 +1,6 @@
 <?php
 
-namespace andy87\dnk\common\components\db;
+namespace common\components\db;
 
 use yii\base\Component;
 
