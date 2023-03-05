@@ -11,22 +11,25 @@ use yii\db\ActiveRecord;
 interface ServiceCommonInterface
 {
     /**
-     * @return mixed
+     * @return string
      */
     public function getClassModel(): string;
 
     /**
-     * @return mixed
+     * @return Model
      */
     public function getModel(): Model;
 
     /**
-     * @return mixed
+     * @param array $attributes
+     * @return ActiveRecord
      */
     public function create(array $attributes = []): ActiveRecord;
 
     /**
-     * @return mixed
+     * @param ActiveRecord $model
+     * @param array $attributes
+     * @return ActiveRecord
      */
     public function update(ActiveRecord $model, array $attributes = []): ActiveRecord;
 }
