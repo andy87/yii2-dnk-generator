@@ -35,6 +35,8 @@ Legend:
 * Env:`frontend` == environment `frontend`
 
 ### Models & Forms.
+<a name="description-models-forms"></a>
+
 ```
 📄 common/components/core/BaseModel.php            // S_P&M > all children models on Env:`all`
 |
@@ -52,6 +54,8 @@ Legend:
 
 
 ### Services.
+<a name="description-services"></a>
+
 ```
 📄 common/components/core/BaseService.php              // S_P&M > all services on Env:`all`
 |
@@ -61,6 +65,8 @@ Legend:
 ```
 
 ### Controllers.
+<a name="description-controllers"></a>
+
 ```
 📄 common/components/core/BaseController.php                 // S_P&M > all controllers on Env:`all`
 |
@@ -73,6 +79,8 @@ Legend:
 ```
 
 ### Resources.
+<a name="description-resources"></a>
+
 ```
 📄 common/components/core/BaseResource.php                         // S_P&M > all resources on Env:`all` 
 |
@@ -101,7 +109,8 @@ Legend:
 ## Usage/Examples.
 
 
-### command {#command-setup}  
+### command  
+<a name="command-setup"></a>
 
 ```bash
 php yii generate/setup
@@ -137,7 +146,8 @@ _____
 
 
 
-### command  {#command-gen}
+### command  
+<a name="command-gen"></a>
 
 ```bash
 php yii generate/gen user
@@ -215,7 +225,8 @@ generate basic file pack:
 _____
 
 
-### command  {#command-gii-model}
+### command  
+<a name="command-gii-model"></a>
 
 ```bash
 php yii generate/gii-model
@@ -244,7 +255,8 @@ ______
 
 
 
-### command  {#command-gii-crud}
+### command  
+<a name="command-gii-crud"></a>
 
 ```bash
 php yii generate/gii-crud
@@ -268,7 +280,8 @@ ______
 
 
 
-### command  {#command-list}
+### command  
+<a name="command-list"></a>
 
 ```bash
 php yii generate/list user common/services
@@ -310,7 +323,8 @@ ______
 
 
 
-### command  {#command-gen-models}
+### command  
+<a name="command-gen-models"></a>
 
 ```bash
 php yii generate/gen-models user
@@ -333,7 +347,8 @@ _____
 
 
 
-### command  {#command-gen-controllers }
+### command  
+<a name="command-gen-controllers"></a>
 
 ```bash
 php yii generate/gen-controllers user
@@ -350,7 +365,8 @@ _____
 
 
 
-### command  {#command-gen-services}  
+### command  
+<a name="command-gen-services"></a>
 
 ```bash
 php yii generate/gen-services user
@@ -371,12 +387,12 @@ _____
 
 
 
-### command  {#command-gen-backend-views}  
+### command  
+<a name="command-gen-backend-service"></a>
 
 ```bash
-php yii generate/gen-backend-views user
+php yii generate/gen-backend-service user
 ```
-
 
 Generate `service` files for needle table(part).
 
@@ -392,7 +408,8 @@ _____
 
 
 
-### command  {#command-gen-backend-views}  
+### command  
+<a name="command-gen-backend-views"></a>
 
 ```bash
 php yii generate/gen-backend-views user
@@ -412,7 +429,8 @@ _____
 
 
 
-### command  {#command-gen-frontend-views}  
+### command  
+<a name="command-gen-frontend-views"></a>
 
 ```bash
 php yii generate/gen-frontend-views user
@@ -433,9 +451,10 @@ _____
 
 
 
-# Profit.  {#profit}  
+# Profit.  
 
-## Service profit  {#profit-services}  
+## Service profit  
+<a name="profit-services"></a>
 
 ### Example for model `User`
 
@@ -481,7 +500,8 @@ tests/unit/user/CreateTest {
 }
 ```
 
-## Resource Profit  {#profit-resources}  
+## Resource Profit  
+<a name="profit-resources"></a>
 
 ```
 example:
