@@ -2,8 +2,8 @@
 
 namespace backend\resources\{{snake_case}};
 
+use common\components\resources\crud\CreateResource;
 use backend\models\forms\{{CamelCase}}Form;
-use backend\components\resources\crud\CreateResource;
 
 /**
  *  {{CamelCase}}CreateResource

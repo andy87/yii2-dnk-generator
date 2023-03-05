@@ -2,8 +2,8 @@
 
 namespace backend\resources\{{snake_case}};
 
+use common\components\resources\crud\ReadResource;
 use backend\models\items\{{CamelCase}}Form;
-use backend\components\resources\crud\ReadResource;
 
 /**
  *  {{CamelCase}}ReadResource
