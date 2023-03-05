@@ -207,11 +207,11 @@ class GenerateController extends Controller
     /** @var array mapping for `tests` generate */
     public const GENERATE_TESTS = [
         'common-tests-unit-services' => [
-            self::SOURCE => '/source/common/tests/unit/services/common-test-unit-service.tpl',
+            self::SOURCE => 'common/tests/unit/services/common-test-unit-service.tpl',
             self::TARGET => '@common/common/tests/unit/services/{{CamelCase}}Service.php'
         ],
             'common-tests-unit-model-items' => [
-                self::SOURCE => '/source/common/tests/unit/models/items/common-test-unit-model-item.tpl',
+                self::SOURCE => 'common/tests/unit/models/items/common-test-unit-model-item.tpl',
                 self::TARGET => '@common/common/tests/unit/models/items/{{CamelCase}}.php'
             ],
         'backend-tests-unit-services' => [
@@ -357,7 +357,6 @@ class GenerateController extends Controller
     public function actionTests(string $entity, bool $overwrite = false)
     {
         $entityList = $this->getEntity($entity);
-
 
         echo "\r\n Generate `test` files.";
 
