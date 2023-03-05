@@ -2,7 +2,7 @@
 
 namespace backend\services;
 
-use yii\base\Model;
+use ReflectionException;
 use common\services\{{CamelCase}}Service as {{CamelCase}}CommonService;
 use andy87\dnk\common\components\interfaces\services\backend\ServiceBackendInterface;
 use backend\models\items\{{CamelCase}};
@@ -16,7 +16,6 @@ use backend\resources\{{snake_case}}\{{CamelCase}}ListResource;
  *  Service for model `{{CamelCase}}` environment `backend`
  *
  * @method {{CamelCase}} getModel()
- * @method {{CamelCase}}Form getForm()
  * @method {{CamelCase}}CreateResource|{{CamelCase}}ReadResource|{{CamelCase}}UpdateResource|{{CamelCase}}ListResource getResource(int $key, array $arr = [])
  */
 class {{CamelCase}}Service extends {{CamelCase}}CommonService implements ServiceBackendInterface
@@ -35,14 +34,23 @@ class {{CamelCase}}Service extends {{CamelCase}}CommonService implements Service
     ];
 
     /**
-     * @return Model
+     * @return {{CamelCase}}Form
      * @throws ReflectionException
      */
-        public function getForm(): Model
+    public function getForm(): {{CamelCase}}Form
     {
         return $this->createClass(
             $this->getClassForm()
         );
+    }
+
+    /**
+     * @return {{CamelCase}}Form
+     * @throws ReflectionException
+     */
+    public function getEntity(): {{CamelCase}}Form
+    {
+        return $this->getForm();
     }
 
     /**
@@ -51,14 +59,5 @@ class {{CamelCase}}Service extends {{CamelCase}}CommonService implements Service
     public function getClassForm(): string
     {
         return static::FORM;
-    }
-
-    /**
-     * @return ActiveRecord
-     * @throws ReflectionException
-     */
-    public function getEntity(): ActiveRecord
-    {
-        return $this->getForm();
     }
 }
