@@ -1,7 +1,32 @@
 
 # DNK
 
-## Extends Path
+Personal library for generate files pack and follow pattern: `template path`, `adapter` and other. 
+
+### Navigation.
+* ### [Description](#description)
+  * [Models & Forms](#description-models-morms)
+  * [Services](#description-services)
+  * [Controllers](#description-controllers)
+  * [Resources](#description-resources)
+* ### Use
+  * [generate/setup](#command-setup)
+  * [generate/gen](#command-gen)
+  * [generate/gii-model](#command-gii-model)
+  * [generate/gii-crud](#command-gii-crud)
+  * [generate/list](#command-list)
+  * [generate/gen-models](#command-gen-models)
+  * [generate/gen-controllers](#command-gen-controllers)
+  * [generate/gen-services](#command-gen-services)
+  * [generate/gen-backend-views](#command-gen-backend-views)
+  * [generate/gen-backend-views](#command-gen-backend-views)
+  * [generate/gen-frontend-views](#command-gen-frontend-views)
+* ### Profit
+  * [Service](#profit-services)
+  * [Resource](#profit-resources)
+* ### [Setup](#setup)
+
+## Description {#description}
 
 Legend: 
 * S_P&M > == set `property` & `methods` in to
@@ -9,7 +34,7 @@ Legend:
 * Env:`backend` == environment `backend`
 * Env:`frontend` == environment `frontend`
 
-### Models & Forms
+### Models & Forms. {#description-models-morms}
 ```
 📄 common/components/core/BaseModel.php            // S_P&M > all children models on Env:`all`
 |
@@ -26,7 +51,7 @@ Legend:
 
 
 
-### Service
+### Services. {#description-services}
 ```
 📄 common/components/core/BaseService.php              // S_P&M > all services on Env:`all`
 |
@@ -35,7 +60,7 @@ Legend:
 └─📄 frontend/components/services/__Model__Service.php // S_P&M > services by part `__Model__` on Env:`frontend`
 ```
 
-### Controllers.
+### Controllers. {#description-controllers}
 ```
 📄 common/components/core/BaseController.php                 // S_P&M > all controllers on Env:`all`
 |
@@ -47,7 +72,7 @@ Legend:
   └─📄 frontend/controllers/__Model__Controller.php          // S_P&M > controllers for moled `__Model__` on Env:`frontend`
 ```
 
-### Resources.
+### Resources. {#description-resources}
 ```
 📄 common/components/core/BaseResource.php                         // S_P&M > all resources on Env:`all` 
 |
@@ -73,111 +98,11 @@ Legend:
 
 
 
-# Profit.
-
-## Example for model `User`
-
-### Service profit
-
-once endpoint for creating on frontend, backend & tests
-```
-common/UserService::create(UserForm $userForm);
-
-backend/controllers/UserController {
-   action create {
-      if ($this->request->isPost)
-      {
-         (new backend/UserService())->create($this->request->post());
-      }
-   }
-}
-
-frontend/controllers/UserController {
-   action create {
-      if ($this->request->isPost)
-      {
-         (new frontend/UserService())->create($this->request->post());
-      }
-   }
-}
-
-frontend/controllers/api/v1/UserController {
-   action create {
-      if ($this->request->isPost)
-      {
-         (new frontend/UserService())->create($this->request->post());
-      }
-   }
-}
-
-
-// Test for all controllers...
-
-tests/unit/user/CreateTest {
-   test{
-      $userForm = new UserForm();
-      (new common/UserService())->create($userForm);
-   }
-}
-```
-
-### Resource Profit
-
-```
-example:
-frontend/resources/user/UsereViewProfileResources {
-   public const TEMPLATE = 'user-view-profile';
-   
-   pub string $display_name;
-   pub string $age;
-   
-   __construct($user) {
-      $this->display_name = $user->name;
-      $this->age = $user->age;
-      // ... other code
-   }
-}
-
-frontend/controllers/UserController {
-   action viewProfile(int $id) {
-      $user = new (UserService())->findByID($id);
-      $R = new UsereViewProfileResources($user);
-      
-      return $R->content();
-   }
-}
-
-frontend/controllers/api/v1/UserController {
-   action viewProfile(int $id) {
-      $user = new (UserService())->findByID($id);
-      $R = new UsereViewProfileResources($user);
-      
-      return $R->json();
-   }
-}
-
-frontend/views/user/user-view-profile:
-<?php
-
-use frontend/resources/user/UsereViewProfileResources;
- 
-/** @var UsereViewProfileResources $R - autocomplete and there is no possibility to make a typo */
-
-?>
-
-<div>Profile: <?= $R->display_name ?></div> 
-<div>Age: <?= $R->age ?></div>
-
-```
-_____
+## Use.
 
 
 
-## Use 
-
-
-
-### command
+### command {#command-setup}  
 `php yii generate/setup`  
 
 Generate all Base Classes for use `Template path` pattern.  
@@ -210,7 +135,7 @@ _____
 
 
 
-### command  
+### command  {#command-gen}  
 `php yii generate/gen user`  
 
 generate basic file pack:
@@ -281,105 +206,39 @@ generate basic file pack:
 _____
 
 
+### command  {#command-gii-model}
+`php yii generate/gii-model`
 
-### command
-`php yii generate/gen-services user`
+Generate gii `model` for select table(part).
 
-Generate `service` files for needle table(part).
+\* - generate list from config `parts`
 
-- **common/services**
-   - common-service `common/services/UserService.php` [view](src/templates/common/services/common-service.tpl)
+#### Examples
+`php yii generate/gii-model user`  
+`php yii generate/gii-model *`
 
-- **backend/services**
-   -  backend-service `backend/services/UserService.php` [view](src/templates/backend/services/backend-service.tpl)
-
-- **frontend/service**
-   - frontend-service `frontend/service/UserService.php` [view](src/templates/frontend/services/frontend-service.tpl)
-_____
-
-
-### command
-`php yii generate/gen-backend-views user`
-
-Generate `service` files for needle table(part).
-
-- **common/services**
-   - common-service `common/services/UserService.php` [view](src/templates/common/services/common-service.tpl)
-
-- **backend/services**
-   -  backend-service `backend/services/UserService.php` [view](src/templates/backend/services/backend-service.tpl)
-
-- **frontend/service**
-   - frontend-service `frontend/service/UserService.php` [view](src/templates/frontend/services/frontend-service.tpl)
-_____
+alias `php yii gii/model`
+______
 
 
 
-### command
-`php yii generate/gen-models user`
+### command  {#command-gii-crud}
+`php yii generate/gii-crud`
 
-Generate `model` files for needle table(part).
+Generate gii `crud` for select table(part).  
+\* - generate list from config `parts`
 
-- **common/models**
-   - common-model-source `common/models/sources/UserSource.php` [view](src/templates/common/models/sources/common-model-source.tpl)
-   - common-model-item `common/models/items/User.php` [view](src/templates/common/models/items/common-model-item.tpl)
+#### Examples
 
-- **backend/models**
-   - backend-model-item `backend/models/items/User.php` [view](src/templates/backend/models/items/backend-model-item.tpl)
-   - backend-model-form `backend/models/forms/UserForm.php` [view](src/templates/backend/models/forms/backend-model-form.tpl)
+`php yii generate/gii-crud user`  
+`php yii generate/gii-crud *`
 
-- **frontend/models**
-   - frontend-model-item `frontend/models/items/User.php` [view](src/templates/frontend/models/items/frontend-model-item.tpl)
-   - frontend-model-form `frontend/models/forms/UserForm.php` [view](src/templates/frontend/models/forms/frontend-model-form.tpl)
-_____
+alias `php yii gii/crud`
+______
 
 
 
-### command
-`php yii generate/gen-controllers user`
-
-Generate `controller` files for needle table(part).
-
-- **backend/controller**
-   - backend-model-controller `backend/controller/cruds/UserController.php` [view](src/templates/backend/controllers/cruds/backend-model-controller.tpl)
-
-- **frontend/controllers**
-   - frontend-model-controller `frontend/consrollers/UserController.php` [view](src/templates/frontend/controllers/frontend-model-controller.tpl)
-_____
-
-
-### command
-`php yii generate/gen-backend-views user`
-
-Generate `views` files for needle table(part).
-
-- **backend/views**
-    - backend-views-form `backend/views/user/_form-user.php` [view](src/templates/backend/views/model/_form-model.tpl)
-    - backend-views-create `backend/views/user/user-create.php` [view](src/templates/backend/views/model/model-create.tpl)
-    - backend-views-update `backend/views/user/user-update.php` [view](src/templates/backend/views/model/model-update.tpl)
-    - backend-views-read `backend/views/user/user-read.php` [view](src/templates/backend/views/model/model-read.tpl)
-    - backend-views-list `backend/views/user/user-list.php` [view](src/templates/backend/views/model/model-list.tpl)
-
-alias `php yii generate/list user backend-views-form,backend-views-create,backend-views-update,backend-views-read,backend-views-list`
-_____
-
-
-### command
-`php yii generate/gen-frontend-views user`
-
-Generate `views` files for needle table(part).
-
-
-- **frontend/views**
-    - frontend-views-read `frontend/views/user/user-read.php` [view](src/templates/frontend/views/model/model-read.tpl)
-    - frontend-views-list `frontend/views/user/user-list.php` [view](src/templates/frontend/views/model/model-list.tpl)
-
-alias `php yii generate/list user frontend-views-read,frontend-views-list`
-_____
-
-
-
-### command
+### command  {#command-list}
 `php yii generate/list user common/services`
 
 Generate selected fileType(list fileType) for needle table(part).
@@ -399,46 +258,213 @@ generate only: `common/services/UserService.php` [view](src/templates/common/ser
 `php yii generate/list user common-services,common-model-source,frontend-service`
 
 generate file list:
-   - `common/services/UserService.php` [view](src/templates/common/services/common-service.tpl)
-   - `common/models/sources/UserSource.php` [view](src/templates/common/models/sources/common-model-source.tpl)
-   - `frontend/service/UserService.php` [view](src/templates/frontend/services/frontend-service.tpl)
+- `common/services/UserService.php` [view](src/templates/common/services/common-service.tpl)
+- `common/models/sources/UserSource.php` [view](src/templates/common/models/sources/common-model-source.tpl)
+- `frontend/service/UserService.php` [view](src/templates/frontend/services/frontend-service.tpl)
 ______
 
 
 
-### command
-`php yii generate/gii-model`  
+### command  {#command-gen-models}
+`php yii generate/gen-models user`
 
-Generate gii `model` for select table(part).
+Generate `model` files for needle table(part).
 
-\* - generate list from config `parts`
+- **common/models**
+    - common-model-source `common/models/sources/UserSource.php` [view](src/templates/common/models/sources/common-model-source.tpl)
+    - common-model-item `common/models/items/User.php` [view](src/templates/common/models/items/common-model-item.tpl)
 
-#### Examples  
-`php yii generate/gii-model user`  
-`php yii generate/gii-model *`  
+- **backend/models**
+    - backend-model-item `backend/models/items/User.php` [view](src/templates/backend/models/items/backend-model-item.tpl)
+    - backend-model-form `backend/models/forms/UserForm.php` [view](src/templates/backend/models/forms/backend-model-form.tpl)
 
-alias `php yii gii/model`
-______
-
-
-
-### command
-`php yii generate/gii-crud`  
-
-Generate gii `crud` for select table(part).  
-\* - generate list from config `parts`
-
-#### Examples
-
-`php yii generate/gii-crud user`  
-`php yii generate/gii-crud *`  
-
-alias `php yii gii/crud`
-______
+- **frontend/models**
+    - frontend-model-item `frontend/models/items/User.php` [view](src/templates/frontend/models/items/frontend-model-item.tpl)
+    - frontend-model-form `frontend/models/forms/UserForm.php` [view](src/templates/frontend/models/forms/frontend-model-form.tpl)
+_____
 
 
 
-## Yii2 setups
+### command  {#command-gen-controllers }
+`php yii generate/gen-controllers user`
+
+Generate `controller` files for needle table(part).
+
+- **backend/controller**
+    - backend-model-controller `backend/controller/cruds/UserController.php` [view](src/templates/backend/controllers/cruds/backend-model-controller.tpl)
+
+- **frontend/controllers**
+    - frontend-model-controller `frontend/consrollers/UserController.php` [view](src/templates/frontend/controllers/frontend-model-controller.tpl)
+_____
+
+
+
+### command  {#command-gen-services}  
+`php yii generate/gen-services user`
+
+Generate `service` files for needle table(part).
+
+- **common/services**
+   - common-service `common/services/UserService.php` [view](src/templates/common/services/common-service.tpl)
+
+- **backend/services**
+   -  backend-service `backend/services/UserService.php` [view](src/templates/backend/services/backend-service.tpl)
+
+- **frontend/service**
+   - frontend-service `frontend/service/UserService.php` [view](src/templates/frontend/services/frontend-service.tpl)
+_____
+
+
+
+### command  {#command-gen-backend-views}  
+`php yii generate/gen-backend-views user`
+
+Generate `service` files for needle table(part).
+
+- **common/services**
+   - common-service `common/services/UserService.php` [view](src/templates/common/services/common-service.tpl)
+
+- **backend/services**
+   -  backend-service `backend/services/UserService.php` [view](src/templates/backend/services/backend-service.tpl)
+
+- **frontend/service**
+   - frontend-service `frontend/service/UserService.php` [view](src/templates/frontend/services/frontend-service.tpl)
+_____
+
+
+
+### command  {#command-gen-backend-views}  
+`php yii generate/gen-backend-views user`
+
+Generate `views` files for needle table(part).
+
+- **backend/views**
+    - backend-views-form `backend/views/user/_form-user.php` [view](src/templates/backend/views/model/_form-model.tpl)
+    - backend-views-create `backend/views/user/user-create.php` [view](src/templates/backend/views/model/model-create.tpl)
+    - backend-views-update `backend/views/user/user-update.php` [view](src/templates/backend/views/model/model-update.tpl)
+    - backend-views-read `backend/views/user/user-read.php` [view](src/templates/backend/views/model/model-read.tpl)
+    - backend-views-list `backend/views/user/user-list.php` [view](src/templates/backend/views/model/model-list.tpl)
+
+alias `php yii generate/list user backend-views-form,backend-views-create,backend-views-update,backend-views-read,backend-views-list`
+_____
+
+
+
+### command  {#command-gen-frontend-views}  
+`php yii generate/gen-frontend-views user`
+
+Generate `views` files for needle table(part).
+
+
+- **frontend/views**
+    - frontend-views-read `frontend/views/user/user-read.php` [view](src/templates/frontend/views/model/model-read.tpl)
+    - frontend-views-list `frontend/views/user/user-list.php` [view](src/templates/frontend/views/model/model-list.tpl)
+
+alias `php yii generate/list user frontend-views-read,frontend-views-list`
+_____
+
+
+
+# Profit.  {#profit}  
+
+## Service profit  {#profit-services}  
+
+### Example for model `User`
+
+once endpoint for creating on frontend, backend & tests
+```
+common/UserService::create(UserForm $userForm);
+
+backend/controllers/UserController {
+   action create {
+      if ($this->request->isPost)
+      {
+         (new backend/UserService())->create($this->request->post());
+      }
+   }
+}
+
+frontend/controllers/UserController {
+   action create {
+      if ($this->request->isPost)
+      {
+         (new frontend/UserService())->create($this->request->post());
+      }
+   }
+}
+
+frontend/controllers/api/v1/UserController {
+   action create {
+      if ($this->request->isPost)
+      {
+         (new frontend/UserService())->create($this->request->post());
+      }
+   }
+}
+
+
+// Test for all controllers...
+
+tests/unit/user/CreateTest {
+   test{
+      $userForm = new UserForm();
+      (new common/UserService())->create($userForm);
+   }
+}
+```
+
+## Resource Profit  {#profit-resources}  
+
+```
+example:
+frontend/resources/user/UsereViewProfileResources {
+   public const TEMPLATE = 'user-view-profile';
+   
+   pub string $display_name;
+   pub string $age;
+   
+   __construct($user) {
+      $this->display_name = $user->name;
+      $this->age = $user->age;
+      // ... other code
+   }
+}
+
+frontend/controllers/UserController {
+   action viewProfile(int $id) {
+      $user = new (UserService())->findByID($id);
+      $R = new UsereViewProfileResources($user);
+      
+      return $R->content();
+   }
+}
+
+frontend/controllers/api/v1/UserController {
+   action viewProfile(int $id) {
+      $user = new (UserService())->findByID($id);
+      $R = new UsereViewProfileResources($user);
+      
+      return $R->json();
+   }
+}
+
+frontend/views/user/user-view-profile:
+<?php
+
+use frontend/resources/user/UsereViewProfileResources;
+ 
+/** @var UsereViewProfileResources $R - autocomplete and there is no possibility to make a typo */
+
+?>
+
+<div>Profile: <?= $R->display_name ?></div> 
+<div>Age: <?= $R->age ?></div>
+
+```
+_____
+
+
+## Yii2 setups  {#setup}  
 
 ### Install.
 
