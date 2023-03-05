@@ -14,7 +14,6 @@ use frontend\resources\{{snake_case}}\{{CamelCase}}ReadResource;
  *  Service for model `{{CamelCase}}` environment `frontend`
  *
  * @method {{CamelCase}} getModel()
- * @method {{CamelCase}}Form getForm()
  * @method {{CamelCase}}ReadResource|{{CamelCase}}ListResource getResource(int $key, array $arr = [])
  */
 class {{CamelCase}}Service extends {{CamelCase}}CommonService implements ServiceFrontendInterface
