@@ -2,6 +2,7 @@
 
 namespace frontend\services;
 
+use yii\base\Model;
 use common\services\{{CamelCase}}Service as {{CamelCase}}CommonService;
 use andy87\dnk\common\components\interfaces\services\frontend\ServiceFrontendInterface;
 use frontend\models\items\{{CamelCase}};
@@ -49,10 +50,10 @@ class {{CamelCase}}Service extends {{CamelCase}}CommonService implements Service
     }
 
     /**
-     * @return ActiveRecord
+     * @return Model
      * @throws ReflectionException
      */
-    public function getEntity(): ActiveRecord
+    public function getEntity(): Model
     {
         return $this->getForm();
     }

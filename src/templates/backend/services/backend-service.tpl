@@ -2,6 +2,7 @@
 
 namespace backend\services;
 
+use yii\base\Model;
 use common\services\{{CamelCase}}Service as {{CamelCase}}CommonService;
 use andy87\dnk\common\components\interfaces\services\backend\ServiceBackendInterface;
 use backend\models\items\{{CamelCase}};
