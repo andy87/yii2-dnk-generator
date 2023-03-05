@@ -4,14 +4,14 @@ namespace backend\components\controllers;
 
 use ReflectionException;
 use yii\data\ActiveDataProvider;
-use common\components\core\BaseService;
+use andy87\dnk\common\components\core\BaseService;
 use andy87\dnk\common\components\resourc\GridViewResource;
 use {{BaseControllerClassName}} as BaseControllerClass;
 use andy87\dnk\common\components\interfaces\controllers\backend\ControllerBackendInterface;
-use common\components\resourc\crud\ListResource;
-use common\components\resourc\crud\CreateResource;
-use common\components\resourc\crud\UpdateResource;
-use common\components\resourc\crud\ReadResource;
+use common\components\resources\crud\ListResource;
+use common\components\resources\crud\ReadResource;
+use common\components\resources\crud\CreateResource;
+use common\components\resources\crud\UpdateResource;
 
 /**
  * Base Controller for environment `backend`

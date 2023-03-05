@@ -6,11 +6,11 @@ use ReflectionException;
 use yii\web\Response;
 use yii\web\ErrorAction;
 use yii\data\ActiveDataProvider;
-use common\components\core\BaseService;
-use common\components\resourc\GridViewResource;
-use common\components\resourc\crud\ListResource;
-use common\components\resourc\crud\ReadResource;
+use common\components\resources\GridViewResource;
+use common\components\resources\crud\ListResource;
+use common\components\resources\crud\ReadResource;
 use {{BaseControllerClassName}} as BaseControllerClass;
+use andy87\dnk\common\components\core\BaseService;
 use andy87\dnk\common\components\interfaces\controllers\frontend\ControllerFrontendInterface;
 
 /**
