@@ -1,7 +1,6 @@
 <?php
 
 use yii\base\View;
-use yii\grid\GridView;
 use backend\resources\{{snake_case}}\{{CamelCase}}UpdateResource;
 
 /** @var View $this **/
