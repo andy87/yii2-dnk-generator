@@ -653,3 +653,5 @@ return [
 * `command` - part of gii/... command  
 * `parts` - table lis. for user *  in command property  
 * `baseClasses` - list of based class names for generated file
+
+4. exec command [generate/setup](#command-setup)

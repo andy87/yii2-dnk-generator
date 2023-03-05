@@ -233,15 +233,15 @@ class GenerateController extends Controller
                 self::TARGET => '@common/components/db/Tables.php'
             ],
             'common-components-db-setup' => [
-                self::SOURCE => 'source/common/components/db/Setup.php',
+                self::SOURCE => '/source/common/components/db/Setup.php',
                 self::TARGET => '@common/components/db/Setup.php'
             ],
             'common-components-parts' => [
-                self::SOURCE => 'source/common/components/Part.php',
+                self::SOURCE => '/source/common/components/Part.php',
                 self::TARGET => '@common/components/Part.php'
             ],
             'common-resources-grid' => [
-                self::SOURCE => 'source/common/components/resources/GridViewResource.php',
+                self::SOURCE => '/source/common/components/resources/GridViewResource.php',
                 self::TARGET => '@common/components/resources/GridViewResource.php'
             ],
         ];
