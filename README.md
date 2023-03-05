@@ -5,11 +5,11 @@ Personal library for generate files pack and follow pattern: `template path`, `a
 
 ### Navigation.
 * ### [Description](#description)
-  * [Models & Forms](#description-models-morms)
+  * [Models & Forms](#description-models-forms)
   * [Services](#description-services)
   * [Controllers](#description-controllers)
   * [Resources](#description-resources)
-* ### Use
+* ### [Use](#usage-examples)
   * [generate/setup](#command-setup)
   * [generate/gen](#command-gen)
   * [generate/gii-model](#command-gii-model)
@@ -26,7 +26,7 @@ Personal library for generate files pack and follow pattern: `template path`, `a
   * [Resource](#profit-resources)
 * ### [Setup](#setup)
 
-## Description {#description}
+## Description
 
 Legend: 
 * S_P&M > == set `property` & `methods` in to
@@ -34,7 +34,7 @@ Legend:
 * Env:`backend` == environment `backend`
 * Env:`frontend` == environment `frontend`
 
-### Models & Forms. {#description-models-morms}
+### Models & Forms.
 ```
 📄 common/components/core/BaseModel.php            // S_P&M > all children models on Env:`all`
 |
@@ -51,7 +51,7 @@ Legend:
 
 
 
-### Services. {#description-services}
+### Services.
 ```
 📄 common/components/core/BaseService.php              // S_P&M > all services on Env:`all`
 |
@@ -60,7 +60,7 @@ Legend:
 └─📄 frontend/components/services/__Model__Service.php // S_P&M > services by part `__Model__` on Env:`frontend`
 ```
 
-### Controllers. {#description-controllers}
+### Controllers.
 ```
 📄 common/components/core/BaseController.php                 // S_P&M > all controllers on Env:`all`
 |
@@ -72,7 +72,7 @@ Legend:
   └─📄 frontend/controllers/__Model__Controller.php          // S_P&M > controllers for moled `__Model__` on Env:`frontend`
 ```
 
-### Resources. {#description-resources}
+### Resources.
 ```
 📄 common/components/core/BaseResource.php                         // S_P&M > all resources on Env:`all` 
 |
@@ -98,12 +98,14 @@ Legend:
 
 
 
-## Use.
-
+## Usage/Examples.
 
 
 ### command {#command-setup}  
-`php yii generate/setup`  
+
+```bash
+php yii generate/setup
+```
 
 Generate all Base Classes for use `Template path` pattern.  
 Method skip generate file if file exists.  
@@ -135,8 +137,15 @@ _____
 
 
 
-### command  {#command-gen}  
-`php yii generate/gen user`  
+### command  {#command-gen}
+
+```bash
+php yii generate/gen user
+```
+
+| Parameter | Type     | Description   |
+|:----------| :------- |:--------------|
+| `entiry`  | `string` | **Required**. |
 
 generate basic file pack:
 
@@ -207,39 +216,68 @@ _____
 
 
 ### command  {#command-gii-model}
-`php yii generate/gii-model`
+
+```bash
+php yii generate/gii-model
+```
+
+| Parameter | Type     | Description   |
+|:----------| :------- |:--------------|
+| `entiry`  | `string` | **Required**. |
 
 Generate gii `model` for select table(part).
 
 \* - generate list from config `parts`
 
 #### Examples
-`php yii generate/gii-model user`  
-`php yii generate/gii-model *`
 
-alias `php yii gii/model`
+```bash
+php yii generate/gii-model user
+php yii generate/gii-model *
+```
+
+alias
+```bash
+php yii gii/model
+```
 ______
 
 
 
 ### command  {#command-gii-crud}
-`php yii generate/gii-crud`
+
+```bash
+php yii generate/gii-crud
+```
+
+| Parameter | Type     | Description                            |
+|:----------| :------- |:---------------------------------------|
+| `entiry`  | `string` | **Required**. model/table to work with |
 
 Generate gii `crud` for select table(part).  
 \* - generate list from config `parts`
 
 #### Examples
 
-`php yii generate/gii-crud user`  
-`php yii generate/gii-crud *`
-
+```bash
+php yii generate/gii-crud user
+php yii generate/gii-crud *
+```
 alias `php yii gii/crud`
 ______
 
 
 
 ### command  {#command-list}
-`php yii generate/list user common/services`
+
+```bash
+php yii generate/list user common/services
+```
+
+| Parameter | Type     | Description                            |
+|:----------| :------- |:---------------------------------------|
+| `entiry`  | `string` | **Required**. model/table to work with |
+| `map`     | `string` | **Required**. list of files to generate |
 
 Generate selected fileType(list fileType) for needle table(part).
 
@@ -248,14 +286,21 @@ Generate selected fileType(list fileType) for needle table(part).
 
 
 ##### Generate once file.
-`php yii generate/list user common-services`
+
+```bash
+php yii generate/list user common-services
+```
+
 \* - generate list from config `parts`
 
 generate only: `common/services/UserService.php` [view](src/templates/common/services/common-service.tpl)
 
 
 ##### Generate selected files.
-`php yii generate/list user common-services,common-model-source,frontend-service`
+
+```bash
+php yii generate/list user common-services,common-model-source,frontend-service
+```
 
 generate file list:
 - `common/services/UserService.php` [view](src/templates/common/services/common-service.tpl)
@@ -266,7 +311,10 @@ ______
 
 
 ### command  {#command-gen-models}
-`php yii generate/gen-models user`
+
+```bash
+php yii generate/gen-models user
+```
 
 Generate `model` files for needle table(part).
 
@@ -286,7 +334,10 @@ _____
 
 
 ### command  {#command-gen-controllers }
-`php yii generate/gen-controllers user`
+
+```bash
+php yii generate/gen-controllers user
+```
 
 Generate `controller` files for needle table(part).
 
@@ -300,7 +351,11 @@ _____
 
 
 ### command  {#command-gen-services}  
-`php yii generate/gen-services user`
+
+```bash
+php yii generate/gen-services user
+```
+
 
 Generate `service` files for needle table(part).
 
@@ -317,7 +372,11 @@ _____
 
 
 ### command  {#command-gen-backend-views}  
-`php yii generate/gen-backend-views user`
+
+```bash
+php yii generate/gen-backend-views user
+```
+
 
 Generate `service` files for needle table(part).
 
@@ -334,7 +393,10 @@ _____
 
 
 ### command  {#command-gen-backend-views}  
-`php yii generate/gen-backend-views user`
+
+```bash
+php yii generate/gen-backend-views user
+```
 
 Generate `views` files for needle table(part).
 
@@ -351,7 +413,10 @@ _____
 
 
 ### command  {#command-gen-frontend-views}  
-`php yii generate/gen-frontend-views user`
+
+```bash
+php yii generate/gen-frontend-views user
+```
 
 Generate `views` files for needle table(part).
 
@@ -360,7 +425,10 @@ Generate `views` files for needle table(part).
     - frontend-views-read `frontend/views/user/user-read.php` [view](src/templates/frontend/views/model/model-read.tpl)
     - frontend-views-list `frontend/views/user/user-list.php` [view](src/templates/frontend/views/model/model-list.tpl)
 
-alias `php yii generate/list user frontend-views-read,frontend-views-list`
+alias
+```bash
+php yii generate/list user frontend-views-read,frontend-views-list
+```
 _____
 
 

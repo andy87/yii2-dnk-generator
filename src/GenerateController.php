@@ -339,12 +339,12 @@ class GenerateController extends Controller
      *      php yii generate/gen user common-model-source,backend-model-form,frontend-model-form
      *
      * @param string $entity
-     * @param string $filter
+     * @param string $map
      * @return void
      */
-    public function actionList(string $entity, string $filter): void
+    public function actionList(string $entity, string $map): void
     {
-        $this->generator($entity, $filter );
+        $this->generator($entity, $map );
     }
 
     /**
