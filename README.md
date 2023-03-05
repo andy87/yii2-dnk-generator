@@ -114,35 +114,26 @@ Legend:
 ### command  
 
 ```bash
-php yii generate/setup
+php yii generate/setup `bool`
 ```
 
-Generate all Base Classes for use `Template path` pattern.  
-Method skip generate file if file exists.  
-
+| Parameter    | Type   | Description                                            |
+|:-------------|:-------|:-------------------------------------------------------|
+| `overwrite`  | `bool` | **optional**. overwrite exists file. defaulkt: `false` |
 
 #### description
 
-common Base classes list:
-- `common\components\core\BaseController`
-- `common\components\core\BaseModel`
-- `common\components\core\BaseResource`
-- `common\components\core\BaseService`
-
-
-Interfaces list:
-- `common\components\interfaces\ControllerInterface`
-- `common\components\interfaces\ModelInterface`
-- `common\components\interfaces\ResourcesInterface`
-- `common\components\interfaces\ServiceInterface`
-
-
-Helpers classes list:
-- `console\components\core\BaseMigration`
-- `console\components\resources\GridViewResource` - GredView Resources ( search, dataProvider )
-- `common\components\db\Config` - Data base config: CHARACTER, COLLATE, ENGINE
-- `common\components\Part` - service parts with labels
-- `common\components\db\Tables` - class with table names used Part::CONSTANT_NAME
+Generate files:
+* `common/components/Part.php` - service parts with labels
+* `common/components/db/Setup.php` - Data base config: CHARACTER, COLLATE, ENGINE
+* `common/components/db/Tables.php` - class with table names used Part::CONSTANT_NAME
+* `common/components/resources/GridViewResource.php` - GridView Resources ( search, dataProvider )
+* `backend/components/controllers/BackendController.php` - Base backend controller with common methods
+* `frontend/components/controllers/FrontendController.php` - Base frontend controller with common methods
+* `common/components/resources/crud/CreateResource.php` - common resource for view create
+* `common/components/resources/crud/ListResource.php` - common resource for view list(index)
+* `common/components/resources/crud/ReadResource.php` - common resource for view read(view)
+* `common/components/resources/crud/UpdateResource.php` - common resource for view update
 _____
 
 
@@ -150,12 +141,13 @@ _____
 ### command  
 
 ```bash
-php yii generate/gen user
+php yii generate/gen `string` `bool`
 ```
 
 | Parameter | Type     | Description                                                                       |
 |:----------| :------- |:----------------------------------------------------------------------------------|
 | `entity`  | `string` | **Required**. model/table to work with </br> * for use list fron property `parts` |
+| `overwrite`  | `bool` | **optional**. overwrite exists file. default: `false` |
 
 generate basic file pack:
 
@@ -228,12 +220,13 @@ _____
 ### command  
 
 ```bash
-php yii generate/gii-model
+php yii generate/gii-model `string` `bool`
 ```
 
 | Parameter | Type     | Description   |
 |:----------| :------- |:--------------|
 | `entity`  | `string` | **Required**. model/table to work with </br> * for use list fron property `parts` |
+| `overwrite`  | `bool` | **optional**. overwrite exists file. default: `false` |
 
 Generate gii `model` for select table(part).
 
@@ -257,12 +250,13 @@ ______
 ### command  
 
 ```bash
-php yii generate/gii-crud
+php yii generate/gii-crud `string` `bool`
 ```
 
 | Parameter | Type     | Description                            |
 |:----------| :------- |:---------------------------------------|
 | `entiry`  | `string` | **Required**. model/table to work with </br> * for use list fron property `parts` |
+| `overwrite`  | `bool` | **optional**. overwrite exists file. default: `false` |
 
 Generate gii `crud` for select table(part).  
 \* - generate list from config `parts`
@@ -281,13 +275,14 @@ ______
 ### command  
 
 ```bash
-php yii generate/list user common/services
+php yii generate/list `string` `string` `bool`
 ```
 
 | Parameter | Type     | Description                            |
 |:----------| :------- |:---------------------------------------|
 | `entiry`  | `string` | **Required**. model/table to work with </br> * for use list fron property `parts` |
 | `map`     | `string` | **Required**. list of files to generate |
+| `overwrite`  | `bool` | **optional**. overwrite exists file. default: `false` |
 
 Generate selected fileType(list fileType) for needle table(part).
 
@@ -298,8 +293,14 @@ Generate selected fileType(list fileType) for needle table(part).
 ##### Generate once file.
 
 ```bash
-php yii generate/list user common-services
+php yii generate/list `string` `string` `bool`
 ```
+
+| Parameter   | Type     | Description                                                                       |
+|:------------| :------- |:----------------------------------------------------------------------------------|
+| `entiry`    | `string` | **Required**. model/table to work with </br> * for use list fron property `parts` |
+| `map`       | `string` | **Required**. map of file types                                                   |
+| `overwrite` | `bool` | **optional**. overwrite exists file. default: `false`                             |
 
 \* - generate list from config `parts`
 
@@ -323,8 +324,13 @@ ______
 ### command  
 
 ```bash
-php yii generate/gen-models user
+php yii generate/gen-models `string` `bool`
 ```
+
+| Parameter | Type     | Description                            |
+|:----------| :------- |:---------------------------------------|
+| `entiry`  | `string` | **Required**. model/table to work with </br> * for use list fron property `parts` |
+| `overwrite`  | `bool` | **optional**. overwrite exists file. default: `false` |
 
 Generate `model` files for needle table(part).
 
@@ -346,8 +352,13 @@ _____
 ### command  
 
 ```bash
-php yii generate/gen-controllers user
+php yii generate/gen-controllers `string` `bool`
 ```
+
+| Parameter | Type     | Description                            |
+|:----------| :------- |:---------------------------------------|
+| `entiry`  | `string` | **Required**. model/table to work with </br> * for use list fron property `parts` |
+| `overwrite`  | `bool` | **optional**. overwrite exists file. default: `false` |
 
 Generate `controller` files for needle table(part).
 
@@ -363,9 +374,13 @@ _____
 ### command  
 
 ```bash
-php yii generate/gen-services user
+php yii generate/gen-services `string` `bool`
 ```
 
+| Parameter | Type     | Description                            |
+|:----------| :------- |:---------------------------------------|
+| `entiry`  | `string` | **Required**. model/table to work with </br> * for use list fron property `parts` |
+| `overwrite`  | `bool` | **optional**. overwrite exists file. default: `false` |
 
 Generate `service` files for needle table(part).
 
@@ -384,8 +399,13 @@ _____
 ### command  
 
 ```bash
-php yii generate/gen-backend-service user
+php yii generate/gen-backend-service `string` `bool`
 ```
+
+| Parameter | Type     | Description                            |
+|:----------| :------- |:---------------------------------------|
+| `entiry`  | `string` | **Required**. model/table to work with </br> * for use list fron property `parts` |
+| `overwrite`  | `bool` | **optional**. overwrite exists file. default: `false` |
 
 Generate `service` files for needle table(part).
 
@@ -404,8 +424,13 @@ _____
 ### command  
 
 ```bash
-php yii generate/gen-backend-views user
+php yii generate/gen-backend-views `string` `bool`
 ```
+
+| Parameter | Type     | Description                            |
+|:----------| :------- |:---------------------------------------|
+| `entiry`  | `string` | **Required**. model/table to work with </br> * for use list fron property `parts` |
+| `overwrite`  | `bool` | **optional**. overwrite exists file. default: `false` |
 
 Generate `views` files for needle table(part).
 
@@ -424,8 +449,13 @@ _____
 ### command  
 
 ```bash
-php yii generate/gen-frontend-views user
+php yii generate/gen-frontend-views `string` `bool`
 ```
+
+| Parameter | Type     | Description                            |
+|:----------| :------- |:---------------------------------------|
+| `entiry`  | `string` | **Required**. model/table to work with </br> * for use list fron property `parts` |
+| `overwrite`  | `bool` | **optional**. overwrite exists file. default: `false` |
 
 Generate `views` files for needle table(part).
 

@@ -153,29 +153,33 @@ class GenerateController extends Controller
 
     /** @var array mapping for `resources` */
     public const BASE_RESOURCES = [
+        'common-base-model' => [
+            self::SOURCE => 'common/components/core/common-base-model.tpl',
+            self::TARGET => '@common/components/core/BaseModel.php'
+        ],
         'backend-components-controller' => [
             self::SOURCE => 'backend/components/controllers/BackendController.tpl',
-            self::TARGET => "@backend/components/controllers/BackendController.php"
+            self::TARGET => '@backend/components/controllers/BackendController.php'
         ],
         'frontend-components-controller' => [
             self::SOURCE => 'frontend/components/controllers/FrontendController.tpl',
-            self::TARGET => "@frontend/components/controllers/FrontendController.php"
+            self::TARGET => '@frontend/components/controllers/FrontendController.php'
         ],
         'common-components-resources-crud-create' => [
             self::SOURCE => 'common/components/resources/crud/CreateResource.tpl',
-            self::TARGET => "@common/components/resources/crud/CreateResource.php"
+            self::TARGET => '@common/components/resources/crud/CreateResource.php'
         ],
         'common-components-resources-crud-list' => [
             self::SOURCE => 'common/components/resources/crud/ListResource.tpl',
-            self::TARGET => "@common/components/resources/crud/ListResource.php"
+            self::TARGET => '@common/components/resources/crud/ListResource.php'
         ],
         'common-components-resources-crud-read' => [
             self::SOURCE => 'common/components/resources/crud/ReadResource.tpl',
-            self::TARGET => "@common/components/resources/crud/ReadResource.php"
+            self::TARGET => '@common/components/resources/crud/ReadResource.php'
         ],
         'common-components-resources-crud-update' => [
             self::SOURCE => 'common/components/resources/crud/UpdateResource.tpl',
-            self::TARGET => "@common/components/resources/crud/UpdateResource.php"
+            self::TARGET => '@common/components/resources/crud/UpdateResource.php'
         ]
     ];
 
@@ -221,27 +225,30 @@ class GenerateController extends Controller
      */
     public function actionSetup( bool $overwrite = false ): void
     {
-        $root = $this->getTemplatePath();
-
+        $sourceRoot = __DIR__;
 
         $copyFiles = [
-            'common-base-model' => [
-                self::SOURCE => 'common/components/core/common-base-model.tpl',
-                self::TARGET => '@common/components/core/BaseModel.php'
-            ],
             'common-components-db-table' => [
-                self::SOURCE => 'common/components/db/Tables.php',
+                self::SOURCE => 'source/common/components/db/Tables.php',
                 self::TARGET => '@common/components/db/Tables.php'
             ],
+            'common-components-db-setup' => [
+                self::SOURCE => 'source/common/components/db/Setup.php',
+                self::TARGET => '@common/components/db/Setup.php'
+            ],
             'common-components-parts' => [
-                self::SOURCE => 'common/components/Part.php',
+                self::SOURCE => 'source/common/components/Part.php',
                 self::TARGET => '@common/components/Part.php'
+            ],
+            'common-resources-grid' => [
+                self::SOURCE => 'source/common/components/resources/GridViewResource.php',
+                self::TARGET => '@common/components/resources/GridViewResource.php'
             ],
         ];
 
         foreach ( $copyFiles as $template )
         {
-            $sourcePath = $root.$template[self::SOURCE];
+            $sourcePath = $sourceRoot.$template[self::SOURCE];
 
             echo "\r\n Generate file: $sourcePath.";
 
@@ -252,8 +259,10 @@ class GenerateController extends Controller
             $this->copy($sourcePath, $targetPath);
         }
 
+        $root = $this->getTemplatePath();
 
         $params = $this->getParams('model','Model');
+
 
         foreach ( self::BASE_RESOURCES as $template )
         {
@@ -313,6 +322,133 @@ class GenerateController extends Controller
     }
 
     /**
+     * Generate some files for entity
+     *
+     * example:
+     *      php yii generate/gen user common-model-source,backend-model-form,frontend-model-form
+     *
+     * @param string $entity
+     * @param string $map
+     * @param bool $overwrite
+     * @return void
+     */
+    public function actionList(string $entity, string $map, bool $overwrite = false): void
+    {
+        $this->generator($entity, $map, $overwrite);
+    }
+
+    /**
+     * Generate services files for entity
+     *
+     * example:
+     *      php yii generate/gen-services user
+     *
+     * @param string $entity
+     * @param bool $overwrite
+     * @return void
+     */
+    public function actionGenServices(string $entity, bool $overwrite = false)
+    {
+        $this->actionList(
+            $entity,
+            'common-service,backend-service,frontend-service',
+            $overwrite
+        );
+    }
+
+    /**
+     * Generate services files for entity
+     *
+     * example:
+     *      php yii generate/gen-controllers user
+     *
+     * @param string $entity
+     * @param bool $overwrite
+     * @return void
+     */
+    public function actionGenControllers(string $entity, bool $overwrite = false)
+    {
+        $this->actionList(
+            $entity,
+            'backend-model-controller,frontend-model-controller',
+            $overwrite
+        );
+    }
+
+    /**
+     * Generate services files for entity
+     *
+     * example:
+     *      php yii generate/gen-models user
+     *
+     * @param string $entity
+     * @param bool $overwrite
+     * @return void
+     */
+    public function actionGenModels(string $entity, bool $overwrite = false)
+    {
+        $this->actionList(
+            $entity,
+            'common-model-source,common-model-item,backend-model-item,backend-model-form,frontend-model-item,frontend-model-form',
+            $overwrite
+        );
+    }
+
+    /**
+     * Generate backend/views files for entity
+     *
+     * example:
+     *      php yii generate/gen-backend-views user
+     *
+     * @param string $entity
+     * @param bool $overwrite
+     * @return void
+     */
+    public function actionGenBackendViews(string $entity, bool $overwrite = false)
+    {
+        $this->actionList(
+            $entity,
+            'backend-views-form,backend-views-create,backend-views-list,backend-views-read,backend-views-update',
+            $overwrite
+        );
+    }
+
+    /**
+     * Generate frontend/views files for entity
+     *
+     * example:
+     *      php yii generate/gen-frontend-views user
+     *
+     * @param string $entity
+     * @param bool $overwrite
+     * @return void
+     */
+    public function actionGenFrontendViews(string $entity, bool $overwrite = false)
+    {
+        $this->actionList(
+            $entity,
+            'frontend-views-list,frontend-views-read',
+            $overwrite
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function actionGiiModel(string $entity)
+    {
+        $this->generateGii($entity, 'php yii gii/model ' . $this->command[ self::COMMAND_MODEL ]);
+    }
+
+    /**
+     * @return void
+     */
+    public function actionGiiCrud(string $entity)
+    {
+        $this->generateGii($entity, 'php yii gii/crud ' . $this->command[ self::COMMAND_CRUD ]);
+    }
+
+    /**
      * @param string $entity
      * @return array
      */
@@ -332,106 +468,6 @@ class GenerateController extends Controller
         return $entityList;
     }
 
-    /**
-     * Generate some files for entity
-     *
-     * example:
-     *      php yii generate/gen user common-model-source,backend-model-form,frontend-model-form
-     *
-     * @param string $entity
-     * @param string $map
-     * @return void
-     */
-    public function actionList(string $entity, string $map): void
-    {
-        $this->generator($entity, $map );
-    }
-
-    /**
-     * Generate services files for entity
-     *
-     * example:
-     *      php yii generate/gen-services user
-     *
-     * @param string $entity
-     * @return void
-     */
-    public function actionGenServices(string $entity)
-    {
-        $this->actionList($entity, 'common-service,backend-service,frontend-service');
-    }
-
-    /**
-     * Generate services files for entity
-     *
-     * example:
-     *      php yii generate/gen-controllers user
-     *
-     * @param string $entity
-     * @return void
-     */
-    public function actionGenControllers(string $entity)
-    {
-        $this->actionList($entity, 'backend-model-controller,frontend-model-controller');
-    }
-
-    /**
-     * Generate services files for entity
-     *
-     * example:
-     *      php yii generate/gen-models user
-     *
-     * @param string $entity
-     * @return void
-     */
-    public function actionGenModels(string $entity)
-    {
-        $this->actionList($entity, 'common-model-source,common-model-item,backend-model-item,backend-model-form,frontend-model-item,frontend-model-form');
-    }
-
-    /**
-     * Generate backend/views files for entity
-     *
-     * example:
-     *      php yii generate/gen-backend-views user
-     *
-     * @param string $entity
-     * @return void
-     */
-    public function actionGenBackendViews(string $entity)
-    {
-        $this->actionList($entity, 'backend-views-form,backend-views-create,backend-views-list,backend-views-read,backend-views-update');
-    }
-
-    /**
-     * Generate frontend/views files for entity
-     *
-     * example:
-     *      php yii generate/gen-frontend-views user
-     *
-     * @param string $entity
-     * @return void
-     */
-    public function actionGenFrontendViews(string $entity)
-    {
-        $this->actionList($entity, 'frontend-views-list,frontend-views-read');
-    }
-
-    /**
-     * @return void
-     */
-    public function actionGiiModel(string $entity)
-    {
-        $this->generateGii($entity, 'php yii gii/model ' . $this->command[ self::COMMAND_MODEL ]);
-    }
-
-    /**
-     * @return void
-     */
-    public function actionGiiCrud(string $entity)
-    {
-        $this->generateGii($entity, 'php yii gii/crud ' . $this->command[ self::COMMAND_CRUD ]);
-    }
 
     /**
      * @param string $entity
