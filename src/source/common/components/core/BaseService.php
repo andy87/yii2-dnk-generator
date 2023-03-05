@@ -65,10 +65,10 @@ abstract class BaseService extends Component
     /**
      * Возвращает экземпляр класса модели, с которой работает сервис
      *
-     * @return ActiveRecord
+     * @return Model
      * @throws ReflectionException
      */
-    public function getModel(): ActiveRecord
+    public function getModel(): Model
     {
         return $this->createClass(
             $this->getClassForm()
