@@ -1,7 +1,7 @@
 
 # DNK
 
-Personal library for generate files pack and follow pattern: `template path`, `adapter` and other. 
+Personal library on `Yii2 advanced` for generate files pack and follow pattern: `template path`, `adapter` and other. 
 
 ### Navigation.
 * ### [Description](#description)
@@ -561,13 +561,16 @@ _____
 ```
 
 <a name="setup-require"></a>
-2. exec command `composer require andy87/yii2-dnk-generator:dev-master`
-
+2. exec command 
+```bash
+composer require andy87/yii2-dnk-generator:dev-master
+#OR
+php composer.local require andy87/yii2-dnk-generator:dev-master
+```
 
 <a name="setup-config"></a>
 3. Update config file:
 - advanced: `@console\config\main.php`
-- basic: `@app\config\console.php`
 
 
 ```php
