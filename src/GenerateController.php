@@ -246,13 +246,14 @@ class GenerateController extends Controller
     {
         $sourceRoot = __DIR__;
 
+        echo "\r\n Copy files.";
+
         foreach ( self::SETUP_COPY_SETUP_FILES as $template )
         {
             $sourcePath = $sourceRoot.$template[self::SOURCE];
             $targetPath = Yii::getAlias($template[self::TARGET]);
 
-            echo "\r\n Copy:";
-            echo "\r\n\t from: $sourcePath";
+            echo "\r\n\t Copy: $sourcePath";
             echo "\r\n\t to: $targetPath";
 
             $this->createDirectories($targetPath);
@@ -264,13 +265,16 @@ class GenerateController extends Controller
 
         $params = $this->getParams('model','Model');
 
+        echo "\r\n Generate files.";
+
         foreach (self::SETUP_GENERATE_SETUP_FILES as $template )
         {
             $sourcePath = $root.$template[self::SOURCE];
 
-            echo "\r\n Generate file: $sourcePath.";
-
             $targetPath = Yii::getAlias($template[self::TARGET]);
+
+            echo "\r\n Generate: $sourcePath";
+            echo "\r\n to: $targetPath.";
 
             if ( file_exists($targetPath) )
             {
@@ -290,11 +294,11 @@ class GenerateController extends Controller
 
             if ($status) {
 
-                $this->stdout("\r\n\t copied successfully.\n", BaseConsole::FG_GREEN);
+                $this->stdout("\r\n\t generate successfully.\n", BaseConsole::FG_GREEN);
 
             } else {
 
-                $this->stdout("\r\n\r copied failed.\n", BaseConsole::FG_RED);
+                $this->stdout("\r\n\r generate failed.\n", BaseConsole::FG_RED);
             }
         }
 
