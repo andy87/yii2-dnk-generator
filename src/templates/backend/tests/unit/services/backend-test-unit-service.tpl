@@ -4,24 +4,25 @@ namespace backend\tests\unit\services;
 
 use Yii;
 use yii\base\InvalidConfigException;
+use Codeception\Test\Unit;
 use common\tests\UnitTester;
 use backend\services\{{CamelCase}}Service;
 
 /**
  * {{CamelCase}}Service test
  */
-class {{CamelCase}}ServiceTest extends \Codeception\Test\Unit
+class {{CamelCase}}ServiceTest extends Unit
 {
     /**
      * @var UnitTester
      */
-    protected $tester;
+    protected UnitTester $tester;
 
     /**
      * @return void
      * @throws InvalidConfigException
      */
-    public function testOne()
+    public function testOne(): void
     {
         /** @var {{CamelCase}}Service $service */
         $service = Yii::createObject({{CamelCase}}Service::class);

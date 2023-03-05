@@ -3,22 +3,20 @@
 namespace frontend\tests\unit\models\items;
 
 use Yii;
+use Codeception\Test\Unit;
+use common\tests\UnitTester;
 use frontend\models\forms\{{CamelCase}}Form;
 
 /**
  * {{CamelCase}}Form test
  */
-class {{CamelCase}}Test extends \Codeception\Test\Unit
+class {{CamelCase}}Test extends Unit
 {
     /**
-     * @var \common\tests\UnitTester
+     * @var UnitTester
      */
-    protected $tester;
+    protected UnitTester$tester;
 
-
-    /**
-     * @return array
-     */
     /*public function _fixtures()
     {
         return [
@@ -29,7 +27,10 @@ class {{CamelCase}}Test extends \Codeception\Test\Unit
         ];
     }*/
 
-    public function testOne()
+    /**
+     * @return void
+     */
+    public function testOne(): void
     {
         $model = new {{CamelCase}}Form([
             'property_1' => 'value',

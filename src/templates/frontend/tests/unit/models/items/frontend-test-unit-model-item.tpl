@@ -3,17 +3,20 @@
 namespace frontend\tests\unit\models\items;
 
 use Yii;
+use yii\base\InvalidConfigException;
+use Codeception\Test\Unit;
+use common\tests\UnitTester;
 use frontend\models\items\{{CamelCase}};
 
 /**
  * {{CamelCase}} test
  */
-class {{CamelCase}}Test extends \Codeception\Test\Unit
+class {{CamelCase}}Test extends Unit
 {
     /**
-     * @var \common\tests\UnitTester
+     * @var UnitTester
      */
-    protected $tester;
+    protected UnitTester $tester;
 
 
     /**
@@ -29,7 +32,11 @@ class {{CamelCase}}Test extends \Codeception\Test\Unit
         ];
     }*/
 
-    public function testOne()
+    /**
+     * @return void
+     * @throws InvalidConfigException
+     */
+    public function testOne(): void
     {
         $model = new {{CamelCase}}([
             'property_1' => 'value',
