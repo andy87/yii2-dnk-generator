@@ -2,8 +2,10 @@
 
 namespace andy87\dnk\common\components\interfaces\services\common;
 
-use yii\base\Model;
 use yii\db\ActiveRecord;
+use andy87\dnk\common\components\interfaces\models\common\ModelInterface as CommonModelInterface;
+use andy87\dnk\common\components\interfaces\models\backend\ModelInterface as BackendModelInterface;
+use andy87\dnk\common\components\interfaces\models\frontend\ModelInterface as FrontendModelInterface;
 
 /**
  * Интерфейс сервиса `common` генерируемого библиотекой
@@ -16,20 +18,20 @@ interface ServiceCommonInterface
     public function getClassModel(): string;
 
     /**
-     * @return Model
+     * @return CommonModelInterface|BackendModelInterface|FrontendModelInterface
      */
-    public function getModel(): Model;
+    public function getModel();
 
     /**
      * @param array $attributes
-     * @return ActiveRecord
+     * @return CommonModelInterface|BackendModelInterface|FrontendModelInterface
      */
-    public function create(array $attributes = []): ActiveRecord;
+    public function create(array $attributes = []);
 
     /**
      * @param ActiveRecord $model
      * @param array $attributes
-     * @return ActiveRecord
+     * @return CommonModelInterface|BackendModelInterface|FrontendModelInterface
      */
-    public function update(ActiveRecord $model, array $attributes = []): ActiveRecord;
+    public function update(ActiveRecord $model, array $attributes = []);
 }
