@@ -7,10 +7,10 @@ use common\services\{{CamelCase}}Service as {{CamelCase}}CommonService;
 use andy87\dnk\common\components\interfaces\services\backend\ServiceBackendInterface;
 use backend\models\items\{{CamelCase}};
 use backend\models\forms\{{CamelCase}}Form;
-use backend\resources\{{snake_case}}\{{CamelCase}}CreateResource;
-use backend\resources\{{snake_case}}\{{CamelCase}}ReadResource;
-use backend\resources\{{snake_case}}\{{CamelCase}}UpdateResource;
-use backend\resources\{{snake_case}}\{{CamelCase}}ListResource;
+use backend\resources\cruds\{{snake_case}}\{{CamelCase}}CreateResource;
+use backend\resources\cruds\{{snake_case}}\{{CamelCase}}ReadResource;
+use backend\resources\cruds\{{snake_case}}\{{CamelCase}}UpdateResource;
+use backend\resources\cruds\{{snake_case}}\{{CamelCase}}ListResource;
 
 /**
  *  Service for model `{{CamelCase}}` environment `backend`

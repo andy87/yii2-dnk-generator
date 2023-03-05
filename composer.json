@@ -31,5 +31,10 @@
     "psr-4": {
       "andy87\\dnk\\": "src"
     }
+  },
+  "config": {
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true
+    }
   }
 }

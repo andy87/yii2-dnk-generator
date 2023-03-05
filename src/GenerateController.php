@@ -79,19 +79,19 @@ class GenerateController extends Controller
             ],
                 'backend-create-resource' => [
                     self::SOURCE => 'backend/resources/model/backend-create-resource.tpl',
-                    self::TARGET => "@backend/resources/{{snake_case}}/{{CamelCase}}CreateResource.php"
+                    self::TARGET => "@backend/resources/cruds/{{snake_case}}/{{CamelCase}}CreateResource.php"
                 ],
                 'backend-list-resource' => [
                     self::SOURCE => 'backend/resources/model/backend-list-resource.tpl',
-                    self::TARGET => "@backend/resources/{{snake_case}}/{{CamelCase}}ListResource.php"
+                    self::TARGET => "@backend/resources/cruds/{{snake_case}}/{{CamelCase}}ListResource.php"
                 ],
                 'backend-update-resource' => [
                     self::SOURCE => 'backend/resources/model/backend-update-resource.tpl',
-                    self::TARGET => "@backend/resources/{{snake_case}}/{{CamelCase}}UpdateResource.php"
+                    self::TARGET => "@backend/resources/cruds/{{snake_case}}/{{CamelCase}}UpdateResource.php"
                 ],
                 'backend-read-resource' => [
                     self::SOURCE => 'backend/resources/model/backend-read-resource.tpl',
-                    self::TARGET => "@backend/resources/{{snake_case}}/{{CamelCase}}ReadResource.php"
+                    self::TARGET => "@backend/resources/cruds/{{snake_case}}/{{CamelCase}}ReadResource.php"
                 ],
                     'backend-model-controller' => [
                         self::SOURCE => 'backend/controllers/cruds/backend-model-controller.tpl',
