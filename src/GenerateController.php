@@ -187,9 +187,6 @@ class GenerateController extends Controller
 
     // Property
 
-    /** @var string path to project root (setup from config) */
-    public string $root = '';
-
     /** @var array Commands */
     public array $command = [
         self::COMMAND_MODEL => null,
@@ -229,7 +226,7 @@ class GenerateController extends Controller
 
         $copyFiles = [
             'common-components-db-table' => [
-                self::SOURCE => 'source/common/components/db/Tables.php',
+                self::SOURCE => '/source/common/components/db/Tables.php',
                 self::TARGET => '@common/components/db/Tables.php'
             ],
             'common-components-db-setup' => [

@@ -597,9 +597,10 @@ composer require andy87/yii2-dnk-generator:dev-master
 #OR
 php composer.local require andy87/yii2-dnk-generator:dev-master
 ```
+3. exec command [generate/setup](#command-setup)
 
 <a name="setup-config"></a>
-3. Update config file:
+4. Update config file:
 - advanced: `@console\config\main.php`
 
 
@@ -607,17 +608,16 @@ php composer.local require andy87/yii2-dnk-generator:dev-master
 //first add `use`
 use andy87\dnk\GenerateController;
     
-//.. other add parts
+//.. other code
+
 return [
-    'aliases' => [
-        // .. other config
-        '@root'   => dirname(__DIR__, 2), // new line
-    ],
+    // .. other config
+    
     'controllerMap' => [
         // .. other config
+        
         'generate' => [  // new block
             'class'     => GenerateController::class,
-            'root'      => '@root', // alias to root project
             'command'   => [
                 GenerateController::COMMAND_MODEL => implode(' ', [
                     '--modelClass={{CamelCase}}Source',
@@ -644,6 +644,7 @@ return [
                 GenerateController::BASE_RESOURCE_CLASS => BaseResource::class, // extends for `Resources`
             ]
         ]
+        
     ]
 ]
 ```
@@ -654,4 +655,3 @@ return [
 * `parts` - table lis. for user *  in command property  
 * `baseClasses` - list of based class names for generated file
 
-4. exec command [generate/setup](#command-setup)
