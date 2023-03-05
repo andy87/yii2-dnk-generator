@@ -130,10 +130,10 @@ abstract class BaseService extends Component
     }
 
     /**
-     * @return ActiveRecord
+     * @return Model
      * @throws ReflectionException
      */
-    public function getEntity(): ActiveRecord
+    public function getEntity(): Model
     {
         return $this->getModel();
     }
