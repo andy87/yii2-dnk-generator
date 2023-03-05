@@ -1,7 +1,7 @@
 <?php
 
-use common\components\db\Config;
 use common\components\Part;
+use common\components\db\Setup;
 use andy87\dnk\common\components\core\BaseMigration as BaseMigrationClass;
 
 /**
@@ -25,8 +25,8 @@ class {{migrateFileName}} extends BaseMigrationClass
                 #'string' => $this->string(255)->notNull()->unique(),
                 #'item_id' => $this->integer(11),
 
-            'created_at' => Config::COLUMN['created_at'],
-            'updated_at' => Config::COLUMN['updated_at'],
+            'created_at' => Setup::COLUMN['created_at'],
+            'updated_at' => Setup::COLUMN['updated_at'],
         ];
     }
 }
