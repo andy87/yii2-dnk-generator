@@ -8,10 +8,10 @@ use common\components\core\BaseService;
 use andy87\dnk\common\components\resourc\GridViewResource;
 use {{BaseControllerClassName}} as BaseControllerClass;
 use andy87\dnk\common\components\interfaces\controllers\backend\ControllerBackendInterface;
-use andy87\dnk\common\components\resourc\crud\ListResource;
-use andy87\dnk\common\components\resourc\crud\CreateResource;
-use andy87\dnk\common\components\resourc\crud\UpdateResource;
-use andy87\dnk\common\components\resourc\crud\ReadResource;
+use common\components\resourc\crud\ListResource;
+use common\components\resourc\crud\CreateResource;
+use common\components\resourc\crud\UpdateResource;
+use common\components\resourc\crud\ReadResource;
 
 /**
  * Base Controller for environment `backend`

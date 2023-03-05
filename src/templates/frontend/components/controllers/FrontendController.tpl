@@ -7,11 +7,11 @@ use yii\web\Response;
 use yii\web\ErrorAction;
 use yii\data\ActiveDataProvider;
 use common\components\core\BaseService;
-use andy87\dnk\common\components\resourc\GridViewResource;
+use common\components\resourc\GridViewResource;
+use common\components\resourc\crud\ListResource;
+use common\components\resourc\crud\ReadResource;
 use {{BaseControllerClassName}} as BaseControllerClass;
 use andy87\dnk\common\components\interfaces\controllers\frontend\ControllerFrontendInterface;
-use andy87\dnk\common\components\resourc\crud\ListResource;
-use andy87\dnk\common\components\resourc\crud\ReadResource;
 
 /**
  * Base Controller for environment `frontend`
