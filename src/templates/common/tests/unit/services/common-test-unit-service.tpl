@@ -23,8 +23,8 @@ class {{CamelCase}}ServiceTest extends \Codeception\Test\Unit
      */
     public function testOne()
     {
-        /** @var {{CamelCase}}Servcie $service */
-        $service = Yii::createObject({{CamelCase}}Servcie::class);
+        /** @var {{CamelCase}}Service $service */
+        $service = Yii::createObject({{CamelCase}}Service::class);
 
         verify($service->method())->false();
         verify($service->property)->true();
