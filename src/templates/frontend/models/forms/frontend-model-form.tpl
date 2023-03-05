@@ -2,7 +2,7 @@
 
 namespace frontend\models\forms;
 
-use common\models\items\{{CamelCase}};
+use frontend\models\items\{{CamelCase}};
 use andy87\dnk\common\components\interfaces\models\frontend\ModelFormInterface;
 
 /**
