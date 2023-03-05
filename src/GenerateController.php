@@ -208,35 +208,36 @@ class GenerateController extends Controller
     public const GENERATE_TESTS = [
         'common-tests-unit-services' => [
             self::SOURCE => 'common/tests/unit/services/common-test-unit-service.tpl',
-            self::TARGET => '@common/tests/unit/services/{{CamelCase}}Service.php'
+            self::TARGET => '@common/tests/unit/services/{{CamelCase}}ServiceTest.php'
         ],
             'common-tests-unit-model-items' => [
                 self::SOURCE => 'common/tests/unit/models/items/common-test-unit-model-item.tpl',
-                self::TARGET => '@common/tests/unit/models/items/{{CamelCase}}.php'
+                self::TARGET => '@common/tests/unit/models/items/{{CamelCase}}Test.php'
             ],
         'backend-tests-unit-services' => [
             self::SOURCE => 'backend/tests/unit/services/backend-test-unit-service.tpl',
-            self::TARGET => '@backend/tests/unit/services/{{CamelCase}}Service.php'
+            self::TARGET => '@backend/tests/unit/services/{{CamelCase}}ServiceTest.php'
         ],
             'backend-tests-unit-model-items' => [
                 self::SOURCE => 'backend/tests/unit/models/items/backend-test-unit-model-item.tpl',
-                self::TARGET => '@backend/tests/unit/models/items/{{CamelCase}}.php'
+                self::TARGET => '@backend/tests/unit/models/items/{{CamelCase}}Test.php'
             ],
                 'backend-tests-unit-model-forms' => [
                     self::SOURCE => 'backend/tests/unit/models/forms/backend-test-unit-model-form.tpl',
-                    self::TARGET => '@backend/tests/unit/models/items/{{CamelCase}}.php'
+                    self::TARGET => '@backend/tests/unit/models/forms/{{CamelCase}}Test.php'
                 ],
-        'frontend-tests-unit-model-forms' => [
-            self::SOURCE => 'frontend/tests/unit/models/forms/frontend-test-unit-model-form.tpl',
-            self::TARGET => '@frontend/tests/unit/models/items/{{CamelCase}}.php'
+
+        'frontend-tests-unit-services' => [
+            self::SOURCE => 'frontend/tests/unit/services/frontend-test-unit-service.tpl',
+            self::TARGET => '@frontend/tests/unit/services/{{CamelCase}}ServiceTest.php'
         ],
-            'frontend-tests-unit-services' => [
-                self::SOURCE => 'frontend/tests/unit/services/frontend-test-unit-service.tpl',
-                self::TARGET => '@frontend/tests/unit/services/{{CamelCase}}Service.php'
+            'frontend-tests-unit-model-items' => [
+                self::SOURCE => 'frontend/tests/unit/models/items/frontend-test-unit-model-item.tpl',
+                self::TARGET => '@frontend/tests/unit/models/items/{{CamelCase}}Test.php'
             ],
-                'frontend-tests-unit-model-items' => [
-                    self::SOURCE => 'frontend/tests/unit/models/items/frontend-test-unit-model-item.tpl',
-                    self::TARGET => '@frontend/tests/unit/models/items/{{CamelCase}}.php'
+                'frontend-tests-unit-model-forms' => [
+                    self::SOURCE => 'frontend/tests/unit/models/forms/frontend-test-unit-model-form.tpl',
+                    self::TARGET => '@frontend/tests/unit/models/forms/{{CamelCase}}Test.php'
                 ],
     ];
 
