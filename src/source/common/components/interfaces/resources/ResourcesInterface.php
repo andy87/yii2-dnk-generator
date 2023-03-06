@@ -1,6 +1,6 @@
 <?php
 
-namespace andy87\dnk\common\components\interfaces\resources;
+namespace andy87\dnk\source\components\interfaces\resources;
 
 /**
  * Интерфейс общих ресурсов генерируемых библиотекой

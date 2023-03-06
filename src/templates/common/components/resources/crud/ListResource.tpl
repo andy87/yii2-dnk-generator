@@ -2,9 +2,9 @@
 
 namespace common\components\resources\crud;
 
-use andy87\dnk\common\components\resourc\GridViewResource;
+use andy87\dnk\source\components\resourc\GridViewResource;
 use {{BaseResourceClassName}} as BaseResourceClass;
-use andy87\dnk\common\components\interfaces\resources\crud\ListResourcesInterface;
+use andy87\dnk\source\components\interfaces\resources\crud\ListResourcesInterface;
 
 /**
  * Base file for `ListResource`

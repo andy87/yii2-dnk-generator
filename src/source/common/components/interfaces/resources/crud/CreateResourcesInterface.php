@@ -1,6 +1,6 @@
 <?php
 
-namespace andy87\dnk\common\components\interfaces\resources\crud;
+namespace andy87\dnk\source\components\interfaces\resources\crud;
 
 /**
  * Интерфейс ресурсов для шаблона `create` генерируемого библиотекой

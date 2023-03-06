@@ -1,6 +1,6 @@
 <?php
 
-namespace andy87\dnk\common\components\interfaces\models\frontend;
+namespace andy87\dnk\source\components\interfaces\models\frontend;
 
 /**
  * Интерфейс форм в `common` генерируемых библиотекой

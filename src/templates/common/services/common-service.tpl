@@ -4,7 +4,7 @@ namespace common\services;
 
 use common\models\items\{{CamelCase}};
 use {{BaseServiceClassName}} as BaseServiceClass;
-use andy87\dnk\common\components\interfaces\services\common\ServiceCommonInterface;
+use andy87\dnk\source\components\interfaces\services\common\ServiceCommonInterface;
 
 /**
  *  Service for model `{{CamelCase}}` environment `common`

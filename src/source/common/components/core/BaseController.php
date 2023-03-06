@@ -1,12 +1,12 @@
 <?php
 
-namespace andy87\dnk\common\components\core;
+namespace andy87\dnk\source\components\core;
 
 use Yii;
 use yii\web\Controller;
 use yii\base\InvalidConfigException;
-use andy87\dnk\common\components\interfaces\services\common\ServiceCommonInterface;
-use andy87\dnk\common\components\interfaces\controllers\common\ControllerCommonInterface;
+use andy87\dnk\source\components\interfaces\services\common\ServiceCommonInterface;
+use andy87\dnk\source\components\interfaces\controllers\common\ControllerCommonInterface;
 
 /**
  *  Базовый клас для контроллеров.

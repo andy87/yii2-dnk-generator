@@ -1,11 +1,11 @@
 <?php
 
-namespace andy87\dnk\common\components\interfaces\services\common;
+namespace andy87\dnk\source\components\interfaces\services\common;
 
 use yii\db\ActiveRecord;
-use andy87\dnk\common\components\interfaces\models\common\ModelInterface as CommonModelInterface;
-use andy87\dnk\common\components\interfaces\models\backend\ModelInterface as BackendModelInterface;
-use andy87\dnk\common\components\interfaces\models\frontend\ModelInterface as FrontendModelInterface;
+use andy87\dnk\source\components\interfaces\models\common\ModelInterface as CommonModelInterface;
+use andy87\dnk\source\components\interfaces\models\backend\ModelInterface as BackendModelInterface;
+use andy87\dnk\source\components\interfaces\models\frontend\ModelInterface as FrontendModelInterface;
 
 /**
  * Интерфейс сервиса `common` генерируемого библиотекой

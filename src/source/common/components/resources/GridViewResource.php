@@ -1,6 +1,6 @@
 <?php
 
-namespace andy87\dnk\common\components\resources;
+namespace andy87\dnk\source\components\resources;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;

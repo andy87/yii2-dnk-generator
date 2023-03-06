@@ -658,10 +658,10 @@ return [
 use common\components\Entity;
 use common\components\core\BaseModel;
 use andy87\dnk\GenerateController;
-use andy87\dnk\common\components\core\BaseController;
-use andy87\dnk\common\components\core\BaseMigration;
-use andy87\dnk\common\components\core\BaseResource;
-use andy87\dnk\common\components\core\BaseService;
+use andy87\dnk\source\components\core\BaseController;
+use andy87\dnk\source\components\core\BaseMigration;
+use andy87\dnk\source\components\core\BaseResource;
+use andy87\dnk\source\components\core\BaseService;
 
 //.. other code
 

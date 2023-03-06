@@ -1,6 +1,6 @@
 <?php
 
-namespace andy87\dnk\common\components\core;
+namespace andy87\dnk\source\components\core;
 
 use ReflectionClass;
 use ReflectionException;

@@ -1,6 +1,6 @@
 <?php
 
-namespace andy87\dnk\common\components\interfaces\services\backend;
+namespace andy87\dnk\source\components\interfaces\services\backend;
 
 /**
  * Интерфейс сервиса `backend` генерируемого библиотекой
