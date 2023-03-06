@@ -71,7 +71,7 @@ abstract class BaseService extends Component
     public function getModel(): Model
     {
         return $this->createClass(
-            $this->getClassForm()
+            $this->getClassModel()
         );
     }
 
@@ -141,33 +141,65 @@ abstract class BaseService extends Component
     /**
      * Создание сущности/модели
      *
-     * @param array $attributes
+     * @param array $params
+     * @param bool $is_save
      * @return Model
      * @throws ReflectionException
      */
-    public function create( array $attributes = [] ): Model
+    public function create( array $params = [], bool $is_save = true ): Model
     {
         $model = $this->getEntity();
 
-        if ( !empty($attributes) ) $model->setAttributes($attributes);
+        $model = $this->modelSetAttributes($model, $params);
 
-        $model->save();
-
-        return $model;
+        return $this->modelSave($model, $is_save);
     }
 
     /**
      * Сохранение сущности/модели
      *
      * @param Model $model
-     * @param array $attributes
+     * @param array $params
+     * @param bool $is_save
      * @return Model
      */
-    public function update( Model $model, array $attributes = [] ): Model
+    public function update( Model $model, array $params = [], bool $is_save = true): Model
     {
-        if ( !empty($attributes) ) $model->setAttributes($attributes);
+        $model = $this->modelSetAttributes($model, $params);
 
-        $model->save();
+        return $this->modelSave($model, $is_save);
+    }
+
+    /**
+     * @param Model $model
+     * @param array $params
+     * @return Model
+     */
+    private function modelSetAttributes(Model $model, array $params = []): Model
+    {
+        if ( !empty($attributes) )
+        {
+            $CamelCame = get_class($model);
+
+            $action = ( isset($params[$CamelCame]) ) ? 'load' : 'setAttributes';
+
+            $model->$action($params);
+        }
+
+        return $model;
+    }
+
+    /**
+     * @param Model $model
+     * @param bool $is_save
+     * @return Model
+     */
+    private function modelSave(Model $model, bool $is_save = true): Model
+    {
+        if($is_save && method_exists($model, 'save'))
+        {
+            $model->save();
+        }
 
         return $model;
     }
