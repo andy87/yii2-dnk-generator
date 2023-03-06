@@ -250,8 +250,8 @@ class GenerateController extends Controller
         self::COMMAND_CRUD => null,
     ];
 
-    /** @var array Список таблиц */
-    public array $parts = [];
+    /** @var array List entity for file generate */
+    public array $entityList = [];
 
     /** @var array bases classname for generated files (setup from config) */
     public array $baseClasses = [
@@ -288,11 +288,9 @@ class GenerateController extends Controller
             $sourcePath = $sourceRoot.$template[self::SOURCE];
             $targetPath = Yii::getAlias($template[self::TARGET]);
 
-            echo "\r\n Copy";
-            echo ($overwrite) ? ' (overwrite)' : '';
-            echo ": $sourcePath";
-            echo "\r\n\t to: $targetPath";
-
+            echo "\r\n Copy" . (($overwrite) ? ' (overwrite)' : '') . ": $sourcePath"
+                . "\r\n to: $targetPath.";
+            
             $this->createDirectories($targetPath);
 
             $this->copy($sourcePath, $targetPath);
@@ -393,10 +391,8 @@ class GenerateController extends Controller
             $targetPath = Yii::getAlias($template[self::TARGET]);
             $targetPath = str_replace($from,$to,$targetPath);
 
-            echo "\r\n Generate";
-            echo ($overwrite) ? ' (overwrite)' : '';
-            echo ": $sourcePath";
-            echo "\r\n to: $targetPath.";
+            echo "\r\n Generate" . (($overwrite) ? ' (overwrite)' : '') . ": $sourcePath"
+            . "\r\n to: $targetPath.";
 
             if ( file_exists($targetPath) )
             {
@@ -551,7 +547,7 @@ class GenerateController extends Controller
             $entityList = [$entity];
         }
 
-        if ( $entity === '*' ) $entityList = $this->parts;
+        if ( $entity === '*' ) $entityList = $this->entityList;
 
         return $entityList;
     }

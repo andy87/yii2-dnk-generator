@@ -658,7 +658,7 @@ return [
                     '&& yes'
                 ])
             ],
-            'parts' => [], //array_keys(\common\components\Entity::DATA),
+            'entityList' => [], //array_keys(\common\components\Entity::DATA),
             'baseClasses' => [
                 GenerateController::BASE_MIGRATE_CLASS => BaseMigration::class, // extends for `Migrations`
                 GenerateController::BASE_CONTROLLER_CLASS => BaseController::class, // extends for `Controllers`
@@ -680,7 +680,34 @@ return [
 
 3. exec command [generate/setup](#command-setup)
     
-4. Check : 
-   * current command
-   * array parts
-   * import base classes
+4. Update `config`: 
+   * base classes `import`
+     * use andy87\dnk\common\components\core\BaseController;
+     * use andy87\dnk\common\components\core\BaseMigration;
+     * use andy87\dnk\common\components\core\BaseResource;
+     * use andy87\dnk\common\components\core\BaseService;
+   * set `entityList`
+     * change:
+         * 'parts' => [], //array_keys(\common\components\Entity::DATA),
+         * to:
+         * 'parts' => array_keys(\common\components\Entity::DATA),
+
+
+5. Add `Entity`  
+   Class: `common\components\Entity`, add `public const`  
+```php
+/** @var int */ 
+public const CAMEL_CASE = 2;
+```
+
+
+6. Add `Tables`  
+   Class: `common\components\db`, update `public const NAMES`  
+```php
+/** @var int */ 
+public const NAMES = [
+    // other code ...
+    Entity::CAMEL_CASE => 'snake_case',
+];
+```
+
