@@ -16,8 +16,8 @@ use common\components\db\Tables;
 abstract class BaseMigration extends Migration
 {
     // Свойства
-    /** @var string Ключ `раздела` в системе */
-    public string $entity;
+    /** @var mixed Ключ `раздела` в системе */
+    public mixed $entity;
 
     /** @var Setup Настройки базы данных */
     protected Setup $setup;
