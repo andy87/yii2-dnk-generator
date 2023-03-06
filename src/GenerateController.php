@@ -592,13 +592,15 @@ class GenerateController extends Controller
 
         foreach ($templatesMap as $sourcePath => $targetPath)
         {
-            if ( strpos($sourcePath, '_create_table_') !== false )
-            {
-                $pathFiles = glob(Yii::getAlias('@console/migrations/*_create_table_*.php'));
+            $mark = '_create_table_';
 
-                foreach ( $pathFiles as $pathFile )
+            if ( strpos($sourcePath, $mark) !== false )
+            {
+                $allMigrationFiles = glob(Yii::getAlias("@console/migrations/*$mark*.php"));
+
+                foreach ( $allMigrationFiles as $migrationFile )
                 {
-                    if ( strpos($pathFile, "_create_table__$snakeCase") !== false )
+                    if ( strpos($migrationFile, "{$mark}_$snakeCase") !== false )
                     {
                         continue 2;
                     }
