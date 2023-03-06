@@ -51,7 +51,7 @@ abstract class FrontendController extends BaseControllerClass implements Control
         $form = $this->service->getForm();
 
         /** @var ListResource $R */
-        $R = new $this->service->getResource(BaseService::LIST, [
+        $R = $this->service->getResource(BaseService::LIST, [
             'gridViewResource' => new GridViewResource($form, new ActiveDataProvider())
         ]);
 
