@@ -3,7 +3,7 @@
 namespace frontend\resources\{{snake_case}};
 
 use frontend\models\items\{{CamelCase}};
-use andy87\dnk\source\resources\crud\ListResource;
+use common\components\resources\crud\ListResource;
 
 /**
  * List Resource for model `{{CamelCase}}` environment `frontend`
