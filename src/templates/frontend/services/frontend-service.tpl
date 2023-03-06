@@ -13,6 +13,7 @@ use frontend\resources\{{snake_case}}\{{CamelCase}}ReadResource;
 /**
  *  Service for model `{{CamelCase}}` environment `frontend`
  *
+ * @method {{CamelCase}} create()
  * @method {{CamelCase}} getModel()
  * @method {{CamelCase}}ReadResource|{{CamelCase}}ListResource getResource(int $key, array $arr = [])
  */

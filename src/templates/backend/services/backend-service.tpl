@@ -15,6 +15,7 @@ use backend\resources\{{snake_case}}\{{CamelCase}}ListResource;
 /**
  *  Service for model `{{CamelCase}}` environment `backend`
  *
+ * @method {{CamelCase}} create()
  * @method {{CamelCase}} getModel()
  * @method {{CamelCase}}CreateResource|{{CamelCase}}ReadResource|{{CamelCase}}UpdateResource|{{CamelCase}}ListResource getResource(int $key, array $arr = [])
  */
