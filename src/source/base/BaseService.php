@@ -196,7 +196,7 @@ abstract class BaseService extends Component
      */
     private function modelSave(Model $model, bool $is_save = true): Model
     {
-        if($is_save && method_exists($model, 'save')) $model->save();
+        if($is_save) $model->save();
 
         return $model;
     }
