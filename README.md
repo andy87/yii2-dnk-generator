@@ -655,7 +655,7 @@ return [
    
 ```php
 
-use common\components\Entity;
+use common\components\db\Tables;
 use common\components\core\BaseModel;
 use andy87\dnk\GenerateController;
 use andy87\dnk\source\base\BaseController;
@@ -690,7 +690,7 @@ return [
                     '&& yes'
                 ])
             ],
-            'entityList' => array_keys(Entity::DATA),
+            'entityList' => array_values(Tables::DATA),
             'baseClasses' => [
                 GenerateController::BASE_MIGRATE_CLASS => BaseMigration::class, // extends for `Migrations`
                 GenerateController::BASE_CONTROLLER_CLASS => BaseController::class, // extends for `Controllers`
