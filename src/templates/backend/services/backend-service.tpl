@@ -4,7 +4,7 @@ namespace backend\services;
 
 use ReflectionException;
 use common\services\{{CamelCase}}Service as {{CamelCase}}CommonService;
-use andy87\dnk\source\components\interfaces\services\backend\ServiceBackendInterface;
+use andy87\dnk\source\interfaces\services\backend\ServiceBackendInterface;
 use backend\models\items\{{CamelCase}};
 use backend\models\forms\{{CamelCase}}Form;
 use backend\resources\{{snake_case}}\{{CamelCase}}CreateResource;

@@ -10,18 +10,18 @@ Personal library on `Yii2 advanced` for generate files pack and follow pattern: 
   * [Controllers](#description-controllers)
   * [Resources](#description-resources)
 * ### [Use](#usage-examples)
-  * [generate/setup](#command-setup)
-  * [generate/gen](#command-gen)
-  * [generate/gii-model](#command-gii-model)
-  * [generate/gii-crud](#command-gii-crud)
-  * [generate/list](#command-list)
-  * [generate/gen-models](#command-gen-models)
-  * [generate/gen-controllers](#command-gen-controllers)
-  * [generate/gen-services](#command-gen-services)
-  * [generate/gen-tests](#command-gen-tests)
-  * [generate/gen-backend-views](#command-gen-backend-views)
-  * [generate/gen-backend-views](#command-gen-backend-views)
-  * [generate/gen-frontend-views](#command-gen-frontend-views)
+  * [dnk/setup](#command-setup)
+  * [dnk/run](#command-run)
+  * [dnk/gii-model](#command-gii-model)
+  * [dnk/gii-crud](#command-gii-crud)
+  * [dnk/list](#command-list)
+  * [dnk/gen-models](#command-gen-models)
+  * [dnk/gen-controllers](#command-gen-controllers)
+  * [dnk/gen-services](#command-gen-services)
+  * [dnk/gen-tests](#command-gen-tests)
+  * [dnk/gen-backend-views](#command-gen-backend-views)
+  * [dnk/gen-backend-views](#command-gen-backend-views)
+  * [dnk/gen-frontend-views](#command-gen-frontend-views)
 * ### Profit
   * [Service](#profit-services)
   * [Resource](#profit-resources)
@@ -114,7 +114,7 @@ Legend:
 ### command  
 
 ```bash
-php yii generate/setup `bool`
+php yii dnk/setup `bool`
 ```
 
 | Parameter    | Type   | Description                                            |
@@ -137,11 +137,11 @@ Generate files:
 _____
 
 
-<a name="command-gen"></a>
+<a name="command-run"></a>
 ### command  
 
 ```bash
-php yii generate/gen `string` `bool`
+php yii dnk/run `string` `bool`
 ```
 
 | Parameter | Type     | Description                                                                       |
@@ -155,72 +155,72 @@ generate basic file pack:
 #### description
 
  - **console/migration**
-   - migration `console/migration/m000000_000000_create_table__user.php` [view](src/templates/console/migrations/migration.tpl)
+   - migration `console/migration/m000000_000000_create_table__user.php` [template](src/templates/console/migrations/migration.tpl)
   
 
  - **common/models**
-   - common-model-source `common/models/sources/UserSource.php` [view](src/templates/common/models/sources/common-model-source.tpl) 
-   - common-model-item `common/models/items/User.php` [view](src/templates/common/models/items/common-model-item.tpl) 
+   - common-model-source `common/models/sources/UserSource.php` [template](src/templates/common/models/sources/common-model-source.tpl) 
+   - common-model-item `common/models/items/User.php` [template](src/templates/common/models/items/common-model-item.tpl) 
 
 
  - **common/services**
-   - common-service `common/services/UserService.php` [view](src/templates/common/services/common-service.tpl)
+   - common-service `common/services/UserService.php` [template](src/templates/common/services/common-service.tpl)
 
 
  - **backend/models**
-   - backend-model-item `backend/models/items/User.php` [view](src/templates/backend/models/items/backend-model-item.tpl)
-   - backend-model-form `backend/models/forms/UserForm.php` [view](src/templates/backend/models/forms/backend-model-form.tpl)
+   - backend-model-item `backend/models/items/User.php` [template](src/templates/backend/models/items/backend-model-item.tpl)
+   - backend-model-form `backend/models/forms/UserForm.php` [template](src/templates/backend/models/forms/backend-model-form.tpl)
 
 
  - **backend/services**
-   -  backend-service `backend/services/UserService.php` [view](src/templates/backend/services/backend-service.tpl)  
+   -  backend-service `backend/services/UserService.php` [template](src/templates/backend/services/backend-service.tpl)  
 
 
  - **backend/resources**
-   - backend-create-resource `backend/resources/user/UserCreateResource.php` [view](src/templates/backend/resources/model/backend-create-resource.tpl)
-   - backend-list-resource `backend/resources/user/UserListResource.php` [view](src/templates/backend/resources/model/backend-list-resource.tpl)
-   - backend-list-resource `backend/resources/user/UserReadResource.php` [view](src/templates/backend/resources/model/backend-list-resource.tpl)
-   - backend-update-resource `backend/resources/user/UserUpdateResource.php` [view](src/templates/backend/resources/model/backend-update-resource.tpl)
+   - backend-create-resource `backend/resources/user/UserCreateResource.php` [template](src/templates/backend/resources/model/backend-create-resource.tpl)
+   - backend-list-resource `backend/resources/user/UserListResource.php` [template](src/templates/backend/resources/model/backend-list-resource.tpl)
+   - backend-list-resource `backend/resources/user/UserReadResource.php` [template](src/templates/backend/resources/model/backend-list-resource.tpl)
+   - backend-update-resource `backend/resources/user/UserUpdateResource.php` [template](src/templates/backend/resources/model/backend-update-resource.tpl)
 
 
  - **backend/controller**
-   - backend-model-controller `backend/controller/cruds/UserController.php` [view](src/templates/backend/controllers/cruds/backend-model-controller.tpl)
+   - backend-model-controller `backend/controller/cruds/UserController.php` [template](src/templates/backend/controllers/cruds/backend-model-controller.tpl)
 
  - **backend/views**
-   - backend-views-form `backend/views/user/_form-user.php` [view](src/templates/backend/views/model/_form-model.tpl)
-   - backend-views-create `backend/views/user/user-create.php` [view](src/templates/backend/views/model/model-create.tpl)
-   - backend-views-update `backend/views/user/user-update.php` [view](src/templates/backend/views/model/model-update.tpl)
-   - backend-views-read `backend/views/user/user-read.php` [view](src/templates/backend/views/model/model-read.tpl)
-   - backend-views-list `backend/views/user/user-list.php` [view](src/templates/backend/views/model/model-list.tpl)
+   - backend-views-form `backend/views/user/_form-user.php` [template](src/templates/backend/views/model/_form-model.tpl)
+   - backend-views-create `backend/views/user/user-create.php` [template](src/templates/backend/views/model/model-create.tpl)
+   - backend-views-update `backend/views/user/user-update.php` [template](src/templates/backend/views/model/model-update.tpl)
+   - backend-views-read `backend/views/user/user-read.php` [template](src/templates/backend/views/model/model-read.tpl)
+   - backend-views-list `backend/views/user/user-list.php` [template](src/templates/backend/views/model/model-list.tpl)
 
 
  - **frontend/models**
-   - frontend-model-item `frontend/models/items/User.php` [view](src/templates/frontend/models/items/frontend-model-item.tpl)
-   - frontend-model-form `frontend/models/forms/UserForm.php` [view](src/templates/frontend/models/forms/frontend-model-form.tpl)
+   - frontend-model-item `frontend/models/items/User.php` [template](src/templates/frontend/models/items/frontend-model-item.tpl)
+   - frontend-model-form `frontend/models/forms/UserForm.php` [template](src/templates/frontend/models/forms/frontend-model-form.tpl)
 
 
  - **frontend/service**
-   - frontend-service `frontend/service/UserService.php` [view](src/templates/frontend/services/frontend-service.tpl)
+   - frontend-service `frontend/service/UserService.php` [template](src/templates/frontend/services/frontend-service.tpl)
 
 
  - **frontend/resources**
-   - frontend-list-resource `frontend/resources/user/UserListResource.php` [view](src/templates/frontend/resources/model/frontend-list-resource.tpl)
-   - frontend-read-resource`frontend/resources/user/UserReadResource.php` [view](src/templates/frontend/resources/model/frontend-read-resource.tpl)
+   - frontend-list-resource `frontend/resources/user/UserListResource.php` [template](src/templates/frontend/resources/model/frontend-list-resource.tpl)
+   - frontend-read-resource`frontend/resources/user/UserReadResource.php` [template](src/templates/frontend/resources/model/frontend-read-resource.tpl)
 
 
  - **frontend/controllers**
-   - frontend-model-controller `frontend/consrollers/UserController.php` [view](src/templates/frontend/controllers/frontend-model-controller.tpl)
+   - frontend-model-controller `frontend/consrollers/UserController.php` [template](src/templates/frontend/controllers/frontend-model-controller.tpl)
  
  - **frontend/views**
-    - frontend-views-read `frontend/views/user/user-read.php` [view](src/templates/frontend/views/model/model-read.tpl)
-    - frontend-views-list `frontend/views/user/user-list.php` [view](src/templates/frontend/views/model/model-list.tpl)
+    - frontend-views-read `frontend/views/user/user-read.php` [template](src/templates/frontend/views/model/model-read.tpl)
+    - frontend-views-list `frontend/views/user/user-list.php` [template](src/templates/frontend/views/model/model-list.tpl)
 _____
 
 <a name="command-gii-model"></a>
 ### command  
 
 ```bash
-php yii generate/gii-model `string` `bool`
+php yii dnk/gii-model `string` `bool`
 ```
 
 | Parameter | Type     | Description   |
@@ -235,8 +235,8 @@ Generate gii `model` for select table(part).
 #### Examples
 
 ```bash
-php yii generate/gii-model user
-php yii generate/gii-model *
+php yii dnk/gii-model user
+php yii dnk/gii-model *
 ```
 
 alias
@@ -250,7 +250,7 @@ ______
 ### command  
 
 ```bash
-php yii generate/gii-crud `string` `bool`
+php yii dnk/gii-crud `string` `bool`
 ```
 
 | Parameter | Type     | Description                            |
@@ -264,8 +264,8 @@ Generate gii `crud` for select table(part).
 #### Examples
 
 ```bash
-php yii generate/gii-crud user
-php yii generate/gii-crud *
+php yii dnk/gii-crud user
+php yii dnk/gii-crud *
 ```
 alias `php yii gii/crud`
 ______
@@ -275,7 +275,7 @@ ______
 ### command  
 
 ```bash
-php yii generate/list `string` `string` `bool`
+php yii dnk/list `string` `string` `bool`
 ```
 
 | Parameter | Type     | Description                            |
@@ -293,7 +293,7 @@ Generate selected fileType(list fileType) for needle table(part).
 ##### Generate once file.
 
 ```bash
-php yii generate/list `string` `string` `bool`
+php yii dnk/list `string` `string` `bool`
 ```
 
 | Parameter   | Type     | Description                                                                       |
@@ -304,19 +304,19 @@ php yii generate/list `string` `string` `bool`
 
 \* - generate list from config `parts`
 
-generate only: `common/services/UserService.php` [view](src/templates/common/services/common-service.tpl)
+generate only: `common/services/UserService.php` [template](src/templates/common/services/common-service.tpl)
 
 
 ##### Generate selected files.
 
 ```bash
-php yii generate/list user common-services,common-model-source,frontend-service
+php yii dnk/list user common-services,common-model-source,frontend-service
 ```
 
 generate file list:
-- `common/services/UserService.php` [view](src/templates/common/services/common-service.tpl)
-- `common/models/sources/UserSource.php` [view](src/templates/common/models/sources/common-model-source.tpl)
-- `frontend/service/UserService.php` [view](src/templates/frontend/services/frontend-service.tpl)
+- `common/services/UserService.php` [template](src/templates/common/services/common-service.tpl)
+- `common/models/sources/UserSource.php` [template](src/templates/common/models/sources/common-model-source.tpl)
+- `frontend/service/UserService.php` [template](src/templates/frontend/services/frontend-service.tpl)
 ______
 
 
@@ -324,7 +324,7 @@ ______
 ### command  
 
 ```bash
-php yii generate/gen-models `string` `bool`
+php yii dnk/gen-models `string` `bool`
 ```
 
 | Parameter | Type     | Description                            |
@@ -335,16 +335,16 @@ php yii generate/gen-models `string` `bool`
 Generate `model` files for needle table(part).
 
 - **common/models**
-    - common-model-source `common/models/sources/UserSource.php` [view](src/templates/common/models/sources/common-model-source.tpl)
-    - common-model-item `common/models/items/User.php` [view](src/templates/common/models/items/common-model-item.tpl)
+    - common-model-source `common/models/sources/UserSource.php` [template](src/templates/common/models/sources/common-model-source.tpl)
+    - common-model-item `common/models/items/User.php` [template](src/templates/common/models/items/common-model-item.tpl)
 
 - **backend/models**
-    - backend-model-item `backend/models/items/User.php` [view](src/templates/backend/models/items/backend-model-item.tpl)
-    - backend-model-form `backend/models/forms/UserForm.php` [view](src/templates/backend/models/forms/backend-model-form.tpl)
+    - backend-model-item `backend/models/items/User.php` [template](src/templates/backend/models/items/backend-model-item.tpl)
+    - backend-model-form `backend/models/forms/UserForm.php` [template](src/templates/backend/models/forms/backend-model-form.tpl)
 
 - **frontend/models**
-    - frontend-model-item `frontend/models/items/User.php` [view](src/templates/frontend/models/items/frontend-model-item.tpl)
-    - frontend-model-form `frontend/models/forms/UserForm.php` [view](src/templates/frontend/models/forms/frontend-model-form.tpl)
+    - frontend-model-item `frontend/models/items/User.php` [template](src/templates/frontend/models/items/frontend-model-item.tpl)
+    - frontend-model-form `frontend/models/forms/UserForm.php` [template](src/templates/frontend/models/forms/frontend-model-form.tpl)
 _____
 
 
@@ -352,7 +352,7 @@ _____
 ### command  
 
 ```bash
-php yii generate/gen-controllers `string` `bool`
+php yii dnk/gen-controllers `string` `bool`
 ```
 
 | Parameter | Type     | Description                            |
@@ -363,10 +363,10 @@ php yii generate/gen-controllers `string` `bool`
 Generate `controller` files for needle table(part).
 
 - **backend/controller**
-    - backend-model-controller `backend/controller/cruds/UserController.php` [view](src/templates/backend/controllers/cruds/backend-model-controller.tpl)
+    - backend-model-controller `backend/controller/cruds/UserController.php` [template](src/templates/backend/controllers/cruds/backend-model-controller.tpl)
 
 - **frontend/controllers**
-    - frontend-model-controller `frontend/consrollers/UserController.php` [view](src/templates/frontend/controllers/frontend-model-controller.tpl)
+    - frontend-model-controller `frontend/consrollers/UserController.php` [template](src/templates/frontend/controllers/frontend-model-controller.tpl)
 _____
 
 
@@ -374,7 +374,7 @@ _____
 ### command  
 
 ```bash
-php yii generate/gen-services `string` `bool`
+php yii dnk/gen-services `string` `bool`
 ```
 
 | Parameter | Type     | Description                            |
@@ -385,13 +385,13 @@ php yii generate/gen-services `string` `bool`
 Generate `service` files for needle table(part).
 
 - **common/services**
-   - common-service `common/services/UserService.php` [view](src/templates/common/services/common-service.tpl)
+   - common-service `common/services/UserService.php` [template](src/templates/common/services/common-service.tpl)
 
 - **backend/services**
-   -  backend-service `backend/services/UserService.php` [view](src/templates/backend/services/backend-service.tpl)
+   -  backend-service `backend/services/UserService.php` [template](src/templates/backend/services/backend-service.tpl)
 
 - **frontend/service**
-   - frontend-service `frontend/service/UserService.php` [view](src/templates/frontend/services/frontend-service.tpl)
+   - frontend-service `frontend/service/UserService.php` [template](src/templates/frontend/services/frontend-service.tpl)
 _____
 
 
@@ -399,7 +399,7 @@ _____
 ### command  
 
 ```bash
-php yii generate/gen-tests `string` `bool`
+php yii dnk/gen-tests `string` `bool`
 ```
 
 | Parameter | Type     | Description                            |
@@ -411,22 +411,22 @@ Generate `test` files for needle table(part).
 
 Example:
 ```bash
-php yii generate/gen-tests user
+php yii dnk/gen-tests user
 ```
 
 - **common/test/unit/**
-   - service `common/tests/unit/services/UserServiceTest.php` [view](src/templates/common/tests/unit/services/common-test-unit-service.tpl)
-   - item `common/tests/unit/models/items/UserTest.php` [view](src/templates/common/tests/unit/models/items/common-test-unit-model-item.tpl)
+   - service `common/tests/unit/services/UserServiceTest.php` [template](src/templates/common/tests/unit/services/common-test-unit-service.tpl)
+   - item `common/tests/unit/models/items/UserTest.php` [template](src/templates/common/tests/unit/models/items/common-test-unit-model-item.tpl)
 
 - **backend/test/unit/**
-    - service `backend/tests/unit/services/UserServiceTest.php` [view](src/templates/backend/tests/unit/services/backend-test-unit-service.tpl)
-    - item `backend/tests/unit/models/items/UserTest.php` [view](src/templates/backend/tests/unit/models/items/backend-test-unit-model-item.tpl)
-    - form `backend/tests/unit/models/items/UserFormTest.php` [view](src/templates/backend/tests/unit/models/forms/backend-test-unit-model-form.tpl)
+    - service `backend/tests/unit/services/UserServiceTest.php` [template](src/templates/backend/tests/unit/services/backend-test-unit-service.tpl)
+    - item `backend/tests/unit/models/items/UserTest.php` [template](src/templates/backend/tests/unit/models/items/backend-test-unit-model-item.tpl)
+    - form `backend/tests/unit/models/items/UserFormTest.php` [template](src/templates/backend/tests/unit/models/forms/backend-test-unit-model-form.tpl)
 
 - **frontend/test/unit/**
-    - service `frontend/tests/unit/services/UserServiceTest.php` [view](src/templates/frontend/tests/unit/services/frontend-test-unit-service.tpl)
-    - item `frontend/tests/unit/models/items/UserTest.php` [view](src/templates/frontend/tests/unit/models/items/frontend-test-unit-model-item.tpl)
-    - form `frontend/tests/unit/models/items/UserFormTest.php` [view](src/templates/frontend/tests/unit/models/forms/frontend-test-unit-model-form.tpl)
+    - service `frontend/tests/unit/services/UserServiceTest.php` [template](src/templates/frontend/tests/unit/services/frontend-test-unit-service.tpl)
+    - item `frontend/tests/unit/models/items/UserTest.php` [template](src/templates/frontend/tests/unit/models/items/frontend-test-unit-model-item.tpl)
+    - form `frontend/tests/unit/models/items/UserFormTest.php` [template](src/templates/frontend/tests/unit/models/forms/frontend-test-unit-model-form.tpl)
 _____
 
 
@@ -434,7 +434,7 @@ _____
 ### command  
 
 ```bash
-php yii generate/gen-backend-service `string` `bool`
+php yii dnk/gen-backend-service `string` `bool`
 ```
 
 | Parameter | Type     | Description                            |
@@ -445,13 +445,13 @@ php yii generate/gen-backend-service `string` `bool`
 Generate `service` files for needle table(part).
 
 - **common/services**
-   - common-service `common/services/UserService.php` [view](src/templates/common/services/common-service.tpl)
+   - common-service `common/services/UserService.php` [template](src/templates/common/services/common-service.tpl)
 
 - **backend/services**
-   -  backend-service `backend/services/UserService.php` [view](src/templates/backend/services/backend-service.tpl)
+   -  backend-service `backend/services/UserService.php` [template](src/templates/backend/services/backend-service.tpl)
 
 - **frontend/service**
-   - frontend-service `frontend/service/UserService.php` [view](src/templates/frontend/services/frontend-service.tpl)
+   - frontend-service `frontend/service/UserService.php` [template](src/templates/frontend/services/frontend-service.tpl)
 _____
 
 
@@ -459,7 +459,7 @@ _____
 ### command  
 
 ```bash
-php yii generate/gen-backend-views `string` `bool`
+php yii dnk/gen-backend-views `string` `bool`
 ```
 
 | Parameter | Type     | Description                            |
@@ -470,13 +470,13 @@ php yii generate/gen-backend-views `string` `bool`
 Generate `views` files for needle table(part).
 
 - **backend/views**
-    - backend-views-form `backend/views/user/_form-user.php` [view](src/templates/backend/views/model/_form-model.tpl)
-    - backend-views-create `backend/views/user/user-create.php` [view](src/templates/backend/views/model/model-create.tpl)
-    - backend-views-update `backend/views/user/user-update.php` [view](src/templates/backend/views/model/model-update.tpl)
-    - backend-views-read `backend/views/user/user-read.php` [view](src/templates/backend/views/model/model-read.tpl)
-    - backend-views-list `backend/views/user/user-list.php` [view](src/templates/backend/views/model/model-list.tpl)
+    - backend-views-form `backend/views/user/_form-user.php` [template](src/templates/backend/views/model/_form-model.tpl)
+    - backend-views-create `backend/views/user/user-create.php` [template](src/templates/backend/views/model/model-create.tpl)
+    - backend-views-update `backend/views/user/user-update.php` [template](src/templates/backend/views/model/model-update.tpl)
+    - backend-views-read `backend/views/user/user-read.php` [template](src/templates/backend/views/model/model-read.tpl)
+    - backend-views-list `backend/views/user/user-list.php` [template](src/templates/backend/views/model/model-list.tpl)
 
-alias `php yii generate/list user backend-views-form,backend-views-create,backend-views-update,backend-views-read,backend-views-list`
+alias `php yii dnk/list user backend-views-form,backend-views-create,backend-views-update,backend-views-read,backend-views-list`
 _____
 
 
@@ -484,7 +484,7 @@ _____
 ### command  
 
 ```bash
-php yii generate/gen-frontend-views `string` `bool`
+php yii dnk/gen-frontend-views `string` `bool`
 ```
 
 | Parameter | Type     | Description                            |
@@ -496,12 +496,12 @@ Generate `views` files for needle table(part).
 
 
 - **frontend/views**
-    - frontend-views-read `frontend/views/user/user-read.php` [view](src/templates/frontend/views/model/model-read.tpl)
-    - frontend-views-list `frontend/views/user/user-list.php` [view](src/templates/frontend/views/model/model-list.tpl)
+    - frontend-views-read `frontend/views/user/user-read.php` [template](src/templates/frontend/views/model/model-read.tpl)
+    - frontend-views-list `frontend/views/user/user-list.php` [template](src/templates/frontend/views/model/model-list.tpl)
 
 alias
 ```bash
-php yii generate/list user frontend-views-read,frontend-views-list
+php yii dnk/list user frontend-views-read,frontend-views-list
 ```
 _____
 
@@ -635,7 +635,7 @@ return [
     'controllerMap' => [
         // .. other config
         
-        'generate' => [  // new block
+        'dnk' => [  // new block
             'class'     => andy87\dnk\GenerateController::class
         ]
         
@@ -649,7 +649,7 @@ return [
 * `parts` - table lis. for user *  in command property  
 * `baseClasses` - list of based class names for generated file
 
-3. exec command [generate/setup](#command-setup)
+3. exec command [dnk/setup](#command-setup)
     
 4. Update `config` for you require, by example: 
    
@@ -658,10 +658,10 @@ return [
 use common\components\Entity;
 use common\components\core\BaseModel;
 use andy87\dnk\GenerateController;
-use andy87\dnk\source\components\core\BaseController;
-use andy87\dnk\source\components\core\BaseMigration;
-use andy87\dnk\source\components\core\BaseResource;
-use andy87\dnk\source\components\core\BaseService;
+use andy87\dnk\source\base\BaseController;
+use andy87\dnk\source\base\BaseMigration;
+use andy87\dnk\source\base\BaseResource;
+use andy87\dnk\source\base\BaseService;
 
 //.. other code
 
@@ -671,7 +671,7 @@ return [
     'controllerMap' => [
         // .. other config
         
-        'generate' => [  // new block
+        'dnk' => [  // new block
             'class'     => GenerateController::class,
             'command'   => [
                 GenerateController::COMMAND_MODEL => implode(' ', [

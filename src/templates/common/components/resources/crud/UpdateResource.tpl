@@ -4,7 +4,7 @@ namespace common\components\resources\crud;
 
 use yii\base\Model;
 use {{BaseResourceClassName}} as BaseResourceClass;
-use andy87\dnk\source\components\interfaces\resources\crud\UpdateResourcesInterface;
+use andy87\dnk\source\interfaces\resources\crud\UpdateResourcesInterface;
 
 /**
  * Base file for `UpdateResource`

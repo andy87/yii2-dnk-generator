@@ -195,13 +195,6 @@ class GenerateController extends Controller
         ],
     ];
 
-    /** @var array mapping for `setup` generate  */
-    public const SETUP_COPY_SETUP_FILES = [
-        'common-resources-grid' => [
-            self::SOURCE => '/source/common/components/resources/GridViewResource.php',
-            self::TARGET => '@common/components/resources/GridViewResource.php'
-        ],
-    ];
 
     /** @var array mapping for `tests` generate */
     public const GENERATE_TESTS = [
@@ -271,7 +264,7 @@ class GenerateController extends Controller
      * Copy directory with based classes (call once)
      *
      * example:
-     *      php yii generate/setup
+     *      php yii dnk/setup
      *
      * @param bool $overwrite
      * @return void
@@ -279,23 +272,6 @@ class GenerateController extends Controller
      */
     public function actionSetup( bool $overwrite = false ): void
     {
-        $sourceRoot = __DIR__;
-
-        echo "\r\n Copy files.";
-
-        foreach ( self::SETUP_COPY_SETUP_FILES as $template )
-        {
-            $sourcePath = $sourceRoot.$template[self::SOURCE];
-            $targetPath = Yii::getAlias($template[self::TARGET]);
-
-            echo "\r\n Copy" . (($overwrite) ? ' (overwrite)' : '') . ": $sourcePath"
-                . "\r\n to: $targetPath.";
-            
-            $this->createDirectories($targetPath);
-
-            $this->copy($sourcePath, $targetPath);
-        }
-
         $params = $this->getParams('model','Model');
 
         echo "\r\n Generate `setup` files.";
@@ -310,13 +286,13 @@ class GenerateController extends Controller
      * Generate new all files for entity
      *
      * example:
-     *      php yii generate/gen user
+     *      php yii dnk/run user
      *
      * @param string $entity
      * @param bool $overwrite
      * @return void
      */
-    public function actionGen(string $entity, bool $overwrite = false ): void
+    public function actionRun(string $entity, bool $overwrite = false ): void
     {
         $entityList = $this->getEntity($entity);
 
@@ -330,7 +306,7 @@ class GenerateController extends Controller
      * Generate some files for entity
      *
      * example:
-     *      php yii generate/gen user common-model-source,backend-model-form,frontend-model-form
+     *      php yii dnk/gen user common-model-source,backend-model-form,frontend-model-form
      *
      * @param string $entity
      * @param string $map
@@ -425,7 +401,7 @@ class GenerateController extends Controller
      * Generate services files for entity
      *
      * example:
-     *      php yii generate/gen-services user
+     *      php yii dnk/gen-services user
      *
      * @param string $entity
      * @param bool $overwrite
@@ -444,7 +420,7 @@ class GenerateController extends Controller
      * Generate services files for entity
      *
      * example:
-     *      php yii generate/gen-controllers user
+     *      php yii dnk/gen-controllers user
      *
      * @param string $entity
      * @param bool $overwrite
@@ -463,7 +439,7 @@ class GenerateController extends Controller
      * Generate services files for entity
      *
      * example:
-     *      php yii generate/gen-models user
+     *      php yii dnk/gen-models user
      *
      * @param string $entity
      * @param bool $overwrite
@@ -482,7 +458,7 @@ class GenerateController extends Controller
      * Generate backend/views files for entity
      *
      * example:
-     *      php yii generate/gen-backend-views user
+     *      php yii dnk/gen-backend-views user
      *
      * @param string $entity
      * @param bool $overwrite
@@ -501,7 +477,7 @@ class GenerateController extends Controller
      * Generate frontend/views files for entity
      *
      * example:
-     *      php yii generate/gen-frontend-views user
+     *      php yii dnk/gen-frontend-views user
      *
      * @param string $entity
      * @param bool $overwrite

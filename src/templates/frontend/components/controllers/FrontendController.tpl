@@ -10,8 +10,8 @@ use common\components\resources\GridViewResource;
 use common\components\resources\crud\ListResource;
 use common\components\resources\crud\ReadResource;
 use {{BaseControllerClassName}} as BaseControllerClass;
-use andy87\dnk\source\components\core\BaseService;
-use andy87\dnk\source\components\interfaces\controllers\frontend\ControllerFrontendInterface;
+use andy87\dnk\source\base\BaseService;
+use andy87\dnk\source\interfaces\controllers\frontend\ControllerFrontendInterface;
 
 /**
  * Base Controller for environment `frontend`
