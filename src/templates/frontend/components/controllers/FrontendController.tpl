@@ -2,14 +2,15 @@
 
 namespace frontend\components\controllers;
 
+use Yii;
 use ReflectionException;
 use yii\web\Response;
 use yii\web\ErrorAction;
 use yii\data\ActiveDataProvider;
-use common\components\resources\GridViewResource;
+use {{BaseControllerClassName}} as BaseControllerClass;
 use common\components\resources\crud\ListResource;
 use common\components\resources\crud\ReadResource;
-use {{BaseControllerClassName}} as BaseControllerClass;
+use andy87\dnk\source\resources\GridViewResource;
 use andy87\dnk\source\base\BaseService;
 use andy87\dnk\source\interfaces\controllers\frontend\ControllerFrontendInterface;
 
