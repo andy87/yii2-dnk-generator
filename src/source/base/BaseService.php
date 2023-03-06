@@ -177,7 +177,7 @@ abstract class BaseService extends Component
      */
     private function modelSetAttributes(Model $model, array $params = []): Model
     {
-        if ( !empty($attributes) )
+        if ( !empty($params) )
         {
             $CamelCame = get_class($model);
 
