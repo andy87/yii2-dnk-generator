@@ -2,7 +2,8 @@
 
 use common\components\Entity;
 use common\components\db\Setup;
-use andy87\dnk\common\components\core\BaseMigration as BaseMigrationClass;
+use common\components\db\Tables;
+use {{BaseMigrationClassName}} as BaseMigrationClass;
 
 /**
  * Создание таблицы `{{snake_case}}`
@@ -10,7 +11,7 @@ use andy87\dnk\common\components\core\BaseMigration as BaseMigrationClass;
 class {{migrateFileName}} extends BaseMigrationClass
 {
     /** @var string Имя таблицы */
-    public string $entity = Entity::{{UPPER_CASE}};
+    public string $entity = Tables::NAMES[ Entity::{{UPPER_CASE}} ];
 
     /**
      * @return array
