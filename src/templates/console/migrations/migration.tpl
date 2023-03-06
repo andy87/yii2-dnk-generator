@@ -2,7 +2,6 @@
 
 use common\components\Entity;
 use common\components\db\Setup;
-use common\components\db\Tables;
 use {{BaseMigrationClassName}} as BaseMigrationClass;
 
 /**
@@ -11,7 +10,7 @@ use {{BaseMigrationClassName}} as BaseMigrationClass;
 class {{migrateFileName}} extends BaseMigrationClass
 {
     /** @var string Имя таблицы */
-    public string $entity = Tables::NAMES[ Entity::{{UPPER_CASE}} ];
+    public string $entity = Entity::{{UPPER_CASE}};
 
     /**
      * @return array
