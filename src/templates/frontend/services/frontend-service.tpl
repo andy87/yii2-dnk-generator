@@ -13,8 +13,9 @@ use frontend\resources\{{snake_case}}\{{CamelCase}}ReadResource;
 /**
  *  Service for model `{{CamelCase}}` environment `frontend`
  *
- * @method {{CamelCase}} create()
  * @method {{CamelCase}} getModel()
+ * @method {{CamelCase}}Form create(array $params = [], bool $is_save = true)
+ * @method {{CamelCase}}Form update(Model $model, array $params = [], bool $is_save = true)
  * @method {{CamelCase}}ReadResource|{{CamelCase}}ListResource getResource(int $key, array $arr = [])
  */
 class {{CamelCase}}Service extends {{CamelCase}}CommonService implements ServiceFrontendInterface
@@ -25,6 +26,7 @@ class {{CamelCase}}Service extends {{CamelCase}}CommonService implements Service
     /** @var string  */
     public const FORM = {{CamelCase}}Form::class;
 
+    /** @var array  */
     public const RESOURCES = [
         self::LIST => {{CamelCase}}ListResource::class,
         self::READ => {{CamelCase}}ReadResource::class,

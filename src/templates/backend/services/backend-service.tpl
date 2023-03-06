@@ -15,8 +15,9 @@ use backend\resources\{{snake_case}}\{{CamelCase}}ListResource;
 /**
  *  Service for model `{{CamelCase}}` environment `backend`
  *
- * @method {{CamelCase}} create()
  * @method {{CamelCase}} getModel()
+ * @method {{CamelCase}}Form create(array $params = [], bool $is_save = true)
+ * @method {{CamelCase}}Form update(Model $model, array $params = [], bool $is_save = true)
  * @method {{CamelCase}}CreateResource|{{CamelCase}}ReadResource|{{CamelCase}}UpdateResource|{{CamelCase}}ListResource getResource(int $key, array $arr = [])
  */
 class {{CamelCase}}Service extends {{CamelCase}}CommonService implements ServiceBackendInterface
@@ -27,6 +28,7 @@ class {{CamelCase}}Service extends {{CamelCase}}CommonService implements Service
     /** @var string  */
     public const FORM = {{CamelCase}}Form::class;
 
+    /** @var array  */
     public const RESOURCES = [
         self::CREATE => {{CamelCase}}CreateResource::class,
         self::READ => {{CamelCase}}ReadResource::class,

@@ -122,7 +122,7 @@ abstract class BaseService extends Component
      * @return Model
      * @throws InvalidConfigException
      */
-    public function create( array $params = [], bool $is_save = true ): Model
+    public function create(array $params = [], bool $is_save = true): Model
     {
         $model = $this->getEntity();
 
@@ -139,7 +139,7 @@ abstract class BaseService extends Component
      * @param bool $is_save
      * @return Model
      */
-    public function update( Model $model, array $params = [], bool $is_save = true): Model
+    public function update(Model $model, array $params = [], bool $is_save = true): Model
     {
         $model = $this->modelSetAttributes($model, $params);
 
