@@ -2,10 +2,10 @@
 
 namespace andy87\dnk\source\tests\unit;
 
-use ReflectionException;
 use Codeception\Test\Unit;
 use andy87\dnk\source\base\BaseService as BaseServiceAlias;
 use andy87\dnk\source\tests\unit\services\BaseService;
+use yii\base\InvalidConfigException;
 
 /**
  * Tests
@@ -14,7 +14,7 @@ class BaseServiceTest extends Unit
 {
     /**
      * @return void
-     * @throws ReflectionException
+     * @throws InvalidConfigException
      */
     public function testSendEmail(): void
     {
@@ -27,8 +27,6 @@ class BaseServiceTest extends Unit
         verify($service->getForm())->instanceOf('yii\base\Model');
 
         verify($service->getResource(BaseServiceAlias::LIST))->null();
-
-        verify($service->createClass($service->getClassModel()))->instanceOf('yii\base\Model');
 
         verify($service->getEntity())->instanceOf('yii\base\Model');
 

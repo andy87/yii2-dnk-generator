@@ -2,13 +2,9 @@
 
 namespace andy87\dnk\source\base;
 
-use ReflectionClass;
-use ReflectionException;
-use yii\base\Model;
-use yii\base\Component;
-use yii\base\InvalidArgumentException;
-use yii\db\ActiveQuery;
-use yii\db\ActiveRecord;
+use Yii;
+use yii\base\{Model,Component,InvalidConfigException};
+use yii\db\{ActiveQuery,ActiveRecord,ActiveRecordInterface};
 
 /**
  *  Базовый клас для сервисов.
@@ -65,26 +61,30 @@ abstract class BaseService extends Component
     /**
      * Возвращает экземпляр класса модели, с которой работает сервис
      *
+     * @param array $params
      * @return Model
-     * @throws ReflectionException
+     * @throws InvalidConfigException
      */
-    public function getModel(): Model
+    public function getModel(array $params = []): Model
     {
-        return $this->createClass(
-            $this->getClassModel()
-        );
+        /** @var Model $model */
+        $model = Yii::createObject($this->getClassModel(), $params);
+
+        return $model;
     }
 
     /**
      * Возвращает экземпляр класса формы, с которой работает сервис
      *
-     * @throws ReflectionException
+     * array $params
+     * @throws InvalidConfigException
      */
-    public function getForm()
+    public function getForm(array $params = []): Model
     {
-        return $this->createClass(
-            $this->getClassForm()
-        );
+        /** @var Model $model */
+        $model = Yii::createObject($this->getClassForm(), $params);
+
+        return $model;
     }
 
     /**
@@ -93,45 +93,21 @@ abstract class BaseService extends Component
      * @param int $key
      * @param array $params
      * @return ?object
-     * @throws ReflectionException
+     * @throws InvalidConfigException
      */
     public function getResource( int $key, array $params = []): ?object
     {
         if ( ($class = static::RESOURCES[$key] ?? false) )
         {
-            return $this->createClass($class, $params);
+            return Yii::createObject($class, $params);
         }
 
         return null;
     }
 
     /**
-     * Возвращает экземпляр класса, переданного в аргументе `$class`
-     *
-     * @param string $class Имя класса, экземпляр которого будет создан
-     * @param array $params Параметры класса
-     * @return mixed
-     * @throws ReflectionException
-     */
-    public function createClass(string $class, array $params = []): object
-    {
-        $reflection = new ReflectionClass($class);
-
-        $constructorParams = $reflection->getConstructor() ? $reflection->getConstructor()->getParameters() : [];
-
-        foreach ($constructorParams as $param)
-        {
-            if (!array_key_exists($param->name, $params) && !$param->isOptional()) {
-                throw new InvalidArgumentException("Missing required parameter: $param->name");
-            }
-        }
-
-        return $reflection->newInstanceArgs($params);
-    }
-
-    /**
      * @return Model
-     * @throws ReflectionException
+     * @throws InvalidConfigException
      */
     public function getEntity(): Model
     {
@@ -144,7 +120,7 @@ abstract class BaseService extends Component
      * @param array $params
      * @param bool $is_save
      * @return Model
-     * @throws ReflectionException
+     * @throws InvalidConfigException
      */
     public function create( array $params = [], bool $is_save = true ): Model
     {
@@ -196,7 +172,7 @@ abstract class BaseService extends Component
      */
     private function modelSave(Model $model, bool $is_save = true): Model
     {
-        if($is_save) $model->save();
+        if($is_save && $model instanceof ActiveRecordInterface ) $model->save();
 
         return $model;
     }
