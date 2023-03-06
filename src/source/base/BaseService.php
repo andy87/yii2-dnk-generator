@@ -29,9 +29,9 @@ abstract class BaseService extends Component
 
 
     /** @var string Имя класса Модели ActiveRecord */
-    private const MODEL = Model::class;
+    public const MODEL = Model::class;
     /** @var string Имя класса Формы ActiveRecord */
-    private const FORM = Model::class;
+    public const FORM = Model::class;
 
 
     /** @var array Массив ресурсов */
@@ -51,7 +51,7 @@ abstract class BaseService extends Component
      */ 
     public function getClassModel(): string
     {
-        return self::MODEL;
+        return static::MODEL;
     }
 
     /**
@@ -59,7 +59,7 @@ abstract class BaseService extends Component
      */
     public function getClassForm(): string
     {
-        return self::FORM;
+        return static::FORM;
     }
 
     /**
@@ -142,10 +142,10 @@ abstract class BaseService extends Component
      * Создание сущности/модели
      *
      * @param array $attributes
-     * @return ActiveRecord
+     * @return Model
      * @throws ReflectionException
      */
-    public function create( array $attributes = [] ): ActiveRecord
+    public function create( array $attributes = [] ): Model
     {
         $model = $this->getEntity();
 
@@ -159,11 +159,11 @@ abstract class BaseService extends Component
     /**
      * Сохранение сущности/модели
      *
-     * @param ActiveRecord $model
+     * @param Model $model
      * @param array $attributes
-     * @return ActiveRecord
+     * @return Model
      */
-    public function update( ActiveRecord $model, array $attributes = [] ): ActiveRecord
+    public function update( Model $model, array $attributes = [] ): Model
     {
         if ( !empty($attributes) ) $model->setAttributes($attributes);
 

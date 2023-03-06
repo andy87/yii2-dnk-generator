@@ -2,11 +2,12 @@
 
 namespace andy87\dnk\source\base;
 
-use yii\base\InvalidConfigException;
+use Yii;
 use yii\db\Migration;
+use yii\base\InvalidConfigException;
 use common\components\Entity;
-use common\components\db\Tables;
 use common\components\db\Setup;
+use common\components\db\Tables;
 
 /**
  * Базовый класс миграций.
@@ -57,9 +58,9 @@ abstract class BaseMigration extends Migration
      * @return void
      * @throws InvalidConfigException
      */
-    private function setSetup()
+    private function setSetup(): void
     {
-        $setup = \Yii::createObject(Setup::class);
+        $setup = Yii::createObject(Setup::class);
 
         $this->setup = $setup;
     }
