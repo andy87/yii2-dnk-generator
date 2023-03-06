@@ -1,6 +1,6 @@
 <?php
 
-use common\components\Part;
+use common\components\Entity;
 use common\components\db\Setup;
 use andy87\dnk\common\components\core\BaseMigration as BaseMigrationClass;
 
@@ -10,7 +10,7 @@ use andy87\dnk\common\components\core\BaseMigration as BaseMigrationClass;
 class {{migrateFileName}} extends BaseMigrationClass
 {
     /** @var string Имя таблицы */
-    public string $part = Part::{{UPPER_CASE}};
+    public string $entity = Entity::{{UPPER_CASE}};
 
     /**
      * @return array

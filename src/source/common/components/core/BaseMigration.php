@@ -4,7 +4,7 @@ namespace andy87\dnk\common\components\core;
 
 use yii\base\InvalidConfigException;
 use yii\db\Migration;
-use common\components\Part;
+use common\components\Entity;
 use common\components\db\Tables;
 use common\components\db\Setup;
 
@@ -16,7 +16,7 @@ abstract class BaseMigration extends Migration
 {
     // Свойства
     /** @var string Ключ `раздела` в системе */
-    public string $part;
+    public string $entity;
 
     /** @var Setup Настройки базы данных */
     protected Setup $setup;
@@ -43,7 +43,7 @@ abstract class BaseMigration extends Migration
 
         $this->setSetup();
 
-        $this->tableName = Tables::NAMES[ $this->part ];
+        $this->tableName = Tables::NAMES[ $this->entity ];
 
         $this->tableOptions = sprintf(
             'CHARACTER SET %s COLLATE %s ENGINE=%s',
@@ -85,7 +85,7 @@ abstract class BaseMigration extends Migration
         parent::createTable($this->tableName, $this->constructTable(), $this->tableOptions );
 
         //Добавление комментария к таблице (средствами Yii2)
-        $tableComment = Part::DATA[ $this->part ]['name'][ Part::NAME_MANY ];
+        $tableComment = Entity::DATA[ $this->entity ][Entity::LABELS][ Entity::NAME_MANY ];
         if ( strlen($tableComment) ) $this->addCommentOnTable($this->tableName, $tableComment );
     }
 

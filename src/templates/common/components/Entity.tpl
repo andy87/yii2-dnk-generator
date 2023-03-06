@@ -7,7 +7,7 @@ use common\components\db\Tables;
 /**
  * `Разделы` системы
  */
-class Part
+class Entity
 {
     // Константы
 

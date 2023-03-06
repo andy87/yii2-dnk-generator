@@ -2,7 +2,6 @@
 
 namespace andy87\dnk;
 
-use common\components\Part;
 use Yii;
 use Exception;
 use yii\helpers\Inflector;
@@ -155,8 +154,8 @@ class GenerateController extends Controller
     public const SETUP_GENERATE_SETUP_FILES = [
 
         'common-components-parts' => [
-            self::SOURCE => 'common/components/Part.tpl' ,
-            self::TARGET => '@common/components/Part.php'
+            self::SOURCE => 'common/components/Entity.tpl' ,
+            self::TARGET => '@common/components/Entity.php'
         ],
         'common-components-db-setup' => [
             self::SOURCE => 'common/components/db/Setup.tpl',
