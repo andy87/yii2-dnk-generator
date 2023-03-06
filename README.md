@@ -626,16 +626,47 @@ php composer.local require andy87/yii2-dnk-generator:dev-master
 2. Update config file:
 - advanced: `@console\config\main.php`
 
-
 ```php
-//first add `use`
-use andy87\dnk\GenerateController;
-    
 //.. other code
 
 return [
     // .. other config
     
+    'controllerMap' => [
+        // .. other config
+        
+        'generate' => [  // new block
+            'class'     => andy87\dnk\GenerateController::class
+        ]
+        
+    ]
+]
+```
+
+
+* `root` - directory with folders 'frontend',backend',common' ...  
+* `command` - part of gii/... command  
+* `parts` - table lis. for user *  in command property  
+* `baseClasses` - list of based class names for generated file
+
+3. exec command [generate/setup](#command-setup)
+    
+4. Update `config` for you require, by example: 
+   
+```php
+//first add `use`
+use common\components\core\BaseModel;
+use andy87\dnk\GenerateController;
+use andy87\dnk\common\components\core\BaseController;
+use andy87\dnk\common\components\core\BaseMigration;
+use andy87\dnk\common\components\core\BaseResource;
+use andy87\dnk\common\components\core\BaseService;
+
+//.. other code
+
+return [
+    // .. other config
+
     'controllerMap' => [
         // .. other config
         
@@ -658,7 +689,7 @@ return [
                     '&& yes'
                 ])
             ],
-            'entityList' => [], //array_keys(\common\components\Entity::DATA),
+            'entityList' => array_keys(\common\components\Entity::DATA),
             'baseClasses' => [
                 GenerateController::BASE_MIGRATE_CLASS => BaseMigration::class, // extends for `Migrations`
                 GenerateController::BASE_CONTROLLER_CLASS => BaseController::class, // extends for `Controllers`
@@ -667,30 +698,9 @@ return [
                 GenerateController::BASE_RESOURCE_CLASS => BaseResource::class, // extends for `Resources`
             ]
         ]
-        
     ]
 ]
 ```
-
-
-* `root` - directory with folders 'frontend',backend',common' ...  
-* `command` - part of gii/... command  
-* `parts` - table lis. for user *  in command property  
-* `baseClasses` - list of based class names for generated file
-
-3. exec command [generate/setup](#command-setup)
-    
-4. Update `config`: 
-   * base classes `import`
-     * use andy87\dnk\common\components\core\BaseController;
-     * use andy87\dnk\common\components\core\BaseMigration;
-     * use andy87\dnk\common\components\core\BaseResource;
-     * use andy87\dnk\common\components\core\BaseService;
-   * set `entityList`
-     * change:
-         * 'parts' => [], //array_keys(\common\components\Entity::DATA),
-         * to:
-         * 'parts' => array_keys(\common\components\Entity::DATA),
 
 
 5. Add `Entity`  
