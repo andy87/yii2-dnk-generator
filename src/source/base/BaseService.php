@@ -122,7 +122,7 @@ abstract class BaseService extends Component
         foreach ($constructorParams as $param)
         {
             if (!array_key_exists($param->name, $params) && !$param->isOptional()) {
-                throw new InvalidArgumentException("Missing required parameter: {$param->name}");
+                throw new InvalidArgumentException("Missing required parameter: $param->name");
             }
         }
 
