@@ -654,7 +654,8 @@ return [
 4. Update `config` for you require, by example: 
    
 ```php
-//first add `use`
+
+use common\components\Entity;
 use common\components\core\BaseModel;
 use andy87\dnk\GenerateController;
 use andy87\dnk\common\components\core\BaseController;
@@ -689,7 +690,7 @@ return [
                     '&& yes'
                 ])
             ],
-            'entityList' => array_keys(\common\components\Entity::DATA),
+            'entityList' => array_keys(Entity::DATA),
             'baseClasses' => [
                 GenerateController::BASE_MIGRATE_CLASS => BaseMigration::class, // extends for `Migrations`
                 GenerateController::BASE_CONTROLLER_CLASS => BaseController::class, // extends for `Controllers`
