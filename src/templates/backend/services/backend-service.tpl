@@ -40,10 +40,10 @@ class {{CamelCase}}Service extends {{CamelCase}}CommonService implements Service
 
     /**
      * @param array $params
-     * @return {{CamelCase}}Form
+     * @return Model|{{CamelCase}}Form
      * @throws InvalidConfigException
      */
-    public function getForm(array $params = []): {{CamelCase}}Form
+    public function getForm(array $params = []): Model|{{CamelCase}}Form
     {
         /** @var {{CamelCase}}Form $model */
         $form = Yii::createObject($this->getClassForm(), $params);
