@@ -17,7 +17,7 @@ use backend\resources\{{snake_case}}\{{CamelCase}}ListResource;
  *
  * @method {{CamelCase}} getModel()
  * @method {{CamelCase}}Form create(array $params = [], bool $is_save = true)
- * @method {{CamelCase}}Form update(Model $model, array $params = [], bool $is_save = true)
+ * @method {{CamelCase}}Form update({{CamelCase}} $model, array $params = [], bool $is_save = true)
  * @method {{CamelCase}}CreateResource|{{CamelCase}}ReadResource|{{CamelCase}}UpdateResource|{{CamelCase}}ListResource getResource(int $key, array $arr = [])
  */
 class {{CamelCase}}Service extends {{CamelCase}}CommonService implements ServiceBackendInterface
@@ -37,21 +37,23 @@ class {{CamelCase}}Service extends {{CamelCase}}CommonService implements Service
     ];
 
     /**
+     * @param array $params
      * @return {{CamelCase}}Form
      * @throws ReflectionException
      */
-    public function getForm(): {{CamelCase}}Form
+    public function getForm(array $params = []): {{CamelCase}}Form
     {
-        return $this->createClass(
-            $this->getClassForm()
-        );
+        /** @var {{CamelCase}}Form $model */
+        $form = Yii::createObject($this->getClassForm(), $params);
+
+        return $form;
     }
 
     /**
-     * @return {{CamelCase}}Form
+     * @return Model|{{CamelCase}}Form
      * @throws ReflectionException
      */
-    public function getEntity(): {{CamelCase}}Form
+    public function getEntity(): Model|{{CamelCase}}Form
     {
         return $this->getForm();
     }

@@ -44,15 +44,6 @@ class {{CamelCase}}Service extends {{CamelCase}}CommonService implements Service
     }
 
     /**
-     * @return {{CamelCase}}Form
-     * @throws ReflectionException
-     */
-    public function getEntity(): {{CamelCase}}Form
-    {
-        return $this->getForm();
-    }
-
-    /**
      * @return string
      */
     public function getClassForm(): string
