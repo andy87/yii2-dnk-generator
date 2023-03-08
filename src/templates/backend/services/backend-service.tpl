@@ -2,6 +2,7 @@
 
 namespace backend\services;
 
+use Yii;
 use yii\base\Model;
 use ReflectionException;
 use common\services\{{CamelCase}}Service as {{CamelCase}}CommonService;
