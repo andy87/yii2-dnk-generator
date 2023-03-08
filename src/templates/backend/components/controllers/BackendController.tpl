@@ -3,8 +3,8 @@
 namespace backend\components\controllers;
 
 use Yii;
-use ReflectionException;
 use yii\data\ActiveDataProvider;
+use yii\base\InvalidConfigException;
 use {{BaseControllerClassName}} as BaseControllerClass;
 use common\components\resources\crud\ListResource;
 use common\components\resources\crud\ReadResource;
@@ -30,7 +30,7 @@ abstract class BackendController extends BaseControllerClass implements Controll
 
     /**
      *  action `List`
-     * @throws ReflectionException
+     * @throws InvalidConfigException
      */
     public function actionList(): string
     {
@@ -49,7 +49,7 @@ abstract class BackendController extends BaseControllerClass implements Controll
     /**
      *  action `Read`
      *
-     * @throws ReflectionException
+     * @throws InvalidConfigException
      */
     public function actionRead(int $id): string
     {
@@ -64,7 +64,7 @@ abstract class BackendController extends BaseControllerClass implements Controll
     /**
      *  action `Create`
      *
-     * @throws ReflectionException
+     * @throws InvalidConfigException
      */
     public function actionCreate(int $id): string
     {
@@ -89,7 +89,7 @@ abstract class BackendController extends BaseControllerClass implements Controll
      * @param int $id
      *
      * @return string
-     * @throws ReflectionException
+     * @throws InvalidConfigException
      */
     public function actionUpdate(int $id): string
     {
