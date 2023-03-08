@@ -2,6 +2,7 @@
 
 namespace backend\services;
 
+use yii\base\Model;
 use ReflectionException;
 use common\services\{{CamelCase}}Service as {{CamelCase}}CommonService;
 use andy87\dnk\source\interfaces\services\backend\ServiceBackendInterface;
