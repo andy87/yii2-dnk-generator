@@ -4,7 +4,7 @@ namespace frontend\services;
 
 use Yii;
 use yii\base\Model;
-use ReflectionException;
+use InvalidConfigException;
 use common\services\{{CamelCase}}Service as {{CamelCase}}CommonService;
 use andy87\dnk\source\interfaces\services\frontend\ServiceFrontendInterface;
 use frontend\models\items\{{CamelCase}};
@@ -36,7 +36,7 @@ class {{CamelCase}}Service extends {{CamelCase}}CommonService implements Service
 
     /**
      * @return Model|{{CamelCase}}Form
-     * @throws ReflectionException
+     * @throws InvalidConfigException
      */
     public function getForm(): Model|{{CamelCase}}Form
     {

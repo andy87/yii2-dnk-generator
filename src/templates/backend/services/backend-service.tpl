@@ -4,7 +4,7 @@ namespace backend\services;
 
 use Yii;
 use yii\base\Model;
-use ReflectionException;
+use InvalidConfigException;
 use common\services\{{CamelCase}}Service as {{CamelCase}}CommonService;
 use andy87\dnk\source\interfaces\services\backend\ServiceBackendInterface;
 use backend\models\items\{{CamelCase}};
@@ -41,7 +41,7 @@ class {{CamelCase}}Service extends {{CamelCase}}CommonService implements Service
     /**
      * @param array $params
      * @return {{CamelCase}}Form
-     * @throws ReflectionException
+     * @throws InvalidConfigException
      */
     public function getForm(array $params = []): {{CamelCase}}Form
     {
@@ -53,7 +53,7 @@ class {{CamelCase}}Service extends {{CamelCase}}CommonService implements Service
 
     /**
      * @return Model|{{CamelCase}}Form
-     * @throws ReflectionException
+     * @throws InvalidConfigException
      */
     public function getEntity(): Model|{{CamelCase}}Form
     {
