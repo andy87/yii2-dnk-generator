@@ -4,7 +4,7 @@ namespace frontend\services;
 
 use Yii;
 use yii\base\Model;
-use InvalidConfigException;
+use yii\base\InvalidConfigException;
 use common\services\{{CamelCase}}Service as {{CamelCase}}CommonService;
 use andy87\dnk\source\interfaces\services\frontend\ServiceFrontendInterface;
 use frontend\models\items\{{CamelCase}};
