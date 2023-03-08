@@ -2,6 +2,8 @@
 
 namespace frontend\services;
 
+use Yii;
+use yii\base\Model;
 use ReflectionException;
 use common\services\{{CamelCase}}Service as {{CamelCase}}CommonService;
 use andy87\dnk\source\interfaces\services\frontend\ServiceFrontendInterface;
@@ -33,14 +35,15 @@ class {{CamelCase}}Service extends {{CamelCase}}CommonService implements Service
     ];
 
     /**
-     * @return {{CamelCase}}Form
+     * @return Model|{{CamelCase}}Form
      * @throws ReflectionException
      */
-    public function getForm(): {{CamelCase}}Form
+    public function getForm(): Model|{{CamelCase}}Form
     {
-        return $this->createClass(
-            $this->getClassForm()
-        );
+        /** @var {{CamelCase}}Form $model */
+        $form = Yii::createObject($this->getClassForm(), $params);
+
+        return $form;
     }
 
     /**
