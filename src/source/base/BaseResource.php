@@ -42,7 +42,7 @@ abstract class BaseResource extends Component implements ResourcesInterface
      */
     public function render(?string $template = null, array $params = []): string
     {
-        $template = $template || static::TEMPLATE;
+        $template = ($template) ? $template : static::TEMPLATE;
         $params = array_merge( $this->release(), $params );
 
         return Yii::$app->view->render($template, $params);
