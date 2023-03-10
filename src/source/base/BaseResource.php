@@ -3,6 +3,7 @@
 namespace andy87\dnk\source\base;
 
 use Yii;
+use yii\web\Controller;
 use yii\web\Response;
 use yii\base\Component;
 use andy87\dnk\source\interfaces\resources\ResourcesInterface;
@@ -36,16 +37,17 @@ abstract class BaseResource extends Component implements ResourcesInterface
     }
 
     /**
+     * @param Controller $controller
      * @param ?string $template
      * @param array $params
      * @return string
      */
-    public function render(?string $template = null, array $params = []): string
+    public function render(Controller $controller, ?string $template = null, array $params = []): string
     {
         $template = ($template) ? $template : static::TEMPLATE;
         $params = array_merge( $this->release(), $params );
 
-        return Yii::$app->view->render($template, $params);
+        return $controller->render($template, $params);
     }
 
     /**

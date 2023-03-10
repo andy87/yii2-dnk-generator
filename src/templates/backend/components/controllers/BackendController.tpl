@@ -3,13 +3,13 @@
 namespace backend\components\controllers;
 
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\base\InvalidConfigException;
-use {{BaseControllerClassName}} as BaseControllerClass;
+use common\components\Entity;
 use common\components\resources\crud\ListResource;
 use common\components\resources\crud\ReadResource;
 use common\components\resources\crud\CreateResource;
 use common\components\resources\crud\UpdateResource;
+use {{BaseControllerClassName}} as BaseControllerClass;
 use andy87\dnk\source\base\BaseService;
 use andy87\dnk\source\resources\GridViewResource;
 use andy87\dnk\source\interfaces\controllers\backend\ControllerBackendInterface;
@@ -43,7 +43,10 @@ abstract class BackendController extends BaseControllerClass implements Controll
             'gridViewResource' => new GridViewResource($form, $activeDataProvider)
         ]);
 
-        return $R->render();
+        $this->view->title = Entity::getLabelMany(Entity::PAGE);
+        $this->view->params['breadcrumbs'][] = $this->view->title;
+
+        return $R->render($this);
     }
 
     /**
@@ -58,7 +61,14 @@ abstract class BackendController extends BaseControllerClass implements Controll
             'item' => $this->service->findWhere(['id' => $id])->one()
         ]);
 
-        return $R->render();
+        $this->view->title = Entity::getLabelOne(Entity::{{UPPER_CASE}}) . ": $id view";
+        $this->view->params['breadcrumbs'][] = [
+            'label' => Entity::getLabelMany(Entity::{{UPPER_CASE}}),
+            'url' => ['index']
+        ];
+        $this->view->params['breadcrumbs'][] = $this->view->title;
+
+        return $R->render($this);
     }
 
     /**
@@ -66,13 +76,11 @@ abstract class BackendController extends BaseControllerClass implements Controll
      *
      * @throws InvalidConfigException
      */
-    public function actionCreate(int $id): string
+    public function actionCreate(): string
     {
-        $formClass = $this->service->getClassForm();
-
         /** @var CreateResource $R */
         $R = $this->service->getResource(BaseService::CREATE, [
-            'item' => $formClass::findOne($id)
+            'item' => $this->service->getForm()
         ]);
 
         if ( $this->request->isPost ){
@@ -80,7 +88,14 @@ abstract class BackendController extends BaseControllerClass implements Controll
             $this->service->create($R->item->getAttributes());
         }
 
-        return $R->render();
+        $this->view->title = Entity::getLabelOne(Entity::{{UPPER_CASE}}) . ': create';
+        $this->view->params['breadcrumbs'][] = [
+            'label' => Entity::getLabelMany(Entity::{{UPPER_CASE}}),
+            'url' => ['index']
+        ];
+        $this->view->params['breadcrumbs'][] = $this->view->title;
+
+        return $R->render($this);
     }
 
     /**
@@ -105,6 +120,13 @@ abstract class BackendController extends BaseControllerClass implements Controll
             $this->service->update($R->item);
         }
 
-        return $R->render();
+        $this->view->title = Entity::getLabelOne(Entity::{{UPPER_CASE}}) . ": $id update";
+        $this->view->params['breadcrumbs'][] = [
+            'label' => Entity::getLabelMany(Entity::{{UPPER_CASE}}),
+            'url' => ['index']
+        ];
+        $this->view->params['breadcrumbs'][] = $this->view->title;
+
+        return $R->render($this);
     }
 }

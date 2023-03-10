@@ -44,4 +44,23 @@ class Entity
         ],
     ];
 
+
+    /**
+     * @param int $key
+     * @return string
+     */
+    public static function getLabelMany( int $key ): string
+    {
+        return self::DATA[$key][self::LABELS][self::NAME_MANY];
+    }
+
+    /**
+     * @param int $key
+     * @return string
+     */
+    public static function getLabelOne( int $key ): string
+    {
+        return self::DATA[$key][self::LABELS][self::NAME_MANY];
+    }
+
 }
