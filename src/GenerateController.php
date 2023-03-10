@@ -61,7 +61,7 @@ class GenerateController extends Controller
                 self::TARGET => "@common/models/items/{{CamelCase}}.php"
             ],
             'common-model-search' => [
-                self::SOURCE => 'common/models/items/common-model-search.tpl',
+                self::SOURCE => 'common/models/search/common-model-search.tpl',
                 self::TARGET => "@common/models/search/{{CamelCase}}Search.php"
             ],
                 'common-service' => [
@@ -73,7 +73,7 @@ class GenerateController extends Controller
             self::TARGET => "@backend/models/items/{{CamelCase}}.php"
         ],
         'backend-model-search' => [
-            self::SOURCE => 'backend/models/items/backend-model-search.tpl',
+            self::SOURCE => 'backend/models/search/backend-model-search.tpl',
             self::TARGET => "@backend/models/search/{{CamelCase}}Search.php"
         ],
         'backend-model-form' => [
@@ -129,7 +129,7 @@ class GenerateController extends Controller
             self::TARGET => "@frontend/models/items/{{CamelCase}}.php"
         ],
         'frontend-model-search' => [
-            self::SOURCE => 'frontend/models/items/frontend-model-search.tpl',
+            self::SOURCE => 'frontend/models/search/frontend-model-search.tpl',
             self::TARGET => "@frontend/models/items/{{CamelCase}}Search.php"
         ],
         'frontend-model-form' => [
