@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models\items;
+namespace common\models\search;
 
 use common\models\sources\{{CamelCase}}Source;
 

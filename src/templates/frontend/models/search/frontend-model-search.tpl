@@ -2,7 +2,7 @@
 
 namespace frontend\models\search;
 
-use common\models\search\{{CamelCase}} as {{CamelCase}}SearchCommon;
+use common\models\search\{{CamelCase}}Search as {{CamelCase}}SearchCommon;
 
 /**
  * Model `{{CamelCase}}` environment `frontend`
