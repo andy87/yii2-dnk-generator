@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\services\{{CamelCase}}Service;
+use backend\models\search\{{CamelCase}}Search;
 use backend\components\controllers\BackendController;
 
 /**
@@ -13,6 +14,9 @@ use backend\components\controllers\BackendController;
 class {{CamelCase}}Controller extends BackendController
 {
     // константы
+
+    /** @var string Имя модели поиска */
+    public const SEARCH = {{CamelCase}}Search::class;
 
     /** @var string className Сервиса */
     public const SERVICE = {{CamelCase}}Service::class;

@@ -77,7 +77,7 @@ abstract class BackendController extends BaseControllerClass implements Controll
 
         if ( $this->request->isPost ){
             $R->item->load(Yii::$app->request->post());
-            $this->service->create($R->item);
+            $this->service->create($R->item->getAttributes());
         }
 
         return $R->render();

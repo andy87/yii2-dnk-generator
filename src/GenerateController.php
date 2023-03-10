@@ -60,6 +60,10 @@ class GenerateController extends Controller
                 self::SOURCE => 'common/models/items/common-model-item.tpl',
                 self::TARGET => "@common/models/items/{{CamelCase}}.php"
             ],
+            'common-model-search' => [
+                self::SOURCE => 'common/models/items/common-model-search.tpl',
+                self::TARGET => "@common/models/search/{{CamelCase}}Search.php"
+            ],
                 'common-service' => [
                     self::SOURCE => 'common/services/common-service.tpl',
                     self::TARGET => "@common/services/{{CamelCase}}Service.php"
@@ -67,6 +71,10 @@ class GenerateController extends Controller
         'backend-model-item' => [
             self::SOURCE => 'backend/models/items/backend-model-item.tpl',
             self::TARGET => "@backend/models/items/{{CamelCase}}.php"
+        ],
+        'backend-model-search' => [
+            self::SOURCE => 'backend/models/items/backend-model-search.tpl',
+            self::TARGET => "@backend/models/search/{{CamelCase}}Search.php"
         ],
         'backend-model-form' => [
             self::SOURCE => 'backend/models/forms/backend-model-form.tpl',
@@ -119,6 +127,10 @@ class GenerateController extends Controller
         'frontend-model-item' => [
             self::SOURCE => 'frontend/models/items/frontend-model-item.tpl',
             self::TARGET => "@frontend/models/items/{{CamelCase}}.php"
+        ],
+        'frontend-model-search' => [
+            self::SOURCE => 'frontend/models/items/frontend-model-search.tpl',
+            self::TARGET => "@frontend/models/items/{{CamelCase}}Search.php"
         ],
         'frontend-model-form' => [
             self::SOURCE => 'frontend/models/forms/frontend-model-form.tpl',

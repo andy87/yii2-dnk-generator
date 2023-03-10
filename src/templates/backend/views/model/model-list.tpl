@@ -10,7 +10,7 @@ use backend\resources\{{snake_case}}\{{CamelCase}}ListResource;
 ?>
 
 <?= GridView::widget([
-    'dataProvider' => $R->dataProvider,
+    'dataProvider' => $R->gridViewResource->activeDataProvider,
     'columns' => [
         [
             'class' => 'yii\grid\SerialColumn'
