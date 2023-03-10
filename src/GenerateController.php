@@ -459,9 +459,21 @@ class GenerateController extends Controller
      */
     public function actionGenModels(string $entity, bool $overwrite = false)
     {
+        $filter = implode(',',[
+            'common-model-source',
+            'common-model-item',
+            'common-model-search',
+            'backend-model-item',
+            'backend-model-form',
+            'backend-model-search',
+            'frontend-model-item',
+            'frontend-model-form',
+            'frontend-model-search',
+        ]);
+
         $this->actionList(
             $entity,
-            'common-model-source,common-model-item,backend-model-item,backend-model-form,frontend-model-item,frontend-model-form',
+            $filter,
             $overwrite
         );
     }
@@ -478,9 +490,17 @@ class GenerateController extends Controller
      */
     public function actionGenBackendViews(string $entity, bool $overwrite = false)
     {
+        $filter = implode(',',[
+            'backend-views-form',
+            'backend-views-create',
+            'backend-views-list',
+            'backend-views-read',
+            'backend-views-update',
+        ]);
+
         $this->actionList(
             $entity,
-            'backend-views-form,backend-views-create,backend-views-list,backend-views-read,backend-views-update',
+            $filter,
             $overwrite
         );
     }
@@ -497,9 +517,14 @@ class GenerateController extends Controller
      */
     public function actionGenFrontendViews(string $entity, bool $overwrite = false)
     {
+        $filter = implode(',',[
+            'frontend-views-list',
+            'frontend-views-read',
+        ]);
+
         $this->actionList(
             $entity,
-            'frontend-views-list,frontend-views-read',
+            $filter,
             $overwrite
         );
     }
