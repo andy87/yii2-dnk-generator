@@ -3,7 +3,7 @@
 namespace backend\components\controllers;
 
 use Yii;
-use yii\base\InvalidConfigException;
+use yii\base\{Model,InvalidConfigException};
 use common\components\Entity;
 use common\components\resources\crud\ListResource;
 use common\components\resources\crud\ReadResource;
@@ -21,6 +21,9 @@ abstract class BackendController extends BaseControllerClass implements Controll
 {
     // константы
 
+    /** @var string className модели поиска */
+    public const SEARCH_MODEL = Model::class;
+
     /** @var string className Сервиса */
     public const SERVICE = BaseService::class;
 
@@ -34,13 +37,16 @@ abstract class BackendController extends BaseControllerClass implements Controll
      */
     public function actionList(): string
     {
-        $form = $this->service->getForm();
+        $class = static::SEARCH_MODEL;
 
-        $activeDataProvider = new ActiveDataProvider();
+        $searchForm = new $class();
 
         /** @var ListResource $R */
         $R = $this->service->getResource(BaseService::LIST, [
-            'gridViewResource' => new GridViewResource($form, $activeDataProvider)
+            'gridViewResource' => new GridViewResource(
+                $searchForm,
+                $searchForm->search($this->request->queryParams)
+            )
         ]);
 
         $this->view->title = Entity::getLabelMany(Entity::PAGE);
