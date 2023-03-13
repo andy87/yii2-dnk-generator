@@ -31,7 +31,7 @@ class {{CamelCase}}Controller extends FrontendController
     public const SERVICE = {{CamelCase}}Service::class;
 
 
-    // методы
+    // Methods
 
     /**
      *  action `List`

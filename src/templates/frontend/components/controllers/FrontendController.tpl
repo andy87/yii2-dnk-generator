@@ -38,7 +38,7 @@ abstract class FrontendController extends BaseControllerClass implements Control
 
 
 
-    // методы
+    // Methods
 
     /**
      *  action `List`

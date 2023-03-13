@@ -14,20 +14,22 @@ abstract class BaseService extends Component
 {
     // константы
 
-    /** @var int Ключ для массива ресурсов */
-    public const CREATE = 1;
-    /** @var int Ключ для массива ресурсов */
+    /** @var int Key for use array resource */
+    public const  CREATE = 1;
+    /** @var int Key for use array resource */
     public const READ = 2;
-    /** @var int Ключ для массива ресурсов */
+    /** @var int Key for use array resource */
     public const UPDATE = 3;
-    /** @var int Ключ для массива ресурсов */
+    /** @var int Key for use array resource */
     public const LIST = 4;
+    /** @var int Key for use array resource */
+    public const FORM = 5;
 
 
     /** @var string Имя класса Модели ActiveRecord */
     public const MODEL = Model::class;
     /** @var string Имя класса Формы ActiveRecord */
-    public const FORM = Model::class;
+    public const MODEL_FORM = Model::class;
 
 
     /** @var array Массив ресурсов */
@@ -40,7 +42,7 @@ abstract class BaseService extends Component
 
 
 
-    // методы
+    // Methods
 
     /**
      * Возвращает полное имя класса модели, с которой работает сервис
@@ -55,7 +57,7 @@ abstract class BaseService extends Component
      */
     public function getClassForm(): string
     {
-        return static::FORM;
+        return static::MODEL_FORM;
     }
 
     /**

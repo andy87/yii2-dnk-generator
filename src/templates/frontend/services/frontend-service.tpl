@@ -26,7 +26,7 @@ class {{CamelCase}}Service extends {{CamelCase}}CommonService implements Service
     public const MODEL = {{CamelCase}}::class;
 
     /** @var string  */
-    public const FORM = {{CamelCase}}Form::class;
+    public const MODEL_FORM = {{CamelCase}}Form::class;
 
     /** @var array  */
     public const RESOURCES = [

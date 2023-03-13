@@ -26,7 +26,7 @@ abstract class BaseResource extends Component implements ResourcesInterface
 
 
 
-    // методы
+    // Methods
 
     /**
      * Получение массива для реализации

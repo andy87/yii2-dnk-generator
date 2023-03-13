@@ -30,7 +30,7 @@ abstract class BaseMigration extends Migration
 
 
 
-    // Методы
+    // Methods
 
     /**
      * Инициализация
