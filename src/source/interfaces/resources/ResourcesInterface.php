@@ -10,7 +10,7 @@ interface ResourcesInterface
     /**
      * Получение массива для реализации
      *
-     * @return mixed
+     * @return array
      */
-    public function release();
+    public function release(): array;
 }
