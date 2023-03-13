@@ -5,6 +5,7 @@ namespace andy87\dnk\source\base;
 use Yii;
 use yii\base\{Model,Component,InvalidConfigException};
 use yii\db\{ActiveQuery,ActiveRecord,ActiveRecordInterface};
+use andy87\dnk\source\interfaces\models\common\ModelFormInterface;
 
 /**
  *  Базовый клас для сервисов.
@@ -119,10 +120,10 @@ abstract class BaseService extends Component
      *
      * @param array $params
      * @param bool $is_save
-     * @return Model
+     * @return ModelFormInterface
      * @throws InvalidConfigException
      */
-    public function create(array $params = [], bool $is_save = true): Model
+    public function create(array $params = [], bool $is_save = true): ModelFormInterface
     {
         $model = $this->getEntity();
 
@@ -134,12 +135,12 @@ abstract class BaseService extends Component
     /**
      * Сохранение сущности/модели
      *
-     * @param Model $model
+     * @param ModelFormInterface $model
      * @param array $params
      * @param bool $is_save
-     * @return Model
+     * @return ModelFormInterface
      */
-    public function update(Model $model, array $params = [], bool $is_save = true): Model
+    public function update(ModelFormInterface $model, array $params = [], bool $is_save = true): ModelFormInterface
     {
         $model = $this->modelSetAttributes($model, $params);
 

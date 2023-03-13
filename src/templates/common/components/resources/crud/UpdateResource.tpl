@@ -2,8 +2,8 @@
 
 namespace common\components\resources\crud;
 
-use yii\base\Model;
 use {{BaseResourceClassName}} as BaseResourceClass;
+use andy87\dnk\source\interfaces\models\common\ModelFormInterface;
 use andy87\dnk\source\interfaces\resources\crud\UpdateResourcesInterface;
 
 /**
@@ -14,16 +14,16 @@ class UpdateResource extends BaseResourceClass implements UpdateResourcesInterfa
     /** @var string  */
     public string $title;
 
-    /** @var Model */
-    public Model $item;
+    /** @var ModelFormInterface */
+    public ModelFormInterface $form;
 
     /**
-     * @param Model $item
+     * @param ModelFormInterface $item
      * @param array $config
      */
-    public function __construct( Model $item, array $config = [] )
+    public function __construct( ModelFormInterface $form, array $config = [] )
     {
-        $this->item = $item;
+        $this->form = $form;
 
         parent::__construct($config);
     }

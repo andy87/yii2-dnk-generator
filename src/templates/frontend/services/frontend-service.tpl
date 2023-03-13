@@ -51,6 +51,6 @@ class {{CamelCase}}Service extends {{CamelCase}}CommonService implements Service
      */
     public function getClassForm(): string
     {
-        return static::FORM;
+        return static::MODEL_FORM;
     }
 }
