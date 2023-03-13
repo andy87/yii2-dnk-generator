@@ -15,9 +15,11 @@ use andy87\dnk\source\interfaces\resources\ResourcesInterface;
 abstract class BaseResource extends Component implements ResourcesInterface
 {
     // константы
-
     /** @var string Имя шаблона */
     public const TEMPLATE = 'index';
+
+    /** @var ?int ID CRUD экшена в котором используется ресурс */
+    public const ACTION = null;
 
     /** @var string Переменная которая будет содержать ресурсы в шаблоне при вызове release() */
     public const KEY = 'R';
