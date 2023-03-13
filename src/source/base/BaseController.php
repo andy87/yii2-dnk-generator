@@ -14,8 +14,6 @@ use andy87\dnk\source\interfaces\controllers\common\ControllerCommonInterface;
  */
 abstract class BaseController extends Controller implements  ControllerCommonInterface
 {
-    // Константы, Свойства, Методы наследуемые всеми рабочими контроллерами
-
     // константы
 
     /** @var string Имя класса сервиса */
