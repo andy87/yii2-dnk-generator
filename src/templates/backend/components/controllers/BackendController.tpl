@@ -21,6 +21,9 @@ abstract class BackendController extends BaseControllerClass implements Controll
 {
     // константы
 
+    /** @var int entity ID */
+    public const ENTITY = null;
+
     /** @var string className модели поиска */
     public const SEARCH_MODEL = Model::class;
 
@@ -49,7 +52,8 @@ abstract class BackendController extends BaseControllerClass implements Controll
             )
         ]);
 
-        $this->view->title = Entity::getLabelMany(Entity::PAGE);
+        $this->view->title = Entity::getLabelMany(static::ENTITY);
+
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
         return $R->render($this);
@@ -67,11 +71,13 @@ abstract class BackendController extends BaseControllerClass implements Controll
             'item' => $this->service->findWhere(['id' => $id])->one()
         ]);
 
-        $this->view->title = Entity::getLabelOne(Entity::{{UPPER_CASE}}) . ": $id view";
+        $this->view->title = Entity::getLabelOne(static::ENTITY) . ": $id view";
+
         $this->view->params['breadcrumbs'][] = [
-            'label' => Entity::getLabelMany(Entity::{{UPPER_CASE}}),
+            'label' => Entity::getLabelMany(static::ENTITY),
             'url' => ['index']
         ];
+
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
         return $R->render($this);
@@ -94,11 +100,13 @@ abstract class BackendController extends BaseControllerClass implements Controll
             $this->service->create($R->item->getAttributes());
         }
 
-        $this->view->title = Entity::getLabelOne(Entity::{{UPPER_CASE}}) . ': create';
+        $this->view->title = Entity::getLabelOne(static::ENTITY) . ': create';
+
         $this->view->params['breadcrumbs'][] = [
-            'label' => Entity::getLabelMany(Entity::{{UPPER_CASE}}),
+            'label' => Entity::getLabelMany(static::ENTITY),
             'url' => ['index']
         ];
+
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
         return $R->render($this);
@@ -126,11 +134,13 @@ abstract class BackendController extends BaseControllerClass implements Controll
             $this->service->update($R->item);
         }
 
-        $this->view->title = Entity::getLabelOne(Entity::{{UPPER_CASE}}) . ": $id update";
+        $this->view->title = Entity::getLabelOne(static::ENTITY) . ": $id update";
+
         $this->view->params['breadcrumbs'][] = [
-            'label' => Entity::getLabelMany(Entity::{{UPPER_CASE}}),
+            'label' => Entity::getLabelMany(static::ENTITY),
             'url' => ['index']
         ];
+
         $this->view->params['breadcrumbs'][] = $this->view->title;
 
         return $R->render($this);
