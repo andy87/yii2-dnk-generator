@@ -100,9 +100,7 @@ abstract class BaseService extends Component
     public function getResource( int $key, array $params = []): ?object
     {
         if ( ($class = static::RESOURCES[$key] ?? false) )
-        {
             return Yii::createObject($class, $params);
-        }
 
         return null;
     }

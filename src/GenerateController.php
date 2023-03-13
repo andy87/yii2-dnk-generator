@@ -340,7 +340,7 @@ class GenerateController extends Controller
      * @param bool $overwrite
      * @return void
      */
-    public function actionGenTests(string $entity, bool $overwrite = false)
+    public function actionGenTests(string $entity, bool $overwrite = false): void
     {
         $entityList = $this->getEntity($entity);
 
@@ -365,7 +365,7 @@ class GenerateController extends Controller
      * @param bool $overwrite
      * @return void
      */
-    private function generateList(array $list, array $params, bool $overwrite = false)
+    private function generateList(array $list, array $params, bool $overwrite = false): void
     {
         $root = $this->getTemplatePath();
 

@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\components\Entity;
 use backend\services\{{CamelCase}}Service;
 use backend\models\search\{{CamelCase}}Search;
 use backend\components\controllers\BackendController;
@@ -14,6 +15,9 @@ use backend\components\controllers\BackendController;
 class {{CamelCase}}Controller extends BackendController
 {
     // константы
+
+    /** @var int entity ID */
+    public const ENTITY = Entity::{{UPPER_CASE}};
 
     /** @var string Имя модели поиска */
     public const SEARCH = {{CamelCase}}Search::class;
