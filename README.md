@@ -128,7 +128,7 @@ php yii dnk/setup `bool`
 #### description
 
 Generate files:
-* `common/components/Part.php` - service parts with labels
+* `common/components/Entity.php` - service parts with labels
 * `common/components/db/Setup.php` - Data base config: CHARACTER, COLLATE, ENGINE
 * `common/components/db/Tables.php` - class with table names used Part::CONSTANT_NAME
 * `common/components/resources/GridViewResource.php` - GridView Resources ( search, dataProvider )
