@@ -5,13 +5,14 @@ namespace andy87\dnk\source\base;
 use Yii;
 use yii\base\{Model,Component,InvalidConfigException};
 use yii\db\{ActiveQuery,ActiveRecord,ActiveRecordInterface};
-use andy87\dnk\source\interfaces\models\common\ModelFormInterface;
+use andy87\dnk\source\interfaces\models\common\ModelInterface;
+use andy87\dnk\source\interfaces\services\common\ServiceCommonInterface;
 
 /**
  *  Базовый клас для сервисов.
  *      Содержит: константы, свойства и методы, наследуемые всеми рабочими сервисами
  */
-abstract class BaseService extends Component
+abstract class BaseService extends Component implements ServiceCommonInterface
 {
     // константы
 
@@ -65,12 +66,12 @@ abstract class BaseService extends Component
      * Возвращает экземпляр класса модели, с которой работает сервис
      *
      * @param array $params
-     * @return Model
+     * @return ModelInterface
      * @throws InvalidConfigException
      */
-    public function getModel(array $params = []): Model
+    public function getModel(array $params = []): ModelInterface
     {
-        /** @var Model $model */
+        /** @var ModelInterface $model */
         $model = Yii::createObject($this->getClassModel(), $params);
 
         return $model;
@@ -82,9 +83,9 @@ abstract class BaseService extends Component
      * array $params
      * @throws InvalidConfigException
      */
-    public function getForm(array $params = []): Model
+    public function getForm(array $params = []): ModelInterface
     {
-        /** @var Model $model */
+        /** @var ModelInterface $model */
         $model = Yii::createObject($this->getClassForm(), $params);
 
         return $model;
@@ -107,10 +108,10 @@ abstract class BaseService extends Component
     }
 
     /**
-     * @return Model
+     * @return ModelInterface
      * @throws InvalidConfigException
      */
-    public function getEntity(): Model
+    public function getEntity(): ModelInterface
     {
         return $this->getModel();
     }
@@ -120,10 +121,10 @@ abstract class BaseService extends Component
      *
      * @param array $params
      * @param bool $is_save
-     * @return ModelFormInterface
+     * @return ModelInterface
      * @throws InvalidConfigException
      */
-    public function create(array $params = [], bool $is_save = true): ModelFormInterface
+    public function create(array $params = [], bool $is_save = true): ModelInterface
     {
         $model = $this->getEntity();
 
@@ -135,12 +136,12 @@ abstract class BaseService extends Component
     /**
      * Сохранение сущности/модели
      *
-     * @param ModelFormInterface $model
+     * @param ModelInterface $model
      * @param array $params
      * @param bool $is_save
-     * @return ModelFormInterface
+     * @return ModelInterface
      */
-    public function update(ModelFormInterface $model, array $params = [], bool $is_save = true): ModelFormInterface
+    public function update(ModelInterface $model, array $params = [], bool $is_save = true): ModelInterface
     {
         $model = $this->modelSetAttributes($model, $params);
 
@@ -148,11 +149,11 @@ abstract class BaseService extends Component
     }
 
     /**
-     * @param Model $model
+     * @param ModelInterface $model
      * @param array $params
-     * @return Model
+     * @return ModelInterface
      */
-    private function modelSetAttributes(Model $model, array $params = []): Model
+    private function modelSetAttributes(ModelInterface $model, array $params = []): ModelInterface
     {
         if ( !empty($params) )
         {
@@ -167,11 +168,11 @@ abstract class BaseService extends Component
     }
 
     /**
-     * @param Model $model
+     * @param ModelInterface $model
      * @param bool $is_save
-     * @return Model
+     * @return ModelInterface
      */
-    private function modelSave(Model $model, bool $is_save = true): Model
+    private function modelSave(ModelInterface $model, bool $is_save = true): ModelInterface
     {
         if($is_save && $model instanceof ActiveRecordInterface ) $model->save();
 

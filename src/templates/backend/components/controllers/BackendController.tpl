@@ -3,6 +3,7 @@
 namespace backend\components\controllers;
 
 use Yii;
+use yii\web\Request;
 use yii\base\{Model,InvalidConfigException};
 use andy87\dnk\source\base\BaseService;
 use andy87\dnk\source\resources\{MutationResource,GridViewResource};
@@ -12,7 +13,6 @@ use common\components\resources\crud\{ListResource,ReadResource,CreateResource,U
 use {{BaseControllerClassName}} as BaseControllerClass;
 use andy87\dnk\source\base\BaseResource;
 use backend\components\resources\LinkResource;
-use backend\resources\layout\components\NavigationResources;use yii\web\Request;
 
 /**
  * Base Controller for environment `backend`
@@ -22,7 +22,7 @@ use backend\resources\layout\components\NavigationResources;use yii\web\Request;
  */
 abstract class BackendController extends BaseControllerClass implements ControllerBackendInterface
 {
-    // cosnt
+    // const
 
     /** @var int entity ID */
     public const ENTITY = null;
@@ -65,6 +65,7 @@ abstract class BackendController extends BaseControllerClass implements Controll
 
     /**
      *  action `List`
+     * @throws InvalidConfigException
      */
     public function actionList(): string
     {
@@ -145,8 +146,8 @@ abstract class BackendController extends BaseControllerClass implements Controll
      *  action `Update`
      *
      * @param int $id
-     *
      * @return string
+     * @throws InvalidConfigException
      */
     public function actionUpdate(int $id): string
     {
@@ -190,6 +191,7 @@ abstract class BackendController extends BaseControllerClass implements Controll
 
     /**
      *  action `Read`
+     * @throws InvalidConfigException
      */
     public function actionRead(int $id): string
     {
@@ -248,6 +250,7 @@ abstract class BackendController extends BaseControllerClass implements Controll
      * @param int $view
      * @param array $params
      * @return BaseResource
+     * @throws InvalidConfigException
      */
     private function resourceConstruct( int $view, array $params = [] ): BaseResource
     {
