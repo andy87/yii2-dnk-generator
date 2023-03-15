@@ -71,7 +71,7 @@ abstract class BackendController extends BaseControllerClass implements Controll
     {
         $this->beforeList();
 
-        $class = static::SEARCH_MODEL;
+        $class = $this->getSearchClass();
 
         $searchForm = new $class();
 
@@ -297,5 +297,13 @@ abstract class BackendController extends BaseControllerClass implements Controll
         {
             $this->view->params['breadcrumbs'][] = $breadcrumb;
         }
+    }
+
+    /**
+     * @return string
+     */
+    protected function getSearchClass(): string
+    {
+        return self::SEARCH_MODEL;
     }
 }
