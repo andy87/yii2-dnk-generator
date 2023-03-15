@@ -629,18 +629,16 @@ class GenerateController extends Controller
 
         foreach ($templatesMap as $sourcePath => $targetPath)
         {
-            $mark = '_create_table_';
-
-            if ( strpos($sourcePath, $mark) !== false )
+            if ( strpos($sourcePath, 'migrations') !== false )
             {
-                $allMigrationFiles = glob(Yii::getAlias("@console/migrations/*$mark*.php"));
+                $migrateFileNamePart = "_create_table__$snakeCase";
 
-                foreach ( $allMigrationFiles as $migrationFile )
+                $existsMigrationFile = glob(Yii::getAlias("@console/migrations/*$migrateFileNamePart.php"));
+
+                if ( !empty($existsMigrationFile) )
                 {
-                    if ( strpos($migrationFile, "{$mark}_$snakeCase") !== false )
-                    {
-                        continue 2;
-                    }
+                    echo "\r\n migration exists";
+                    continue;
                 }
             }
 
@@ -706,7 +704,7 @@ class GenerateController extends Controller
     private function getParams( string $snakeCase, string $camelCase): array
     {
         $timestamp = date('ymd_his');
-        $migrateFileName = "m{$timestamp}__create_table__$snakeCase" ;
+        $migrateFileName = "m{$timestamp}_create_table__$snakeCase" ;
 
         $params = [
             '{{migrateFileName}}' => $migrateFileName,
