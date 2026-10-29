@@ -11,6 +11,7 @@ require $vendorPath . '/autoload.php';
 require $vendorPath . '/yiisoft/yii2/Yii.php';
 Yii::setAlias('@andy87/dnk', dirname(__DIR__) . '/src');
 Yii::setAlias('@testVendor', $vendorPath);
+require __DIR__ . '/fixtures/identity.php';
 
 /**
  * Suppresses console progress while exercising the unmodified generation logic.
@@ -75,6 +76,18 @@ function prepareApplication(): string
         'vendorPath' => Yii::getAlias('@testVendor'),
         'components' => [
             'db' => ['class' => yii\db\Connection::class, 'dsn' => 'sqlite::memory:'],
+            'user' => [
+                'class' => yii\web\User::class,
+                'identityClass' => RegressionIdentity::class,
+                'enableSession' => false,
+                'loginUrl' => null,
+            ],
+            'authManager' => [
+                'class' => yii\rbac\PhpManager::class,
+                'itemFile' => $root . '/runtime/rbac-items.php',
+                'assignmentFile' => $root . '/runtime/rbac-assignments.php',
+                'ruleFile' => $root . '/runtime/rbac-rules.php',
+            ],
             'request' => [
                 'cookieValidationKey' => 'regression-only',
                 'enableCsrfValidation' => false,
@@ -84,6 +97,10 @@ function prepareApplication(): string
             'assetManager' => ['basePath' => $root . '/web/assets', 'baseUrl' => '/assets'],
         ],
     ]);
+    $permission = Yii::$app->authManager->createPermission('regression.backend');
+    Yii::$app->authManager->add($permission);
+    Yii::$app->authManager->assign($permission, 1);
+    Yii::$app->user->setIdentity(new RegressionIdentity());
     $vendor = Yii::getAlias('@testVendor');
     Yii::setAlias('@bower', is_dir($vendor . '/bower-asset') ? $vendor . '/bower-asset' : $vendor . '/bower');
     Yii::$app->db->createCommand('CREATE TABLE user (
@@ -122,6 +139,7 @@ function generatedController(string $side): yii\web\Controller
     Yii::$app->setViewPath(Yii::getAlias('@' . $side . '/views'));
     $class = $side . '\\controllers\\UserController';
     $controller = new $class('user', Yii::$app, ['layout' => false]);
+    if ($side === 'backend') $controller->accessRoles = ['regression.backend'];
     Yii::$app->controller = $controller;
 
     return $controller;
@@ -139,5 +157,6 @@ function resetFixture(): void
     Yii::$app->request->setBodyParams([]);
     Yii::$app->request->setQueryParams([]);
     Yii::$app->view->params = [];
+    Yii::$app->user->setIdentity(new RegressionIdentity());
     $_SERVER['REQUEST_METHOD'] = 'GET';
 }
