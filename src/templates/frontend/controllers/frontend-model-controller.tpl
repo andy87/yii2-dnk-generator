@@ -3,7 +3,8 @@
 namespace frontend\controllers;
 
 use Yii;
-use yii\base\{Model,InvalidConfigException};
+use yii\base\InvalidConfigException;
+use andy87\dnk\source\base\BaseService;
 use andy87\dnk\source\resources\GridViewResource;
 use common\components\Entity;
 use common\components\resources\crud\ListResource;
@@ -25,7 +26,10 @@ class {{CamelCase}}Controller extends FrontendController
     public const ENTITY = Entity::{{UPPER_CASE}};
 
     /** @var string Имя модели поиска */
-    public const SEARCH = {{CamelCase}}Search::class;
+    public const SEARCH_MODEL = {{CamelCase}}Search::class;
+
+    /** @var string Совместимость с прежним именем константы. */
+    public const SEARCH = self::SEARCH_MODEL;
 
     /** @var string className Сервиса */
     public const SERVICE = {{CamelCase}}Service::class;

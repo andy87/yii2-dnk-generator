@@ -140,7 +140,7 @@ class GenerateController extends Controller
         ],
         'frontend-model-search' => [
             self::SOURCE => 'frontend/models/search/frontend-model-search.tpl',
-            self::TARGET => "@frontend/models/items/{{CamelCase}}Search.php"
+            self::TARGET => "@frontend/models/search/{{CamelCase}}Search.php"
         ],
         'frontend-model-form' => [
             self::SOURCE => 'frontend/models/forms/frontend-model-form.tpl',
