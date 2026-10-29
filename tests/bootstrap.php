@@ -52,15 +52,7 @@ function prepareApplication(): string
         'runtimePath' => $root . '/runtime',
         'vendorPath' => Yii::getAlias('@testVendor'),
     ]);
-    $generator = new RegressionGenerator('dnk', Yii::$app, [
-        'baseClasses' => [
-            GenerateController::BASE_MIGRATE_CLASS => andy87\dnk\source\base\BaseMigration::class,
-            GenerateController::BASE_CONTROLLER_CLASS => andy87\dnk\source\base\BaseController::class,
-            GenerateController::BASE_MODEL_CLASS => 'common\\components\\core\\BaseModel',
-            GenerateController::BASE_SERVICE_CLASS => andy87\dnk\source\base\BaseService::class,
-            GenerateController::BASE_RESOURCE_CLASS => andy87\dnk\source\base\BaseResource::class,
-        ],
-    ]);
+    $generator = new RegressionGenerator('dnk', Yii::$app);
     ob_start();
     try {
         $generator->actionSetup();

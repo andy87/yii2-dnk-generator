@@ -657,6 +657,10 @@ return [
 * `baseClasses` - list of based class names for generated file
 
 3. exec command [dnk/setup](#command-setup)
+
+   The generator supplies default base classes for Yii Advanced. `baseClasses`
+   is optional; individual entries can be overridden without repeating the rest.
+   Empty or malformed class names are rejected before files are written.
     
 4. Update `config` for you require, by example: 
    
@@ -697,7 +701,7 @@ return [
                     '&& yes'
                 ])
             ],
-            'entityList' => array_values(Tables::DATA),
+            'entityList' => array_values(Tables::NAMES),
             'baseClasses' => [
                 GenerateController::BASE_MIGRATE_CLASS => BaseMigration::class, // extends for `Migrations`
                 GenerateController::BASE_CONTROLLER_CLASS => BaseController::class, // extends for `Controllers`
