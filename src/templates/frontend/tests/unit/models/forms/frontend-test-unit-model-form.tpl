@@ -4,7 +4,7 @@ namespace frontend\tests\unit\models\forms;
 
 use Yii;
 use Codeception\Test\Unit;
-use common\tests\UnitTester;
+use Codeception\Actor;
 use frontend\models\forms\{{CamelCase}}Form;
 
 /**
@@ -13,9 +13,9 @@ use frontend\models\forms\{{CamelCase}}Form;
 class {{CamelCase}}Test extends Unit
 {
     /**
-     * @var UnitTester
+     * @var Actor Actor текущего тестового набора.
      */
-    protected UnitTester$tester;
+    protected Actor $tester;
 
     /*public function _fixtures()
     {

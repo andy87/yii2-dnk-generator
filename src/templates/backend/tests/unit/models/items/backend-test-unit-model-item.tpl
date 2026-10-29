@@ -4,7 +4,7 @@ namespace backend\tests\unit\models\items;
 
 use Yii;
 use Codeception\Test\Unit;
-use common\tests\UnitTester;
+use Codeception\Actor;
 use backend\models\items\Profile;
 use backend\models\items\{{CamelCase}};
 
@@ -14,9 +14,9 @@ use backend\models\items\{{CamelCase}};
 class {{CamelCase}}Test extends Unit
 {
     /**
-     * @var \common\tests\UnitTester
+     * @var Actor Actor текущего тестового набора.
      */
-    protected UnitTester $tester;
+    protected Actor $tester;
 
     /*public function _fixtures()
     {
