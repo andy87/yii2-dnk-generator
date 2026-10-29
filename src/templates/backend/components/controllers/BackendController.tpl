@@ -22,6 +22,9 @@ use backend\components\resources\LinkResource;
  */
 abstract class BackendController extends BaseControllerClass implements ControllerBackendInterface
 {
+    /** @var string Список открывается при обращении к контроллеру без action. */
+    public $defaultAction = 'list';
+
     // const
 
     /** @var int entity ID */
@@ -128,7 +131,7 @@ abstract class BackendController extends BaseControllerClass implements Controll
         $this->setBreadcrumbs([
             [
                 'label' => Entity::getLabelMany(static::ENTITY),
-                'url' => ['index']
+                'url' => ['list']
             ],
             $title
         ]);
@@ -174,7 +177,7 @@ abstract class BackendController extends BaseControllerClass implements Controll
         $this->setBreadcrumbs([
             [
                 'label' => Entity::getLabelMany(static::ENTITY),
-                'url' => ['index']
+                'url' => ['list']
             ],
             $title
         ]);
@@ -211,7 +214,7 @@ abstract class BackendController extends BaseControllerClass implements Controll
         $this->setBreadcrumbs([
             [
                 'label' => Entity::getLabelMany(static::ENTITY),
-                'url' => ['index']
+                'url' => ['list']
             ],
             $title
         ]);

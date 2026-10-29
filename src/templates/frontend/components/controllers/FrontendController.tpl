@@ -18,6 +18,9 @@ use andy87\dnk\source\interfaces\controllers\frontend\ControllerFrontendInterfac
  */
 abstract class FrontendController extends BaseControllerClass implements ControllerFrontendInterface
 {
+    /** @var string Список открывается при обращении к контроллеру без action. */
+    public $defaultAction = 'list';
+
     // константы
 
     /** @var string className Сервиса */
