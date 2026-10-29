@@ -607,6 +607,14 @@ $is_save)` delegates to the existing `create(array $params, bool $is_save)` meth
 so application overrides remain active. The scenario applies only to that call;
 ordinary `create()` calls keep the scenario selected by their own form factory.
 
+The generated backend form renders the model's safe scalar attributes in its current
+scenario, including scalar virtual fields, instead of assuming `name`, `description`
+or `status_id` columns. Auto-increment columns and columns with SQL-expression
+defaults are omitted from the default form. Creation forwards only initialized
+safe columns and safe virtual values so omitted database defaults remain effective.
+Array/object values require application-specific widgets and are omitted from the
+default text inputs. Customize the generated inputs for such fields.
+
 <a name="profit-resources"></a>
 ## Resource Profit  
 
