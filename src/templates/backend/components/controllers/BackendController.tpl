@@ -102,7 +102,9 @@ abstract class BackendController extends BaseControllerClass implements Controll
 
 
     /**
-     *  action `Create`
+     * Создаёт запись и передаёт результат сохранения или ошибки в форму.
+     *
+     * @return string HTML формы с актуальной моделью.
      * @throws InvalidConfigException
      */
     public function actionCreate(): string
@@ -116,7 +118,7 @@ abstract class BackendController extends BaseControllerClass implements Controll
 
         if ( $this->request->isPost ){
             $R->item->load(Yii::$app->request->post());
-            $this->service->create($R->item->getAttributes());
+            $R->item = $this->service->create($R->item->getAttributes());
         }
 
         $title = Entity::getLabelOne(static::ENTITY) . ': create';
