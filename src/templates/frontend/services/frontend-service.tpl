@@ -48,6 +48,17 @@ class {{CamelCase}}Service extends {{CamelCase}}CommonService implements Service
     }
 
     /**
+     * Создаёт форму для сохранения с её правилами и именем POST-параметра.
+     *
+     * @return {{CamelCase}}Form Настроенная frontend-форма.
+     * @throws InvalidConfigException Если класс формы настроен неверно.
+     */
+    public function getEntity(): {{CamelCase}}Form
+    {
+        return $this->getForm();
+    }
+
+    /**
      * @return string
      */
     public function getClassForm(): string
