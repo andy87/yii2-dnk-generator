@@ -116,23 +116,23 @@ class GenerateController extends Controller
                     ],
                         'backend-views-form' => [
                             self::SOURCE => 'backend/views/model/_form-model.tpl',
-                            self::TARGET => "@backend/views/{{snake_case}}/_form-{{snake_case}}.php"
+                            self::TARGET => "@backend/views/{{kebab-case}}/_form-{{snake_case}}.php"
                         ],
                         'backend-views-create' => [
                             self::SOURCE => 'backend/views/model/model-create.tpl',
-                            self::TARGET => "@backend/views/{{snake_case}}/{{snake_case}}-create.php"
+                            self::TARGET => "@backend/views/{{kebab-case}}/{{snake_case}}-create.php"
                         ],
                         'backend-views-list' => [
                             self::SOURCE => 'backend/views/model/model-list.tpl',
-                            self::TARGET => "@backend/views/{{snake_case}}/{{snake_case}}-list.php"
+                            self::TARGET => "@backend/views/{{kebab-case}}/{{snake_case}}-list.php"
                         ],
                         'backend-views-read' => [
                             self::SOURCE => 'backend/views/model/model-read.tpl',
-                            self::TARGET => "@backend/views/{{snake_case}}/{{snake_case}}-read.php"
+                            self::TARGET => "@backend/views/{{kebab-case}}/{{snake_case}}-read.php"
                         ],
                         'backend-views-update' => [
                             self::SOURCE => 'backend/views/model/model-update.tpl',
-                            self::TARGET => "@backend/views/{{snake_case}}/{{snake_case}}-update.php"
+                            self::TARGET => "@backend/views/{{kebab-case}}/{{snake_case}}-update.php"
                         ],
         'frontend-model-item' => [
             self::SOURCE => 'frontend/models/items/frontend-model-item.tpl',
@@ -164,11 +164,11 @@ class GenerateController extends Controller
                     ],
                         'frontend-views-list' => [
                             self::SOURCE => 'frontend/views/model/model-list.tpl',
-                            self::TARGET => "@frontend/views/{{snake_case}}/{{snake_case}}-list.php"
+                            self::TARGET => "@frontend/views/{{kebab-case}}/{{snake_case}}-list.php"
                         ],
                         'frontend-views-read' => [
                             self::SOURCE => 'frontend/views/model/model-read.tpl',
-                            self::TARGET => "@frontend/views/{{snake_case}}/{{snake_case}}-read.php"
+                            self::TARGET => "@frontend/views/{{kebab-case}}/{{snake_case}}-read.php"
                         ],
     ];
 

@@ -2,6 +2,7 @@
 
 use yii\base\View;
 use yii\grid\GridView;
+use yii\helpers\Url;
 use backend\resources\{{snake_case}}\{{CamelCase}}ListResource;
 
 /** @var View $this **/
@@ -23,7 +24,12 @@ use backend\resources\{{snake_case}}\{{CamelCase}}ListResource;
         // 'created_at',
         // 'updated_at',
         [
-            'class' => 'yii\grid\ActionColumn'
+            'class' => 'yii\grid\ActionColumn',
+            'template' => '{view} {update}',
+            'urlCreator' => static fn (string $action, $model, $key): string => Url::to([
+                $action === 'view' ? 'read' : $action,
+                'id' => $key,
+            ]),
         ],
     ],
 ]); ?>

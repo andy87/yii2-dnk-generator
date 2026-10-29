@@ -78,7 +78,7 @@ class {{CamelCase}}Controller extends FrontendController
 
         $this->view->params['breadcrumbs'][] = [
             'label' => Entity::getLabelMany(static::ENTITY),
-            'url' => ['index']
+            'url' => ['list']
         ];
 
         $this->view->params['breadcrumbs'][] = $this->view->title;
