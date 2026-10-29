@@ -39,4 +39,18 @@ layouts: 16 tests and 32 assertions. Probe subclasses replace only the example
 `testOne()` bodies; actor construction and `_setUp()` run inside real Codeception
 against the generated `$tester` declarations. Application-specific examples still
 need their own assertions. Integration applications are removed after each run.
-`test:all` runs both the Yii regression suite and this Codeception check.
+`test:all` runs the documentation checks, the Yii regression suite and this
+Codeception check.
+
+## Documentation checks
+
+```sh
+composer test:docs
+php tests/docs.php
+```
+
+Both commands perform the same check, without Yii, Codeception or network access.
+The check verifies all README editions' local links, explicit section
+anchors, identical code examples, command signatures and generated-file maps.
+The CLI list and destination maps are also compared with `GenerateController`.
+It does not assess translation fluency or run a complete application installation.

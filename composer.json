@@ -39,8 +39,9 @@
   },
   "scripts": {
     "test": "@php tests/run.php",
+    "test:docs": "@php tests/docs.php",
     "test:codeception": "@php tests/codeception.php",
-    "test:all": ["@test", "@test:codeception"]
+    "test:all": ["@test:docs", "@test", "@test:codeception"]
   },
   "config": {
     "allow-plugins": {
