@@ -189,16 +189,16 @@ abstract class BaseService extends Component implements ServiceCommonInterface
     }
 
     /**
-     * Поиск модели
+     * Добавляет критерии поиска, сохраняя ограничения, заданные моделью.
      *
-     * @param array $criteria
-     * @return ActiveQuery
+     * @param array $criteria Дополнительные условия; пустой массив не снимает ограничения модели.
+     * @return ActiveQuery Запрос с исходными и дополнительными условиями.
      */
     public function findWhere( array $criteria ): ActiveQuery
     {
         /** @var ActiveRecord $class */
         $class = static::MODEL;
 
-        return $class::find()->where($criteria);
+        return $class::find()->andWhere($criteria);
     }
 }

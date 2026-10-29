@@ -3,6 +3,7 @@
 namespace common\models\search;
 
 use common\models\sources\{{CamelCase}}Source;
+use common\models\items\{{CamelCase}};
 use yii\data\ActiveDataProvider;
 use yii\db\Exception;
 
@@ -11,6 +12,9 @@ use yii\db\Exception;
  */
 class {{CamelCase}}Search extends {{CamelCase}}Source
 {
+    /** @var string Item-модель, определяющая видимость записей в этом окружении. */
+    public const MODEL = {{CamelCase}}::class;
+
     /**
      * Проверяет необязательные фильтры по типам колонок таблицы.
      *
@@ -35,7 +39,7 @@ class {{CamelCase}}Search extends {{CamelCase}}Source
     }
 
     /**
-     * Создаёт список с фильтрацией по переданным атрибутам.
+     * Добавляет фильтры к запросу item-модели, сохраняя её ограничения видимости.
      *
      * @param array $params Параметры запроса в формате {{CamelCase}}Search[attribute].
      * @return ActiveDataProvider Провайдер списка; при ошибке фильтра список пуст.
@@ -43,12 +47,13 @@ class {{CamelCase}}Search extends {{CamelCase}}Source
      */
     public function search(array $params = []): ActiveDataProvider
     {
-        $query = {{CamelCase}}Source::find();
+        $modelClass = static::MODEL;
+        $query = $modelClass::find();
         $dataProvider = new ActiveDataProvider(['query' => $query]);
 
         $this->load($params);
         if (!$this->validate()) {
-            $query->where('0=1');
+            $query->andWhere('0=1');
             return $dataProvider;
         }
 
