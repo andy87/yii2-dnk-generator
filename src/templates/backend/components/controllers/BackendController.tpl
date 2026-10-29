@@ -122,7 +122,8 @@ abstract class BackendController extends BaseControllerClass implements Controll
 
         if ( $this->request->isPost ){
             $R->item->load(Yii::$app->request->post());
-            $R->item = $this->service->create($R->item->getAttributes());
+            // Без списка getAttributes() исключает поля формы, которые не являются колонками БД.
+            $R->item = $this->service->create($R->item->getAttributes($R->item->safeAttributes()));
         }
 
         $title = Entity::getLabelOne(static::ENTITY) . ': create';
