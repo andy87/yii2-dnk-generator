@@ -582,6 +582,11 @@ returns no item attributes. Keep passwords, authentication keys and internal
 fields out of this list; newly added database columns are not exposed automatically.
 The response envelopes remain `items`/`totalCount` and `item`.
 
+Generated searches query the item model of their own application side through
+the `MODEL` constant. Conditions configured in that model's `find()` method are
+preserved by both search filters and `BaseService::findWhere()`, which adds its
+criteria with `andWhere()`. This also applies when the criteria array is empty.
+
 <a name="profit-resources"></a>
 ## Resource Profit  
 
