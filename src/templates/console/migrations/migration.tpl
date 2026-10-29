@@ -9,8 +9,8 @@ use {{BaseMigrationClassName}} as BaseMigrationClass;
  */
 class {{migrateFileName}} extends BaseMigrationClass
 {
-    /** @var string Имя таблицы */
-    public string $entity = Entity::{{UPPER_CASE}};
+    /** @var mixed Идентификатор раздела; тип совпадает с BaseMigration. */
+    public mixed $entity = Entity::{{UPPER_CASE}};
 
     /**
      * @return array
