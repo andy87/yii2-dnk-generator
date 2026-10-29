@@ -23,6 +23,10 @@
   },
   "repositories": [
     {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    },
+    {
       "type": "vcs",
       "url": "https://github.com/andy87/yii2-dnk-generator"
     }
@@ -31,6 +35,9 @@
     "psr-4": {
       "andy87\\dnk\\": "src"
     }
+  },
+  "scripts": {
+    "test": "php tests/run.php"
   },
   "config": {
     "allow-plugins": {

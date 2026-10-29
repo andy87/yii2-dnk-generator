@@ -2,3 +2,14 @@
 .idea/
 
 vendor/
+
+tests/runtime/
+.local/
+
+AGENTS.md
+CLAUDE.md
+QWEN.md
+.claude/
+.qwen/
+.codex/
+.cursor/

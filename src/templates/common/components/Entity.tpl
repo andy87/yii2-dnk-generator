@@ -46,21 +46,25 @@ class Entity
 
 
     /**
-     * @param int $key
-     * @return string
+     * Возвращает название раздела во множественном числе.
+     *
+     * @param int|string $key Идентификатор раздела из констант Entity.
+     * @return string Название раздела.
      */
-    public static function getLabelMany( int $key ): string
+    public static function getLabelMany( int|string $key ): string
     {
         return self::DATA[$key][self::LABELS][self::NAME_MANY];
     }
 
     /**
-     * @param int $key
-     * @return string
+     * Возвращает название раздела в единственном числе.
+     *
+     * @param int|string $key Идентификатор раздела из констант Entity.
+     * @return string Название раздела.
      */
-    public static function getLabelOne( int $key ): string
+    public static function getLabelOne( int|string $key ): string
     {
-        return self::DATA[$key][self::LABELS][self::NAME_MANY];
+        return self::DATA[$key][self::LABELS][self::NAME_ONE];
     }
 
 }
