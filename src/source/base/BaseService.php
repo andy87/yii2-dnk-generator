@@ -42,6 +42,9 @@ abstract class BaseService extends Component implements ServiceCommonInterface
         self::READ => null,
     ];
 
+    /** @var string|null Сценарий только для текущего вызова createInScenario(). */
+    private ?string $creationScenario = null;
+
 
 
     // Methods
@@ -127,11 +130,35 @@ abstract class BaseService extends Component implements ServiceCommonInterface
      */
     public function create(array $params = [], bool $is_save = true): ModelInterface
     {
+        $scenario = $this->creationScenario;
+        $this->creationScenario = null;
         $model = $this->getEntity();
+        if ($scenario !== null) $model->setScenario($scenario);
 
         $model = $this->modelSetAttributes($model, $params);
 
         return $this->modelSave($model, $is_save);
+    }
+
+    /**
+     * Передаёт сценарий в обычный create(), сохраняя пользовательские переопределения.
+     *
+     * @param array $params Атрибуты или данные формы под ключом formName().
+     * @param string $scenario Доверенный сценарий, выбранный приложением до загрузки POST.
+     * @param bool $is_save Сохранить модель после заполнения.
+     * @return ModelInterface Форма в выбранном сценарии с результатом сохранения.
+     * @throws InvalidConfigException Если форма настроена неверно.
+     * @throws InvalidArgumentException Если сценарий или данные формы некорректны.
+     */
+    public function createInScenario(array $params, string $scenario, bool $is_save = true): ModelInterface
+    {
+        $previous = $this->creationScenario;
+        $this->creationScenario = $scenario;
+        try {
+            return $this->create($params, $is_save);
+        } finally {
+            $this->creationScenario = $previous;
+        }
     }
 
     /**

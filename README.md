@@ -601,6 +601,12 @@ only be used when that is the intended application policy. Frontend controllers
 remain public. Existing applications must apply the updated backend base template
 while preserving their custom code; updating the package alone does not replace it.
 
+Backend creation preserves the form's selected validation scenario, including one
+set by a resource mutation. `BaseService::createInScenario($params, $scenario,
+$is_save)` delegates to the existing `create(array $params, bool $is_save)` method,
+so application overrides remain active. The scenario applies only to that call;
+ordinary `create()` calls keep the scenario selected by their own form factory.
+
 <a name="profit-resources"></a>
 ## Resource Profit  
 
