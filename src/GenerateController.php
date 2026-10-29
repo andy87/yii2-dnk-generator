@@ -526,19 +526,27 @@ class GenerateController extends Controller
     }
 
     /**
-     * @return void
+     * Генерирует Gii-модели и возвращает код завершения дочерней команды.
+     *
+     * @param string $entity Имя сущности, список имён или *.
+     * @return int Код завершения Gii; 0 при успехе всех сущностей.
+     * @throws InvalidConfigException Если команда не настроена.
      */
-    public function actionGiiModel(string $entity)
+    public function actionGiiModel(string $entity): int
     {
-        $this->generateGii($entity, 'php yii gii/model ' . $this->command[ self::COMMAND_MODEL ]);
+        return $this->generateGii($entity, 'gii/model', $this->command[ self::COMMAND_MODEL ]);
     }
 
     /**
-     * @return void
+     * Генерирует Gii CRUD и возвращает код завершения дочерней команды.
+     *
+     * @param string $entity Имя сущности, список имён или *.
+     * @return int Код завершения Gii; 0 при успехе всех сущностей.
+     * @throws InvalidConfigException Если команда не настроена.
      */
-    public function actionGiiCrud(string $entity)
+    public function actionGiiCrud(string $entity): int
     {
-        $this->generateGii($entity, 'php yii gii/crud ' . $this->command[ self::COMMAND_CRUD ]);
+        return $this->generateGii($entity, 'gii/crud', $this->command[ self::COMMAND_CRUD ]);
     }
 
     /**
@@ -563,12 +571,19 @@ class GenerateController extends Controller
 
 
     /**
-     * @param string $entity
-     * @param string $sourceCommand
-     * @return void
+     * Запускает Gii тем же PHP и прекращает пакет при первой ошибке.
+     *
+     * @param string $entity Имя сущности, список имён или *.
+     * @param string $route Маршрут Gii: gii/model или gii/crud.
+     * @param string|null $sourceCommand Настроенные аргументы с маркерами.
+     * @return int Код завершения первой ошибки или 0.
+     * @throws InvalidConfigException Если аргументы Gii не настроены.
      */
-    private function generateGii(string $entity, string $sourceCommand)
+    private function generateGii(string $entity, string $route, ?string $sourceCommand): int
     {
+        if ($sourceCommand === null || trim($sourceCommand) === '') {
+            throw new InvalidConfigException("Configure command arguments for $route before running Gii.");
+        }
         $entityList = $this->getEntity($entity);
 
         foreach ($entityList as $entity )
@@ -581,12 +596,17 @@ class GenerateController extends Controller
             $from = array_keys($params);
             $to = array_values($params);
 
-            $command = str_replace($from, $to, $sourceCommand);
+            $command = escapeshellarg(PHP_BINARY) . ' yii ' . $route . ' '
+                . str_replace($from, $to, $sourceCommand);
 
             echo "\r\nEntity: $camelCase table: $snakeCase";
             echo "\r\nCommand: \r\n\t $command";
-            echo "\r\n\tresult: " . shell_exec( $command );
+            echo "\r\n\tresult: ";
+            passthru($command, $status);
+            if ($status !== 0) return $status;
         }
+
+        return 0;
     }
 
     /**
@@ -702,6 +722,7 @@ class GenerateController extends Controller
         $params = [
             '{{migrateFileName}}' => $migrateFileName,
             '{{snake_case}}' => $snakeCase,
+            '{{kebab-case}}' => Inflector::camel2id($camelCase),
             '{{UPPER_CASE}}' => strtoupper($snakeCase),
             '{{CamelCase}}' => $camelCase,
         ];

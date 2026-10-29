@@ -227,15 +227,18 @@ _____
 ### command  
 
 ```bash
-php yii dnk/gii-model `string` `bool`
+php yii dnk/gii-model `string`
 ```
 
 | Parameter | Type     | Description   |
 |:----------| :------- |:--------------|
 | `entity`  | `string` | **Required**. model/table to work with </br> * for use list fron property `parts` |
-| `overwrite`  | `bool` | **optional**. overwrite exists file. default: `false` |
 
 Generate gii `model` for select table(part).
+
+Configure Gii's `--interactive` and `--overwrite` options in `command`; these
+are not positional arguments of `dnk/gii-model`. A failed child command stops
+the batch and its nonzero exit code is returned by DNK.
 
 \* - generate list from config `parts`
 
@@ -257,15 +260,16 @@ ______
 ### command  
 
 ```bash
-php yii dnk/gii-crud `string` `bool`
+php yii dnk/gii-crud `string`
 ```
 
 | Parameter | Type     | Description                            |
 |:----------| :------- |:---------------------------------------|
 | `entiry`  | `string` | **Required**. model/table to work with </br> * for use list fron property `parts` |
-| `overwrite`  | `bool` | **optional**. overwrite exists file. default: `false` |
 
 Generate gii `crud` for select table(part).  
+Gii options, including `--overwrite`, belong in `command`. DNK returns the
+child command's exit code and stops the batch on failure.
 \* - generate list from config `parts`
 
 #### Examples
@@ -687,18 +691,20 @@ return [
             'command'   => [
                 GenerateController::COMMAND_MODEL => implode(' ', [
                     '--modelClass={{CamelCase}}Source',
-                    '--ns=common\\models\\sources',
+                    '--ns=' . escapeshellarg('common\\models\\sources'),
                     '--tableName={{snake_case}}',
-                    '--baseClass={{BaseModelClassName}}',
-                    '&& yes'
+                    '--baseClass=' . escapeshellarg('{{BaseModelClassName}}'),
+                    '--interactive=0',
+                    '--overwrite=1'
                 ]),
                 GenerateController::COMMAND_CRUD => implode(' ', [
-                    '--modelClass={{CamelCase}}',
-                    '--controllerNamespace=backend\\controllers\\crud',
-                    '--baseControllerClass=backend\\controllers\\cruds\\{{CamelCase}}Controller',
-                    '--viewPath=@backend\\views\\cruds\\{{snake_case}}',
+                    '--modelClass=' . escapeshellarg('backend\\models\\items\\{{CamelCase}}'),
+                    '--controllerClass=' . escapeshellarg('backend\\controllers\\{{CamelCase}}CrudController'),
+                    '--baseControllerClass=' . escapeshellarg('yii\\web\\Controller'),
+                    '--viewPath=' . escapeshellarg('@backend/views/{{kebab-case}}-crud'),
                     '--enableI18N=1',
-                    '&& yes'
+                    '--interactive=0',
+                    '--overwrite=0'
                 ])
             ],
             'entityList' => array_values(Tables::NAMES),
@@ -715,7 +721,17 @@ return [
 ```
 
 
-5. Add `Entity`  
+The model command replaces generated source models (`--overwrite=1`). Keep
+custom behavior in the item/form classes. The CRUD command creates a separate
+standard Gii `{{CamelCase}}CrudController` in `backend/controllers/` and preserves existing
+files (`--overwrite=0`). The `{{kebab-case}}` marker matches Yii controller IDs:
+`user_profile` produces views in `backend/views/user-profile-crud/`. Its base
+is `yii\web\Controller`: standard Gii actions
+have different return signatures from DNK's controllers. Use shell-escaped
+namespace arguments as shown above on both Windows and Unix. Gii must be
+installed and enabled in the application's console configuration.
+
+5. Add `Entity`
    Class: `common\components\Entity`, add `public const`  
 ```php
 /** @var int */ 
