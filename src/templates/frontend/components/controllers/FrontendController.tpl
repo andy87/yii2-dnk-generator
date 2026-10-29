@@ -2,8 +2,7 @@
 
 namespace frontend\components\controllers;
 
-use Yii;
-use ReflectionException;
+use yii\base\InvalidConfigException;
 use yii\web\Response;
 use yii\web\ErrorAction;
 use yii\data\ActiveDataProvider;
@@ -41,57 +40,60 @@ abstract class FrontendController extends BaseControllerClass implements Control
     // Methods
 
     /**
-     *  action `List`
+     * Показывает список записей или возвращает JSON с items и totalCount.
      *
-     * @return ListResource|string
-     * @throws ReflectionException
+     * @return Response|string JSON-ответ или HTML списка.
+     * @throws InvalidConfigException Если сервис или ресурс настроен неверно.
      */
-    public function actionList(): ListResource|string
+    public function actionList(): Response|string
     {
         $form = $this->service->getForm();
 
         /** @var ListResource $R */
         $R = $this->service->getResource(BaseService::LIST, [
-            'gridViewResource' => new GridViewResource($form, new ActiveDataProvider())
+            'gridViewResource' => new GridViewResource($form, new ActiveDataProvider([
+                'query' => $this->service->findWhere([])
+            ]))
         ]);
 
-        if ( $this->isJsonResponse() ) return $R;
+        if ( $this->isJsonResponse() ) {
+            $provider = $R->gridViewResource->activeDataProvider;
+            return $this->asJson([
+                'items' => $provider->getModels(),
+                'totalCount' => $provider->getTotalCount(),
+            ]);
+        }
 
-        return $R->render();
+        return $R->render($this);
     }
 
 
     /**
-     *  action `Read`
+     * Показывает запись или возвращает её в JSON-поле item.
      *
-     * @param int $id
-     * @return ReadResource|string
-     * @throws ReflectionException
+     * @param int $id Идентификатор записи.
+     * @return Response|string JSON-ответ или HTML записи.
+     * @throws InvalidConfigException Если сервис или ресурс настроен неверно.
      */
-    public function actionRead(int $id): ReadResource|string
+    public function actionRead(int $id): Response|string
     {
         /** @var ReadResource $R */
         $R = $this->service->getResource(BaseService::READ, [
             'item' => $this->service->findWhere(['id' => $id])->one()
         ]);
 
-        if ( $this->isJsonResponse() ) return $R;
+        if ( $this->isJsonResponse() ) return $this->asJson(['item' => $R->item]);
 
-        return $R->render();
+        return $R->render($this);
     }
 
     /**
-     * @return bool
+     * Проверяет запрошенный формат без изменения объекта ответа.
+     *
+     * @return bool Запрошен ли JSON через параметр type.
      */
     public function isJsonResponse(): bool
     {
-        if ($this->request->get('type') === 'json')
-        {
-            $this->response = Response::FORMAT_JSON;
-
-            return true;
-        }
-
-        return false;
+        return $this->request->get('type') === 'json';
     }
 }
