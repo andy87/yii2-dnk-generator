@@ -7,6 +7,7 @@ use Exception;
 use yii\helpers\Inflector;
 use yii\console\Controller;
 use yii\helpers\BaseConsole;
+use yii\base\InvalidConfigException;
 
 /**
  *  Class for generate files:
@@ -30,6 +31,15 @@ class GenerateController extends Controller
 
     /** @var string Base class for `Resource` */
     public const BASE_RESOURCE_CLASS = 5;
+
+    /** @var array Базовые классы для первого запуска в Yii Advanced. */
+    private const DEFAULT_BASE_CLASSES = [
+        self::BASE_MIGRATE_CLASS => source\base\BaseMigration::class,
+        self::BASE_CONTROLLER_CLASS => source\base\BaseController::class,
+        self::BASE_MODEL_CLASS => 'common\\components\\core\\BaseModel',
+        self::BASE_SERVICE_CLASS => source\base\BaseService::class,
+        self::BASE_RESOURCE_CLASS => source\base\BaseResource::class,
+    ];
 
 
     /** @var string Key for `command` */
@@ -259,13 +269,7 @@ class GenerateController extends Controller
     public array $entityList = [];
 
     /** @var array bases classname for generated files (setup from config) */
-    public array $baseClasses = [
-        self::BASE_MIGRATE_CLASS => null,
-        self::BASE_CONTROLLER_CLASS => null,
-        self::BASE_MODEL_CLASS => null,
-        self::BASE_SERVICE_CLASS => null,
-        self::BASE_RESOURCE_CLASS => null,
-    ];
+    public array $baseClasses = self::DEFAULT_BASE_CLASSES;
 
 
 
@@ -697,9 +701,12 @@ class GenerateController extends Controller
     }
 
     /**
-     * @param string $snakeCase
-     * @param string $camelCase
-     * @return array
+     * Собирает параметры шаблонов и проверяет имена базовых классов до записи файлов.
+     *
+     * @param string $snakeCase Имя сущности для таблиц и путей.
+     * @param string $camelCase Имя сущности для классов.
+     * @return array Значения маркеров шаблонов.
+     * @throws InvalidConfigException Если имя базового класса некорректно.
      */
     private function getParams( string $snakeCase, string $camelCase): array
     {
@@ -716,11 +723,35 @@ class GenerateController extends Controller
         $from = array_keys($params);
         $to = array_values($params);
 
-        $params['{{BaseMigrationClassName}}'] = str_replace($from, $to, $this->baseClasses[self::BASE_MIGRATE_CLASS]);
-        $params['{{BaseModelClassName}}'] =str_replace($from, $to, $this->baseClasses[self::BASE_MODEL_CLASS]);
-        $params['{{BaseControllerClassName}}'] =str_replace($from, $to, $this->baseClasses[self::BASE_CONTROLLER_CLASS]);
-        $params['{{BaseServiceClassName}}'] =str_replace($from, $to, $this->baseClasses[self::BASE_SERVICE_CLASS]);
-        $params['{{BaseResourceClassName}}'] =str_replace($from, $to, $this->baseClasses[self::BASE_RESOURCE_CLASS]);
+        $baseClasses = array_replace(self::DEFAULT_BASE_CLASSES, $this->baseClasses);
+        $markers = [
+            '{{BaseMigrationClassName}}' => self::BASE_MIGRATE_CLASS,
+            '{{BaseModelClassName}}' => self::BASE_MODEL_CLASS,
+            '{{BaseControllerClassName}}' => self::BASE_CONTROLLER_CLASS,
+            '{{BaseServiceClassName}}' => self::BASE_SERVICE_CLASS,
+            '{{BaseResourceClassName}}' => self::BASE_RESOURCE_CLASS,
+        ];
+
+        foreach ($markers as $marker => $key)
+        {
+            if (!is_string($baseClasses[$key]) || $baseClasses[$key] === '') {
+                throw new InvalidConfigException("Base class for $marker must be a non-empty class name.");
+            }
+
+            $class = str_replace($from, $to, $baseClasses[$key]);
+            $name = str_starts_with($class, '\\') ? substr($class, 1) : $class;
+            foreach (explode('\\', $name) as $part) {
+                if (!preg_match('/^[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*$/D', $part)) {
+                    throw new InvalidConfigException("Base class for $marker contains an invalid name.");
+                }
+            }
+            try {
+                token_get_all("<?php use $class as DnkBase;", TOKEN_PARSE);
+            } catch (\ParseError $error) {
+                throw new InvalidConfigException("Base class for $marker cannot be imported.", 0, $error);
+            }
+            $params[$marker] = $class;
+        }
 
         return $params;
     }

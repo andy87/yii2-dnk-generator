@@ -19,6 +19,7 @@
   "version"     : "1.0.0",
   "minimum-stability": "stable",
   "require": {
+    "php": ">=8.0",
     "yiisoft/yii2": "*"
   },
   "repositories": [
