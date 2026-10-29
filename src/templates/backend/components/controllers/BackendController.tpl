@@ -4,6 +4,7 @@ namespace backend\components\controllers;
 
 use Yii;
 use yii\web\Request;
+use yii\web\NotFoundHttpException;
 use yii\base\{Model,InvalidConfigException};
 use andy87\dnk\source\base\BaseService;
 use andy87\dnk\source\resources\{MutationResource,GridViewResource};
@@ -148,21 +149,24 @@ abstract class BackendController extends BaseControllerClass implements Controll
     }
 
     /**
-     *  action `Update`
+     * Обновляет существующую запись или сообщает об её отсутствии.
      *
-     * @param int $id
-     * @return string
+     * @param int $id Идентификатор обновляемой записи.
+     * @return string HTML формы редактирования.
      * @throws InvalidConfigException
+     * @throws NotFoundHttpException Если запись не найдена.
      */
     public function actionUpdate(int $id): string
     {
         $this->beforeUpdate($id);
 
         $formClass = $this->service->getClassForm();
+        $item = $formClass::findOne($id);
+        if ($item === null) throw new NotFoundHttpException('The requested page does not exist.');
 
         /** @var UpdateResource $R */
         $R = $this->resourceConstruct(BaseService::UPDATE, [
-            'item' => $formClass::findOne($id)
+            'item' => $item
         ]);
 
         if ( $this->request->isPost ){
@@ -195,16 +199,22 @@ abstract class BackendController extends BaseControllerClass implements Controll
     }
 
     /**
-     *  action `Read`
+     * Показывает существующую запись или сообщает об её отсутствии.
+     *
+     * @param int $id Идентификатор записи.
+     * @return string HTML страницы записи.
      * @throws InvalidConfigException
+     * @throws NotFoundHttpException Если запись не найдена.
      */
     public function actionRead(int $id): string
     {
         $this->beforeRead($id);
+        $item = $this->service->findWhere(['id' => $id])->one();
+        if ($item === null) throw new NotFoundHttpException('The requested page does not exist.');
 
         /** @var ReadResource $R */
         $R = $this->resourceConstruct(BaseService::READ, [
-            'item' => $this->service->findWhere(['id' => $id])->one()
+            'item' => $item
         ]);
 
         $title = Entity::getLabelOne(static::ENTITY) . ": $id view";

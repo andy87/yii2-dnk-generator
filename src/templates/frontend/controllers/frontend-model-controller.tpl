@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use yii\base\InvalidConfigException;
+use yii\web\NotFoundHttpException;
 use andy87\dnk\source\base\BaseService;
 use andy87\dnk\source\resources\GridViewResource;
 use common\components\Entity;
@@ -63,15 +64,21 @@ class {{CamelCase}}Controller extends FrontendController
     }
 
     /**
-     *  action `Read`
+     * Показывает существующую запись или сообщает об её отсутствии.
      *
+     * @param int $id Идентификатор записи.
+     * @return string HTML страницы записи.
      * @throws InvalidConfigException
+     * @throws NotFoundHttpException Если запись не найдена.
      */
     public function actionRead(int $id): string
     {
+        $item = $this->service->findWhere(['id' => $id])->one();
+        if ($item === null) throw new NotFoundHttpException('The requested page does not exist.');
+
         /** @var ReadResource $R */
         $R = $this->service->getResource(BaseService::READ, [
-            'item' => $this->service->findWhere(['id' => $id])->one()
+            'item' => $item
         ]);
 
         $this->view->title = Entity::getLabelOne(static::ENTITY) . ": $id view";

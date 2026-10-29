@@ -4,6 +4,7 @@ namespace frontend\components\controllers;
 
 use yii\base\InvalidConfigException;
 use yii\web\Response;
+use yii\web\NotFoundHttpException;
 use yii\web\ErrorAction;
 use yii\data\ActiveDataProvider;
 use {{BaseControllerClassName}} as BaseControllerClass;
@@ -77,12 +78,16 @@ abstract class FrontendController extends BaseControllerClass implements Control
      * @param int $id Идентификатор записи.
      * @return Response|string JSON-ответ или HTML записи.
      * @throws InvalidConfigException Если сервис или ресурс настроен неверно.
+     * @throws NotFoundHttpException Если запись не найдена.
      */
     public function actionRead(int $id): Response|string
     {
+        $item = $this->service->findWhere(['id' => $id])->one();
+        if ($item === null) throw new NotFoundHttpException('The requested page does not exist.');
+
         /** @var ReadResource $R */
         $R = $this->service->getResource(BaseService::READ, [
-            'item' => $this->service->findWhere(['id' => $id])->one()
+            'item' => $item
         ]);
 
         if ( $this->isJsonResponse() ) return $this->asJson(['item' => $R->item]);
