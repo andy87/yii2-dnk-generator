@@ -40,7 +40,7 @@ function checkOverwrite(string $action, ?string $failure, bool $overwrite = true
             if ($action === 'tests') $generator->actionGenTests('user', $overwrite);
             if ($action === 'copy') {
                 $method = new ReflectionMethod(andy87\dnk\GenerateController::class, 'copy');
-                $method->setAccessible(true);
+                if (PHP_VERSION_ID < 80100) $method->setAccessible(true);
                 $method->invoke($generator, $source, $target, $overwrite);
             }
         } catch (Throwable $error) {

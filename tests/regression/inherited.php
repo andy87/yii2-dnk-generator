@@ -42,7 +42,7 @@ return [
                 expect($controller->response instanceof yii\web\Response, 'The Response object was replaced.');
                 expect($response->format === yii\web\Response::FORMAT_JSON, 'JSON format was not selected.');
                 $prepare = new ReflectionMethod(yii\web\Response::class, 'prepare');
-                $prepare->setAccessible(true);
+                if (PHP_VERSION_ID < 80100) $prepare->setAccessible(true);
                 $prepare->invoke($response);
                 $data = json_decode($response->content, true, 512, JSON_THROW_ON_ERROR);
                 $item = $method === 'actionList' ? $data['items'][0] : $data['item'];
