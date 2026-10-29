@@ -6,6 +6,7 @@
 class InheritedFrontendController extends frontend\components\controllers\FrontendController
 {
     public const SERVICE = frontend\services\UserService::class;
+    public const JSON_FIELDS = ['id', 'name'];
 }
 
 /**

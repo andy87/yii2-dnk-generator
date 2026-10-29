@@ -3,6 +3,7 @@
 namespace frontend\components\controllers;
 
 use yii\base\InvalidConfigException;
+use yii\base\Arrayable;
 use yii\web\Response;
 use yii\web\NotFoundHttpException;
 use yii\web\ErrorAction;
@@ -26,6 +27,9 @@ abstract class FrontendController extends BaseControllerClass implements Control
 
     /** @var string className Сервиса */
     public const SERVICE = BaseService::class;
+
+    /** @var string[] Публичные поля JSON; новые атрибуты модели автоматически не раскрываются. */
+    public const JSON_FIELDS = ['id'];
 
     /**
      * @return array
@@ -63,7 +67,7 @@ abstract class FrontendController extends BaseControllerClass implements Control
         if ( $this->isJsonResponse() ) {
             $provider = $R->gridViewResource->activeDataProvider;
             return $this->asJson([
-                'items' => $provider->getModels(),
+                'items' => array_map(fn(Arrayable $item): array => $this->serializeItem($item), $provider->getModels()),
                 'totalCount' => $provider->getTotalCount(),
             ]);
         }
@@ -90,9 +94,21 @@ abstract class FrontendController extends BaseControllerClass implements Control
             'item' => $item
         ]);
 
-        if ( $this->isJsonResponse() ) return $this->asJson(['item' => $R->item]);
+        if ( $this->isJsonResponse() ) return $this->asJson(['item' => $this->serializeItem($R->item)]);
 
         return $R->render($this);
+    }
+
+    /**
+     * Отбирает только явно разрешённые поля для публичного JSON-ответа.
+     *
+     * @param Arrayable $item Модель записи с поддержкой сериализации Yii.
+     * @return array Публичные поля; пустой JSON_FIELDS не раскрывает атрибуты.
+     */
+    protected function serializeItem(Arrayable $item): array
+    {
+        // В Yii toArray([]) возвращает все поля, поэтому пустой список обрабатывается отдельно.
+        return static::JSON_FIELDS === [] ? [] : $item->toArray(static::JSON_FIELDS);
     }
 
     /**

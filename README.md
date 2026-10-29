@@ -567,6 +567,21 @@ tests/unit/user/CreateTest {
 }
 ```
 
+### Public frontend JSON fields
+
+Inherited `FrontendController::actionList()` and `actionRead()` accept `type=json`.
+Their items expose only `id` by default. Explicitly approve additional public
+fields in the application controller:
+
+```php
+public const JSON_FIELDS = ['id', 'name'];
+```
+
+The list also respects the model's `fields()` definitions. An empty `JSON_FIELDS`
+returns no item attributes. Keep passwords, authentication keys and internal
+fields out of this list; newly added database columns are not exposed automatically.
+The response envelopes remain `items`/`totalCount` and `item`.
+
 <a name="profit-resources"></a>
 ## Resource Profit  
 
