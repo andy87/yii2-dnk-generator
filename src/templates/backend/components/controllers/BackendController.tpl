@@ -300,10 +300,12 @@ abstract class BackendController extends BaseControllerClass implements Controll
     }
 
     /**
-     * @return string
+     * Возвращает модель поиска, выбранную конкретным контроллером.
+     *
+     * @return string Полное имя класса SearchModel.
      */
     protected function getSearchClass(): string
     {
-        return self::SEARCH_MODEL;
+        return static::SEARCH_MODEL;
     }
 }
