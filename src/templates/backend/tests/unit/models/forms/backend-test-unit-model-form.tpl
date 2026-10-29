@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\tests\unit\models\items;
+namespace backend\tests\unit\models\forms;
 
 use Codeception\Test\Unit;
 use common\tests\UnitTester;

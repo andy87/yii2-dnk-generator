@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\tests\unit\models\items;
+namespace frontend\tests\unit\models\forms;
 
 use Yii;
 use Codeception\Test\Unit;
