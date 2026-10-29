@@ -1,6 +1,31 @@
 <?php
 
 return [
+    'backend: invalid create renders validation errors without inserting a row' => function (): void {
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        Yii::$app->request->setBodyParams(['UserForm' => ['name' => '']]);
+        $html = generatedController('backend')->actionCreate();
+        expect((int) backend\models\items\User::find()->count() === 0, 'Invalid record was inserted.');
+        expect(strpos($html, '<div class="help-block">Name cannot be blank.</div>') !== false, 'Validation error was not rendered.');
+    },
+    'backend: create exposes the saved model and its primary key to the view' => function (): void {
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        Yii::$app->request->setBodyParams(['UserForm' => ['name' => 'Saved record']]);
+        $controller = generatedController('backend');
+        $resource = null;
+        $controller->addMutation(new andy87\dnk\source\resources\MutationResource(
+            backend\components\controllers\BackendController::EVENT_RESOURCE_CREATED,
+            andy87\dnk\source\base\BaseService::CREATE,
+            static function ($created) use (&$resource) {
+                $resource = $created;
+                return $created;
+            }
+        ));
+        $controller->actionCreate();
+        expect(!$resource->item->isNewRecord, 'The view received an unsaved model.');
+        expect($resource->item->id !== null, 'The saved primary key was lost.');
+        expect(backend\models\items\User::findOne($resource->item->id)->name === 'Saved record', 'The view model does not match the saved record.');
+    },
     'backend: generated list renders stored records' => function (): void {
         Yii::$app->db->createCommand()->insert('user', ['name' => 'Visible user'])->execute();
         $html = generatedController('backend')->actionList();
