@@ -144,9 +144,12 @@ abstract class BackendController extends BaseControllerClass implements Controll
 
         if ( $this->request->isPost ){
             $R->item->load(Yii::$app->request->post());
-            // Без списка getAttributes() исключает поля формы, которые не являются колонками БД.
+            $safeAttributes = $R->item->safeAttributes();
+            // Незаданные колонки сохраняют defaults БД; виртуальные поля передаются отдельно.
+            $attributes = $R->item->getDirtyAttributes($safeAttributes)
+                + $R->item->getAttributes(array_diff($safeAttributes, $R->item->attributes()));
             $R->item = $this->service->createInScenario(
-                $R->item->getAttributes($R->item->safeAttributes()),
+                $attributes,
                 $R->item->scenario
             );
         }

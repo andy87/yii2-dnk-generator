@@ -3,6 +3,7 @@
 use yii\web\View;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\db\ExpressionInterface;
 use backend\models\forms\{{CamelCase}}Form;
 use backend\resources\{{snake_case}}\{{CamelCase}}CreateResource;
 use backend\resources\{{snake_case}}\{{CamelCase}}UpdateResource;
@@ -20,11 +21,17 @@ $model = $R->item;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'status_id')->dropDownList([]) ?>
+    <?php foreach ($model->safeAttributes() as $attribute): ?>
+        <?php
+        $column = $model->getTableSchema()->getColumn($attribute);
+        // Автоматические колонки заполняет БД; виртуальные безопасные поля остаются в форме.
+        if ($column !== null && ($column->autoIncrement || $column->defaultValue instanceof ExpressionInterface)) continue;
+        // Массивам и объектам нужен специализированный виджет вместо текстового input.
+        if (($column !== null && in_array($column->phpType, ['array', 'resource'], true))
+            || ($model->$attribute !== null && !is_scalar($model->$attribute))) continue;
+        ?>
+        <?= $form->field($model, $attribute)->textInput(['maxlength' => true]) ?>
+    <?php endforeach; ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Сохранить', [

@@ -71,7 +71,10 @@ function submitConfirmationForm(array $fields, ?callable $prepare = null): array
         ));
         $_SERVER['REQUEST_METHOD'] = 'POST';
         Yii::$app->request->setBodyParams(['UserForm' => $fields]);
-        expect($controller->actionCreate() !== '', 'The form did not render.');
+        $html = $controller->actionCreate();
+        expect($html !== '', 'The form did not render.');
+        expect(strpos($html, 'name="UserForm[confirmation]"') !== false, 'The safe virtual field did not render.');
+        expect(strpos($html, 'name="UserForm[serverValue]"') === false, 'An unsafe virtual field was rendered.');
         expect(count(RecordingBackendCreateService::$received) === 1, 'The application create() override was bypassed or repeated.');
         expect($resource->item instanceof BackendConfirmationForm, 'The view received the wrong form class.');
         return [$resource->item, RecordingBackendCreateService::$received[0]];
