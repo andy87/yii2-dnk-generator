@@ -386,21 +386,13 @@ class GenerateController extends Controller
             echo "\r\n Generate" . (($overwrite) ? ' (overwrite)' : '') . ": $sourcePath"
             . "\r\n to: $targetPath.";
 
-            if ( file_exists($targetPath) )
+            if ( file_exists($targetPath) && !$overwrite )
             {
-                if ($overwrite)
-                {
-                    unlink($targetPath);
-                    $this->stdout("\r\n\t remove old file: $targetPath", BaseConsole::FG_RED);
-
-                } else {
-
-                    $this->stdout("\r\n\t copied skip (file exist) .\n", BaseConsole::FG_RED);
-                    continue;
-                }
+                $this->stdout("\r\n\t copied skip (file exist) .\n", BaseConsole::FG_RED);
+                continue;
             }
 
-            $status = $this->generateFileFromTpl($sourcePath, $targetPath, $params);
+            $status = $this->generateFileFromTpl($sourcePath, $targetPath, $params, $overwrite);
 
             if ($status) {
 
@@ -656,38 +648,32 @@ class GenerateController extends Controller
             $this->stdout($targetPath, BaseConsole::FG_GREEN);
 
 
-            if ( file_exists($targetPath) )
+            $replace = $overwrite;
+            if ( file_exists($targetPath) && !$overwrite )
             {
-                if ( $overwrite )
+                $this->stdout("\r\n File exists!", BaseConsole::FG_RED);
+
+                echo "\r\nEnter `yes` if you want reGenerate this file:";
+
+                while (true)
                 {
-                     unlink($targetPath);
+                    $input = BaseConsole::stdin('');
 
-                }  else {
-
-                    $this->stdout("\r\n File exists!", BaseConsole::FG_RED);
-
-                    echo "\r\nEnter `yes` if you want reGenerate this file:";
-
-                    while (true)
+                    if ($input === 'yes')
                     {
-                        $input = BaseConsole::stdin('');
+                        $replace = true;
+                        break;
 
-                        if ($input === 'yes')
-                        {
-                            unlink($targetPath);
-                            break;
+                    } else {
 
-                        } else {
+                        $this->stdout("\r\n copied skipped.\n", BaseConsole::FG_RED);
 
-                            $this->stdout("\r\n copied skipped.\n", BaseConsole::FG_RED);
-
-                            continue 2;
-                        }
+                        continue 2;
                     }
                 }
             }
 
-            $status = $this->generateFileFromTpl($sourcePath, $targetPath, $params);
+            $status = $this->generateFileFromTpl($sourcePath, $targetPath, $params, $replace);
 
             if ($status) {
 
@@ -792,30 +778,28 @@ class GenerateController extends Controller
     }
 
     /**
-     * @param string $source
-     * @param string $destination
-     * @param bool $overwrite
-     * @return ?bool
+     * Копирует файл через безопасную замену готового содержимого.
+     *
+     * @param string $source Исходный файл.
+     * @param string $destination Целевой файл.
+     * @param bool $overwrite Разрешена ли перезапись.
+     * @return ?bool Результат копирования; null при пропуске существующего файла.
+     * @throws Exception Если чтение или запись завершились ошибкой.
      */
     private function copy(string $source, string $destination, bool $overwrite = false): ?bool
     {
         echo "\r\n Copy file: $source.";
 
-        if ( file_exists($destination) )
+        if ( file_exists($destination) && !$overwrite )
         {
-            if ( $overwrite )
-            {
-                unlink($destination);
-
-            } else {
-
-                $this->stdout("\r\n\t file exists.\n", BaseConsole::FG_PURPLE);
-
-                return null;
-            }
+            $this->stdout("\r\n\t file exists.\n", BaseConsole::FG_PURPLE);
+            return null;
         }
 
-        if (copy($source, $destination)) {
+        $content = file_get_contents($source);
+        if ($content === false) throw new Exception("Cannot read source file: $source");
+
+        if ($this->createFile($destination, $content, $overwrite)) {
             $this->stdout("\r\n\t successfully.\n", BaseConsole::FG_GREEN);
 
             return true;
@@ -841,43 +825,57 @@ class GenerateController extends Controller
     /**
      * Generate file from `tpl`
      *
-     * @param string $sourcePath
-     * @param string $targetPath
-     * @param array $params
-     * @return bool
+     * @param string $sourcePath Шаблон для чтения.
+     * @param string $targetPath Целевой файл.
+     * @param array $params Значения маркеров шаблона.
+     * @param bool $overwrite Разрешена ли замена существующего файла.
+     * @return bool Успешность записи.
+     * @throws Exception Если шаблон нельзя прочитать или файл нельзя записать.
      */
-    private function generateFileFromTpl(string $sourcePath, string $targetPath, array $params = []): bool
+    private function generateFileFromTpl(string $sourcePath, string $targetPath, array $params = [], bool $overwrite = false): bool
     {
         $content = file_get_contents($sourcePath);
+        if ($content === false) throw new Exception("Cannot read template: $sourcePath");
 
         foreach ($params as $mark => $value) {
             $content = str_replace($mark, $value, $content);
         }
 
-        return $this->createFile($targetPath, $content);
+        return $this->createFile($targetPath, $content, $overwrite);
     }
 
 
     /**
-     * Create file
+     * Записывает готовое содержимое, сохраняя старый файл при ошибке.
      *
-     * @param $filename
-     * @param $content
-     * @return bool
+     * @param string $filename Целевой файл.
+     * @param string $content Полное содержимое нового файла.
+     * @param bool $overwrite Разрешена ли замена существующего файла.
+     * @return bool Файл записан; false при запрещённой перезаписи.
+     * @throws Exception Если подготовка или замена файла не удалась.
      */
-    private function createFile($filename, $content): bool
+    private function createFile(string $filename, string $content, bool $overwrite = false): bool
     {
         $this->createDirectories($filename);
+        if (file_exists($filename) && !$overwrite) return false;
 
-        if (!file_exists($filename)) {
-            $dirname = dirname($filename);
-            if (!file_exists($dirname)) {
-                mkdir($dirname, 0755, true);
+        $temporary = tempnam(dirname($filename), '.dnk-');
+        if ($temporary === false) throw new Exception("Cannot prepare file: $filename");
+
+        try {
+            if (file_put_contents($temporary, $content) !== strlen($content)) {
+                throw new Exception("Cannot write complete file: $filename");
             }
-            return (bool) file_put_contents($filename, $content);
-        }
+            if (file_exists($filename) && !$overwrite) return false;
+            $mode = file_exists($filename) ? fileperms($filename) & 0777 : 0666 & ~umask();
+            if (!chmod($temporary, $mode)) throw new Exception("Cannot set file permissions: $filename");
 
-        return false;
+            // Замена выполняется в той же директории, без предварительного удаления оригинала.
+            if (!rename($temporary, $filename)) throw new Exception("Cannot replace file: $filename");
+            return true;
+        } finally {
+            if (is_file($temporary)) unlink($temporary);
+        }
     }
 
     /**
