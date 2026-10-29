@@ -3,7 +3,7 @@
 namespace andy87\dnk\source\base;
 
 use Yii;
-use yii\base\{Model,Component,InvalidConfigException};
+use yii\base\{Model,Component,InvalidConfigException,InvalidArgumentException};
 use yii\db\{ActiveQuery,ActiveRecord,ActiveRecordInterface};
 use andy87\dnk\source\interfaces\models\common\ModelInterface;
 use andy87\dnk\source\interfaces\services\common\ServiceCommonInterface;
@@ -119,10 +119,11 @@ abstract class BaseService extends Component implements ServiceCommonInterface
     /**
      * Создание сущности/модели
      *
-     * @param array $params
-     * @param bool $is_save
-     * @return ModelInterface
+     * @param array $params Атрибуты или данные формы под ключом formName().
+     * @param bool $is_save Сохранить модель после заполнения.
+     * @return ModelInterface Модель с результатом валидации и сохранения.
      * @throws InvalidConfigException
+     * @throws InvalidArgumentException Если данные под ключом формы не являются массивом.
      */
     public function create(array $params = [], bool $is_save = true): ModelInterface
     {
@@ -136,10 +137,11 @@ abstract class BaseService extends Component implements ServiceCommonInterface
     /**
      * Сохранение сущности/модели
      *
-     * @param ModelInterface $model
-     * @param array $params
-     * @param bool $is_save
-     * @return ModelInterface
+     * @param ModelInterface $model Обновляемая модель.
+     * @param array $params Атрибуты или данные формы под ключом formName().
+     * @param bool $is_save Сохранить модель после заполнения.
+     * @return ModelInterface Обновлённая модель с результатом валидации.
+     * @throws InvalidArgumentException Если данные под ключом формы не являются массивом.
      */
     public function update(ModelInterface $model, array $params = [], bool $is_save = true): ModelInterface
     {
@@ -149,19 +151,26 @@ abstract class BaseService extends Component implements ServiceCommonInterface
     }
 
     /**
-     * @param ModelInterface $model
-     * @param array $params
-     * @return ModelInterface
+     * Заполняет безопасные атрибуты из формы Yii или плоского массива.
+     *
+     * @param ModelInterface $model Модель с правилами безопасного присваивания.
+     * @param array $params Данные формы либо атрибуты модели.
+     * @return ModelInterface Заполненная модель без сохранения.
+     * @throws InvalidArgumentException Если данные под ключом формы не являются массивом.
      */
     private function modelSetAttributes(ModelInterface $model, array $params = []): ModelInterface
     {
         if ( !empty($params) )
         {
-            $CamelCame = get_class($model);
-
-            $action = ( isset($params[$CamelCame]) ) ? 'load' : 'setAttributes';
-
-            $model->$action($params);
+            $formName = $model->formName();
+            if ($formName !== '' && array_key_exists($formName, $params)) {
+                if (!is_array($params[$formName])) {
+                    throw new InvalidArgumentException("Form data for $formName must be an array.");
+                }
+                $model->load($params);
+            } else {
+                $model->setAttributes($params);
+            }
         }
 
         return $model;
