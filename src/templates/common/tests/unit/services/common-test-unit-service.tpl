@@ -5,7 +5,7 @@ namespace common\tests\unit\services;
 use Yii;
 use Codeception\Test\Unit;
 use yii\base\InvalidConfigException;
-use common\tests\UnitTester;
+use Codeception\Actor;
 use common\services\{{CamelCase}}Service;
 
 /**
@@ -14,9 +14,9 @@ use common\services\{{CamelCase}}Service;
 class {{CamelCase}}ServiceTest extends Unit
 {
     /**
-     * @var UnitTester
+     * @var Actor Actor текущего тестового набора.
      */
-    protected UnitTester $tester;
+    protected Actor $tester;
 
     /**
      * @return void

@@ -3,7 +3,7 @@
 namespace common\tests\unit\models\items;
 
 use Codeception\Test\Unit;
-use common\tests\UnitTester;
+use Codeception\Actor;
 use common\models\items\{{CamelCase}};
 
 /**
@@ -12,9 +12,9 @@ use common\models\items\{{CamelCase}};
 class {{CamelCase}}Test extends Unit
 {
     /**
-     * @var UnitTester
+     * @var Actor Actor текущего тестового набора.
      */
-    protected UnitTester $tester;
+    protected Actor $tester;
 
     /*public function _fixtures()
     {

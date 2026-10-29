@@ -5,7 +5,7 @@ namespace frontend\tests\unit\models\items;
 use Yii;
 use yii\base\InvalidConfigException;
 use Codeception\Test\Unit;
-use common\tests\UnitTester;
+use Codeception\Actor;
 use frontend\models\items\{{CamelCase}};
 
 /**
@@ -14,9 +14,9 @@ use frontend\models\items\{{CamelCase}};
 class {{CamelCase}}Test extends Unit
 {
     /**
-     * @var UnitTester
+     * @var Actor Actor текущего тестового набора.
      */
-    protected UnitTester $tester;
+    protected Actor $tester;
 
 
     /**

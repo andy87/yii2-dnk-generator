@@ -20,3 +20,23 @@ dependencies are installed outside this checkout.
 Generated files and published assets are confined to the ignored `tests/runtime/`
 directory. Successful runs remove their generated application; failed runs keep
 the application and print its path for diagnosis.
+
+## Codeception actor integration
+
+The generated `$tester` property accepts `Codeception\Actor`, including actors
+from common, backend and frontend suites with or without a `Support` namespace.
+To exercise the real framework lifecycle, install a PHP-compatible Codeception
+runner in the test vendor directory, or set `DNK_TEST_CODECEPTION` to the absolute
+path of its `codecept.phar` or PHP entry point. A missing runner fails the command.
+
+```sh
+composer test:codeception
+composer test:all
+```
+
+The integration check executes all eight generated test classes in both actor
+layouts: 16 tests and 32 assertions. Probe subclasses replace only the example
+`testOne()` bodies; actor construction and `_setUp()` run inside real Codeception
+against the generated `$tester` declarations. Application-specific examples still
+need their own assertions. Integration applications are removed after each run.
+`test:all` runs both the Yii regression suite and this Codeception check.
