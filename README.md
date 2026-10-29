@@ -587,6 +587,20 @@ the `MODEL` constant. Conditions configured in that model's `find()` method are
 preserved by both search filters and `BaseService::findWhere()`, which adds its
 criteria with `andWhere()`. This also applies when the criteria array is empty.
 
+Generated backend controllers deny access until the application explicitly sets
+`accessRoles`. Guests are always denied. In the generated entity controller,
+declare the roles or permissions managed by the application's Yii `authManager`:
+
+```php
+public array $accessRoles = ['manageUsers'];
+```
+
+Assign the corresponding RBAC permission or role to the intended users. An empty
+list grants no access; `['@']` explicitly grants all authenticated users and should
+only be used when that is the intended application policy. Frontend controllers
+remain public. Existing applications must apply the updated backend base template
+while preserving their custom code; updating the package alone does not replace it.
+
 <a name="profit-resources"></a>
 ## Resource Profit  
 

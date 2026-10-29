@@ -32,6 +32,7 @@ try {
         Yii::$app->setViewPath($root . '/' . $side . '/views');
         $class = $side . '\\controllers\\PostController';
         $controller = new $class('post', Yii::$app, ['layout' => false]);
+        if ($side === 'backend') $controller->accessRoles = ['regression.backend'];
         Yii::$app->controller = $controller;
         $actions = $side === 'backend' ? ['list', 'read', 'update', 'create'] : ['list', 'read'];
         foreach ($actions as $action) {

@@ -4,6 +4,7 @@ namespace backend\components\controllers;
 
 use Yii;
 use yii\web\Request;
+use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\base\{Model,InvalidConfigException};
 use andy87\dnk\source\base\BaseService;
@@ -25,6 +26,9 @@ abstract class BackendController extends BaseControllerClass implements Controll
 {
     /** @var string Список открывается при обращении к контроллеру без action. */
     public $defaultAction = 'list';
+
+    /** @var string[] Разрешённые роли или права Yii RBAC; пустой список закрывает backend. */
+    public array $accessRoles = [];
 
     // const
 
@@ -66,6 +70,24 @@ abstract class BackendController extends BaseControllerClass implements Controll
 
 
     // Methods
+
+    /**
+     * Закрывает backend для гостей и пользователей без явно разрешённых прав.
+     *
+     * @return array Фильтры родителя и обязательная проверка доступа перед action.
+     */
+    public function behaviors(): array
+    {
+        return array_merge(parent::behaviors(), [
+            'dnkAccess' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    ['allow' => false, 'roles' => ['?']],
+                    ['allow' => $this->accessRoles !== [], 'roles' => $this->accessRoles],
+                ],
+            ],
+        ]);
+    }
 
     /**
      *  action `List`
