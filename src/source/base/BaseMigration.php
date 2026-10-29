@@ -79,14 +79,16 @@ abstract class BaseMigration extends Migration
      * Подготовленный метод применения миграции
      *
      * @return void
+     * @throws InvalidConfigException Если название раздела невозможно определить до создания таблицы.
      */
     public function safeUp(): void
     {
+        $tableComment = Entity::getLabelMany($this->entity);
+
         // Создание таблицы (средствами Yii2)
         parent::createTable($this->tableName, $this->constructTable(), $this->tableOptions );
 
         //Добавление комментария к таблице (средствами Yii2)
-        $tableComment = Entity::DATA[ $this->entity ][Entity::LABELS][ Entity::NAME_MANY ];
         if ( strlen($tableComment) ) $this->addCommentOnTable($this->tableName, $tableComment );
     }
 

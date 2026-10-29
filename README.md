@@ -746,21 +746,35 @@ have different return signatures from DNK's controllers. Use shell-escaped
 namespace arguments as shown above on both Windows and Unix. Gii must be
 installed and enabled in the application's console configuration.
 
-5. Add `Entity`
-   Class: `common\components\Entity`, add `public const`  
-```php
-/** @var int */ 
-public const CAMEL_CASE = 2;
-```
+5. Register each additional entity in `common\components\Entity`.
+   For example, the `post` entity uses a unique constant and display labels.
+   Add these entries to the existing class; preserve the other entities:
 
-
-6. Add `Tables`  
-   Class: `common\components\db`, update `public const NAMES`  
 ```php
-/** @var int */ 
-public const NAMES = [
-    // other code ...
-    Entity::CAMEL_CASE => 'snake_case',
+public const POST = 2;
+
+public const DATA = [
+    // Keep existing entries, including USER.
+    self::POST => [
+        self::TABLE_NAME => Tables::NAMES[self::POST],
+        self::LABELS => [
+            self::NAME_MANY => 'Posts',
+            self::NAME_ONE => 'Post',
+        ],
+    ],
 ];
 ```
 
+6. Add the table to `common\components\db\Tables::NAMES` before running
+   migrations or opening the generated pages:
+
+```php
+public const NAMES = [
+    // Keep existing entries.
+    Entity::POST => 'post',
+];
+```
+
+When display labels are omitted, pages and migration comments use the registered
+table name. Labels in `Entity::DATA` take precedence. An unknown entity without
+either a label or a registered table raises an explicit configuration error.

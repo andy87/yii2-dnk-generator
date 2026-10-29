@@ -3,6 +3,7 @@
 namespace common\components;
 
 use common\components\db\Tables;
+use yii\base\InvalidConfigException;
 
 /**
  * `Разделы` системы
@@ -49,22 +50,42 @@ class Entity
      * Возвращает название раздела во множественном числе.
      *
      * @param int|string $key Идентификатор раздела из констант Entity.
-     * @return string Название раздела.
+     * @return string Название раздела или имя зарегистрированной таблицы.
+     * @throws InvalidConfigException Если раздел не зарегистрирован или название некорректно.
      */
     public static function getLabelMany( int|string $key ): string
     {
-        return self::DATA[$key][self::LABELS][self::NAME_MANY];
+        return self::getLabel($key, self::NAME_MANY);
     }
 
     /**
      * Возвращает название раздела в единственном числе.
      *
      * @param int|string $key Идентификатор раздела из констант Entity.
-     * @return string Название раздела.
+     * @return string Название раздела или имя зарегистрированной таблицы.
+     * @throws InvalidConfigException Если раздел не зарегистрирован или название некорректно.
      */
     public static function getLabelOne( int|string $key ): string
     {
-        return self::DATA[$key][self::LABELS][self::NAME_ONE];
+        return self::getLabel($key, self::NAME_ONE);
+    }
+
+    /**
+     * Поддерживает регистрацию таблицы без необязательных человекочитаемых названий.
+     *
+     * @param int|string $key Идентификатор раздела.
+     * @param int $number Ключ названия в единственном или множественном числе.
+     * @return string Настроенное название либо имя таблицы.
+     * @throws InvalidConfigException Если название невозможно определить.
+     */
+    private static function getLabel(int|string $key, int $number): string
+    {
+        $label = self::DATA[$key][self::LABELS][$number] ?? Tables::NAMES[$key] ?? null;
+        if (!is_string($label)) {
+            throw new InvalidConfigException("Entity '$key' requires a table in Tables::NAMES or a string label in Entity::DATA.");
+        }
+
+        return $label;
     }
 
 }
