@@ -1,6 +1,7 @@
 <?php
 
 require __DIR__ . '/bootstrap.php';
+require __DIR__ . '/fixtures/generator-io.php';
 
 $group = $argv[1] ?? '*';
 if (!preg_match('/^(?:[a-z]+|\*)$/', $group)) {
